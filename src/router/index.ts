@@ -1,12 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes as authRoutes } from '@/router/routes/auth-routes'
 import { routes as charRoutes } from '@/router/routes/character-routes'
+import { routes as shopRoutes } from '@/router/routes/shop-routes'
 
 import { setupGuards } from '@/router/guard'
 
 const appRoutes = [
   ...authRoutes,
   ...charRoutes,
+  ...shopRoutes,
 ]
 
 const router = createRouter({
