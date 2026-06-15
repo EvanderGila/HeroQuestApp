@@ -53,10 +53,10 @@
         <!-- OPCIÓN 3: TIENDA DE OBJETOS -->
         <VCol cols="12" sm="6">
           <VCard
+            to="/shop"
             class="py-6 h-100 d-flex flex-column align-center justify-center menu-card border-thin"
             elevation="3"
             hover
-            @click="actionNotImplemented('Tienda de Objetos')"
           >
             <VIcon icon="mdi-treasure-chest" size="40" color="warning" class="mb-3" />
             <VCardItem>
