@@ -77,27 +77,6 @@
         </VWindowItem>
       </VWindow>
     </div>
-
-    <div class="d-flex justify-space-between mt-4">
-      <VBtn 
-        variant="text" 
-        color="grey-lighten-1" 
-        prepend-icon="mdi-arrow-left"
-        class="font-weight-bold"
-        @click="previousStep"
-      >
-        Atrás
-      </VBtn>
-      <VBtn 
-        color="primary" 
-        :disabled="!canContinue" 
-        append-icon="mdi-arrow-right" 
-        class="font-weight-bold px-6"
-        @click="nextStep"
-      >
-        Siguiente
-      </VBtn>
-    </div>
   </div>
 </template>
 

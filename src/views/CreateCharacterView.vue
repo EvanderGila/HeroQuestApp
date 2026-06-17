@@ -1,12 +1,10 @@
 <template>
-  <VContainer fluid class="hq-creation-bg fill-height pa-0 bg-grey-darken-4">
+  <VContainer fluid class="fill-height pa-1 bg-grey-darken-4">
     <VOverlay :model-value="isLoading" class="align-center justify-center" persistent>
       <VProgressCircular color="warning" indeterminate size="64" />
     </VOverlay>
 
-    <VRow>
-      <VCol cols="12" md="8" lg="8" class="pa-2">
-        <VCard variant="flat" class="border-thin bg-surface elevation-12 rounded-xl overflow-hidden">
+        <VCard variant="flat" class="border-thin bg-surface elevation-12 rounded-xl overflow-hidden ma-2">
           
           <VCardTitle class="bg-grey-darken-3 text-white py-2 px-6 d-flex justify-space-between align-center">
             <div class="d-flex align-center">
@@ -25,31 +23,83 @@
             class="bg-transparent"
           >
             <template v-slot:item.1>
-              <RaceSelectionCreation />
+              <VRow>
+                <VCol cols="12" md="8"><RaceSelectionCreation /></VCol>
+                <VCol cols="12" md="4"><PreviewCharacterCard /></VCol>
+              </VRow>
             </template>
 
             <template v-slot:item.2>
-              <ClassSelectionCreation />
+              <VRow>
+                <VCol cols="12" md="8"><ClassSelectionCreation /></VCol>
+                <VCol cols="12" md="4"><PreviewCharacterCard /></VCol>
+              </VRow>
             </template>
 
             <template v-slot:item.3>
-              <IdentityAssignCreation />
+              <VRow>
+                <VCol cols="12" md="8"><IdentityAssignCreation /></VCol>
+                <VCol cols="12" md="4"><PreviewCharacterCard /></VCol>
+              </VRow>
             </template>
 
             <template v-slot:item.4>
-              <CharacterConfirmCreation @save="handleSave" />
+              <VRow>
+                <VCol cols="12" md="6"><CharacterConfirmCreation @save="handleSave" /></VCol>
+                <VCol cols="12" md="4"><PreviewCharacterCard /></VCol>
+              </VRow>
             </template>
           </VStepper>
-
-        </VCard>
-      </VCol>
-      <VCol cols="12" md="4" lg="4">
-        <div class="d-flex justify-center align-center pa-2 h-100">
-          <PreviewCharacterCard />
-        </div>
+          <VDivider class="mt-4 mb-2" />
+      <div class="d-flex justify-space-between align-center px-4 py-2">
         
-      </VCol>
-    </VRow>
+        <div>
+          <VBtn 
+            v-if="currentStep > 1"
+            variant="text" 
+            color="grey-darken-1" 
+            prepend-icon="mdi-arrow-left" 
+            class="font-weight-bold" 
+            @click="previousStep"
+          >
+            Atrás
+          </VBtn>
+          <VBtn 
+            v-else
+            variant="text" 
+            color="error" 
+            prepend-icon="mdi-close" 
+            class="font-weight-bold" 
+            @click="abortAndGoBack"
+          >
+            Cancelar
+          </VBtn>
+        </div>
+
+        <div>
+          <VBtn 
+            v-if="currentStep < 4"
+            color="primary" 
+            :disabled="!canContinue" 
+            append-icon="mdi-arrow-right" 
+            class="font-weight-bold px-6" 
+            @click="nextStep"
+          >
+            {{ currentStep === 3 ? 'Revisar Ficha' : 'Siguiente' }}
+          </VBtn>
+          <VBtn 
+            v-else
+            color="success" 
+            append-icon="mdi-anvil" 
+            class="font-weight-bold px-6 elevation-2" 
+            @click="handleSave"
+          >
+            Forjar Personaje
+          </VBtn>
+        </div>
+
+      </div>
+        </VCard>
   </VContainer>
 </template>
 
@@ -66,7 +116,7 @@ import PreviewCharacterCard from '@/components/characters/creation/PreviewCharac
 
 
 const router = useRouter()
-const { currentStep, isLoading, resetDraft, createCharacter } = useCharacterCreation()
+const { currentStep, isLoading, canContinue, previousStep, nextStep, resetDraft, createCharacter } = useCharacterCreation()
 const { loadCreationData } = useCharacters()
 
 // Precargamos el catálogo de Razas y Clases al montar la pantalla

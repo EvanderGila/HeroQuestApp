@@ -66,17 +66,6 @@
       <AbilitiesTab :character="mockCharacterForAbilities" />
     </div>
 
-    <div class="d-flex justify-end mt-6">
-      <VBtn 
-        color="primary" 
-        :disabled="!canContinue" 
-        append-icon="mdi-arrow-right" 
-        class="font-weight-bold px-6"
-        @click="nextStep"
-      >
-        Siguiente
-      </VBtn>
-    </div>
   </div>
 </template>
 

@@ -36,29 +36,6 @@
       </VCol>
     </VRow>
 
-    <VDivider class="my-4" />
-
-    <!-- Botonera de Decisiones -->
-    <div class="d-flex justify-space-between align-center mt-2">
-      <VBtn 
-        variant="text" 
-        color="grey-lighten-1" 
-        prepend-icon="mdi-arrow-left" 
-        class="font-weight-bold" 
-        @click="previousStep"
-      >
-        Revisar Pasos
-      </VBtn>
-      
-      <VBtn 
-        color="success" 
-        append-icon="mdi-anvil" 
-        class="font-weight-bold px-6 elevation-4" 
-        @click="$emit('save')"
-      >
-        Forjar Personaje
-      </VBtn>
-    </div>
   </div>
 </template>
 
