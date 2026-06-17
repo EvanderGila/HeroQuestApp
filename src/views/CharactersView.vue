@@ -15,7 +15,7 @@
           variant="dashed"
           color="primary"
           class="d-flex flex-column align-center justify-center fill-height min-card-height custom-create-btn"
-          @click="goToCharacterCreator"
+          to="/character-create"
         >
           <VIcon icon="mdi-plus-circle-outline" size="48" class="mb-2" />
           <span class="text-button font-weight-bold">Crear Personaje</span>
