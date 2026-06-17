@@ -2,43 +2,9 @@
   <VCard class="hq-hq-card mx-auto d-flex flex-column" height="720"
   max-height="720" variant="flat">
     
-    <div class="hq-header flex-shrink-0">
-      <VImg
-        :src="character.races?.img || 'https://placehold.co/800x300?text=HeroQuest'"
-        height="100%"
-        cover
-        crossorigin="anonymous"
-        class="align-end text-white"
-      >
-        <div class="bg-gradient-dark px-4 py-3 d-flex justify-space-between align-end">
-          <div>
-            <h2 class="text-h5 text-sm-h4 font-weight-black text-uppercase tracking-wide mb-0 text-white line-clamp-1">
-              {{ character.name }}
-            </h2>
-            <div class="text-caption text-sm-subtitle-2 text-grey-lighten-2 font-weight-bold">
-              {{ character.races?.name }} — {{ character.classes?.name }}
-            </div>
-          </div>
-          <VAvatar color="warning" size="48" class="elevation-3 border-thin font-weight-black text-subtitle-1 text-black flex-shrink-0">
-            {{ character.lvl || 1 }}
-          </VAvatar>
-        </div>
-      </VImg>
-    </div>
-
-    <div class="px-4 py-2 bg-grey-lighten-4 border-bottom-thin flex-shrink-0">
-      <div class="d-flex justify-space-between hq-mini-text font-weight-bold mb-1">
-        <span>EXPERIENCIA</span>
-        <span>{{ character.current_xp || 0 }} / 1000 PX</span>
-      </div>
-      <VProgressLinear
-        :model-value="calculateExpPercentage(character.current_xp)"
-        color="warning"
-        height="6"
-        rounded
-        striped
-      />
-    </div>
+    <HeaderDetailedCard
+    :character="character"
+    ></HeaderDetailedCard>
 
     <VTabs 
       v-model="activeTab" 
@@ -93,11 +59,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import AbilitiesTab from '@/components/characters/AbilitiesTab.vue'
 import SpellsTab from '@/components/characters/SpellsTab.vue'
 import EquipmentTab from '@/components/characters/EquipmentTab.vue'
 import StatsTab from '@/components/characters/StatsTab.vue'
+import HeaderDetailedCard from '@/components/characters/HeaderDetailedCard.vue'
 
 const props = defineProps<{
   character: any
@@ -110,11 +77,6 @@ const emit = defineEmits<{
 }>()
 
 const activeTab = ref('stats')
-
-
-function calculateExpPercentage(exp: number = 0) {
-  return Math.min((exp / 1000) * 100, 100)
-}
 
 </script>
 
