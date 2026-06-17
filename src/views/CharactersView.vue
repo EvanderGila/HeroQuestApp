@@ -1,12 +1,8 @@
 <template>
   <VContainer class="py-8">
-    <div class="d-flex justify-between align-center mb-6">
-      <div>
-        <h1 class="text-h4 font-weight-bold">Tus Héroes</h1>
-        <p class="text-subtitle-1 text-medium-emphasis">
-          Bienvenido de vuelta, {{ authStore.user?.profile?.nickname || 'Explorador' }}
-        </p>
-      </div>
+    <div class="mb-6">
+      <h1 class="text-h4 font-weight-bold">Tus Héroes</h1>
+      <p class="text-subtitle-1 text-medium-emphasis">Gestiona tus fichas de personaje activos.</p>
     </div>
 
     <div v-if="charStore.isLoading" class="d-flex justify-center align-center py-12">
@@ -34,65 +30,49 @@
         md="4" 
         lg="3"
       >
-        <VCard class="fill-height d-flex flex-column border-thin elevation-2">
-          <VImg
-            :src="character.races?.img || 'https://placehold.co/400x200?text=HeroQuest'"
-            height="160"
-            cover
-            class="align-end text-white"
-          >
-            <VCardTitle class="bg-gradient-dark font-weight-bold">
-              {{ character.name }}
-            </VCardTitle>
-          </VImg>
-
-          <VCardSubtitle class="pt-3 font-weight-medium text-primary">
-            Nivel {{ character.lvl }} — {{ character.races?.name }} {{ character.classes?.name }}
-          </VCardSubtitle>
-
-          <VCardText class="flex-grow-1">
-            <div class="d-flex justify-space-between mb-1">
-              <span><VIcon icon="mdi-heart" color="red" size="18" class="me-1"/> Vida:</span>
-              <span class="font-weight-bold">{{ character.hp }}</span>
-            </div>
-            <div class="d-flex justify-space-between mb-1">
-              <span><VIcon icon="mdi-sword" color="orange" size="18" class="me-1"/> Ataque:</span>
-              <span class="font-weight-bold">{{ character.atk }}</span>
-            </div>
-            <div class="d-flex justify-space-between">
-              <span><VIcon icon="mdi-shield" color="blue" size="18" class="me-1"/> Defensa:</span>
-              <span class="font-weight-bold">{{ character.def }}</span>
-            </div>
-          </VCardText>
-
-          <VDivider />
-
-          <VCardActions>
-            <VBtn color="primary" variant="text" block prepend-icon="mdi-eye">
-              Ver Ficha
-            </VBtn>
-          </VCardActions>
-        </VCard>
+        <CharacterSimpleCard 
+          :character="character" 
+          @inspect="handleInspectCharacter"
+        />
       </VCol>
     </VRow>
   </VContainer>
+
+  <VDialog v-model="isDetailsDialogOpen" max-width="900px" transition="dialog-bottom-transition">
+  <CharacterDetailedCard 
+    v-if="characterSelected"
+    :character="liveCharacter" 
+    @close="isDetailsDialogOpen = false"
+    @saveStats="handleSaveStats"
+  />
+</VDialog>
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/store/authStore'
 import { useCharacterStore } from '@/store/characterStore'
 import { useCharacters } from '@/composables/useCharacters'
 
+import CharacterSimpleCard from '@/components/characters/CharacterSimpleCard.vue'
+import CharacterDetailedCard from '@/components/characters/CharacterDetailedCard.vue'
+
 const router = useRouter()
 const charStore = useCharacterStore()
 const authStore = useAuthStore()
 const { loadCreationData, fetchUserCharacters } = useCharacters()
+const { upgradeCharacterStats } = useCharacters()
+
+const isDetailsDialogOpen = ref(false)
+const characterSelected = ref<any>(null)
+
+  const liveCharacter = computed(() => {
+  return charStore.myCharacters.find(c => c.id === characterSelected.value?.id) || characterSelected.value
+})
 
 onMounted(async () => {
   if (authStore.user?.id) {
-    // Cargamos catálogos y luego sus personajes específicos usando el id correcto
     await Promise.all([
       loadCreationData(),
       fetchUserCharacters(authStore.user.id)
@@ -101,10 +81,24 @@ onMounted(async () => {
 })
 
 function goToCharacterCreator() {
-  // Aquí es a donde navegará en el futuro cuando implementes la creación
-  console.log('Navegando al creador de personajes...')
-  // router.push('/characters/create')
+  router.push('/characters/create') // O la ruta que decidas para los steps
 }
+
+function handleInspectCharacter(character: any) {
+  characterSelected.value = character
+  isDetailsDialogOpen.value = true
+}
+
+async function handleSaveStats(payload: { characterId: number; updates: Record<string, number>; totalSpent: number; onSuccess?: () => void }) {
+  // 1. Esperamos a que el composable guarde en Supabase y mutile el store de Pinia
+  const success = await upgradeCharacterStats(payload)
+  
+  // 2. Si todo fue bien, le damos la orden a la tarjeta de cerrar su modo edición de forma segura
+  if (success && payload.onSuccess) {
+    payload.onSuccess()
+  }
+}
+
 </script>
 
 <style scoped>
@@ -117,9 +111,5 @@ function goToCharacterCreator() {
 }
 .custom-create-btn:hover {
   background-color: rgba(var(--v-theme-primary), 0.05);
-}
-.bg-gradient-dark {
-  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
-  width: 100%;
 }
 </style>

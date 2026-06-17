@@ -7,8 +7,28 @@ export const characterService = {
       .from('characters')
       .select(`
         *,
-        races (id, name, img),
-        classes (id, name, img)
+        races (
+          id, name, img, hp_base, atk_base, def_base, mp_base, mov_base,
+          race_abilities (
+            required_lvl,
+            abilities (*)
+          )
+        ),
+        classes (
+          id, name, img, hp_mod, atk_mod, def_mod, mp_mod, mov_mod, class, init_equip, obj_limit,
+          class_abilities (
+            required_lvl,
+            abilities (*)
+          ),
+          class_spells (
+            required_lvl,
+            spells (*)
+          )
+        ),
+        character_equipment(
+          slot,
+          items(*)
+        )
       `)
       .eq('user_id', userId)
     
@@ -36,5 +56,37 @@ export const characterService = {
     
     if (error) throw error
     return data
+  },
+
+  // 4. Subir de nivel los stats
+  async updateCharacterStats(characterId: number, currentHp: number, currentMp: number, currentPoints: number, hpAdded: number, mpAdded: number, totalSpent: number) {
+    const finalHp = currentHp + hpAdded
+    const finalMp = currentMp + mpAdded
+    const finalPoints = currentPoints - totalSpent
+
+    const { data, error } = await supabase
+      .from('characters')
+      .update({
+        hp: finalHp,
+        mp: finalMp,
+        available_points: finalPoints
+      })
+      .eq('id', characterId)
+      .select() // Súper importante para que nos devuelva el personaje actualizado completo
+      .single()
+
+    if (error) throw error
+    return data
+  },
+
+  // 5. Añadir un nuevo personaje
+  async createCharacter(characterData: any) {
+    const { data, error } = await supabase
+      .from('characters')
+      .insert(characterData)
+      .select() // Para que nos devuelva el personaje creado si lo necesitamos
+    
+    if (error) throw error
+    return data[0]
   }
 }
