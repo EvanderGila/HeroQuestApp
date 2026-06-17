@@ -154,93 +154,9 @@
       </div>
 
       <div v-if="activeTab === 'skills'" class="pa-4 pa-sm-6">
-        <div v-if="hasAbilities" class="d-flex flex-column gap-4">
-          
-          <div v-if="character.races?.race_abilities?.length > 0" class="mb-4">
-            <h4 class="text-caption font-weight-bold text-uppercase text-primary mb-2">Rasgos de Raza ({{ character.races.name }})</h4>
-            <VRow dense>
-              <VCol cols="12" sm="12" v-for="ra in character.races.race_abilities" :key="ra.abilities.id" class="pa-1">
-                <VCard variant="tonal" :color="isLevelUnlocked(ra.required_lvl) ? 'secondary' : 'grey'" class="border-thin pa-3 h-100" :disabled="!isLevelUnlocked(ra.required_lvl)">
-                  
-                  <div class="d-flex align-center justify-space-between mb-2">
-                    <span class="font-weight-black text-body-2 line-clamp-1">
-                      <VIcon icon="mdi-dna" size="16" class="me-1"/>{{ ra.abilities.name }}
-                    </span>
-                    
-                    <div class="d-flex align-center gap-x-2">
-                      <VChip 
-                        size="x-small" 
-                        :variant="isLevelUnlocked(ra.required_lvl) ? 'flat' : 'outlined'"
-                        :color="ra.abilities.type === 'passive' ? 'blue-darken-1' : 'orange-darken-2'"
-                        class="font-weight-bold"
-                      >
-                        {{ ra.abilities.type === 'passive' ? 'Pasiva' : 'Activa' }}
-                      </VChip>
-
-                      <VChip 
-                        v-if="!isLevelUnlocked(ra.required_lvl)" 
-                        size="x-small" 
-                        color="error" 
-                        variant="flat"
-                        prepend-icon="mdi-lock"
-                        class="font-weight-black"
-                      >
-                        Req. Nv. {{ ra.required_lvl }}
-                      </VChip>
-                    </div>
-                  </div>
-
-                  <p class="hq-mini-desc mb-0 text-medium-emphasis">{{ ra.abilities.description || 'Sin descripción.' }}</p>
-                </VCard>
-              </VCol>
-            </VRow>
-          </div>
-
-          <div v-if="character.classes?.class_abilities?.length > 0">
-            <h4 class="text-caption font-weight-bold text-uppercase text-primary mb-2">Técnicas de Clase ({{ character.classes.name }})</h4>
-            <VRow dense>
-              <VCol cols="12" sm="12" v-for="ca in character.classes.class_abilities" :key="ca.abilities.id" class="pa-1">
-                <VCard variant="tonal" :color="isLevelUnlocked(ca.required_lvl) ? 'primary' : 'grey'" class="border-thin pa-3 h-100" :disabled="!isLevelUnlocked(ca.required_lvl)">
-                  
-                  <div class="d-flex align-center justify-space-between mb-2">
-                    <span class="font-weight-black text-body-2 line-clamp-1">
-                      <VIcon icon="mdi-sword-master" size="16" class="me-1"/>{{ ca.abilities.name }}
-                    </span>
-                    
-                    <div class="d-flex align-center gap-x-2">
-                      <VChip 
-                        size="x-small" 
-                        :variant="isLevelUnlocked(ca.required_lvl) ? 'flat' : 'outlined'"
-                        :color="ca.abilities.type === 'passive' ? 'blue-darken-1' : 'orange-darken-2'"
-                        class="font-weight-bold"
-                      >
-                        {{ ca.abilities.type === 'passive' ? 'Pasiva' : 'Activa' }}
-                      </VChip>
-
-                      <VChip 
-                        v-if="!isLevelUnlocked(ca.required_lvl)" 
-                        size="x-small" 
-                        color="error" 
-                        variant="flat"
-                        prepend-icon="mdi-lock"
-                        class="font-weight-black"
-                      >
-                        Req. Nv. {{ ca.required_lvl }}
-                      </VChip>
-                    </div>
-                  </div>
-
-                  <p class="hq-mini-desc mb-0 text-medium-emphasis">{{ ca.abilities.description || 'Sin descripción.' }}</p>
-                </VCard>
-              </VCol>
-            </VRow>
-          </div>
-
-        </div>
-        <div v-else class="text-center py-8 text-medium-emphasis">
-          <VIcon icon="mdi-book-open-blank-variant" size="36" class="mb-2 text-disabled" />
-          <p class="text-caption">Este aventurero no posee rasgos ni técnicas aprendidas.</p>
-        </div>
+        <AbilitiesTab
+        :character="character"
+        ></AbilitiesTab>
       </div>
 
       <div v-if="activeTab === 'spells'" class="pa-4 pa-sm-6">
@@ -329,6 +245,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import AbilitiesTab from '@/components/characters/AbilitiesTab.vue'
 
 const props = defineProps<{
   character: any
@@ -377,13 +294,6 @@ const availableSlots = [
   { key: 'boots', label: 'Calzado', icon: 'mdi-shoe-print' }
 ]
 
-const hasAbilities = computed(() => {
-  return !!props.character.races?.race_abilities?.length || !!props.character.classes?.class_abilities?.length
-})
-
-function isLevelUnlocked(requiredLvl: number): boolean {
-  return (props.character.lvl || 1) >= requiredLvl
-}
 
 function calculateExpPercentage(exp: number = 0) {
   return Math.min((exp / 1000) * 100, 100)
