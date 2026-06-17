@@ -1,7 +1,7 @@
 <template>
   <VCard 
     variant="flat" 
-    class="bg-grey-darken-4 border-thin rounded-xl text-white sticky-card h-100 d-flex flex-column"
+    class="bg-grey-darken-4 border-thin rounded-xl text-white h-auto d-flex flex-column"
   >
     <!-- 🖼️ Cabecera: Retrato e Identidad Principal -->
     <div class="relative-container">
@@ -24,7 +24,7 @@
     </div>
 
     <!-- 📊 Cuerpo: Stats Combinadas en Tiempo Real -->
-    <VCardText class="pa-3 flex-grow-1 overflow-y-auto">
+    <VCardText class="pa-3">
       <div class="text-caption font-weight-bold text-uppercase text-disabled mb-2 tracking-wide" style="font-size: 0.65rem;">
         Atributos Actuales
       </div>
@@ -32,11 +32,23 @@
       <VRow dense class="mb-3">
         <VCol v-for="stat in currentLiveStats" :key="stat.label" cols="6" sm="4" md="12" class="py-0.5">
           <div class="d-flex align-center justify-space-between bg-grey-darken-3 px-2.5 py-1 rounded border-thin">
-            <div class="d-flex align-center gap-x-2">
+            <!-- Izquierda: Icono y Etiqueta -->
+            <div class="d-flex align-center gap-x-2 ml-1">
               <VIcon :icon="stat.icon" :color="stat.color" size="14" />
               <span class="text-caption text-grey-lighten-1 text-truncate" style="font-size: 0.75rem;">{{ stat.label }}</span>
             </div>
-            <span class="text-caption font-weight-black">{{ stat.value }}</span>
+            
+            <!-- Derecha: Valor de Raza + Modificador de Clase si existe -->
+            <div class="text-caption font-weight-black d-flex align-center gap-x-1 mr-2">
+              <span>{{ stat.base }}</span>
+              <span 
+                v-if="stat.mod !== 0" 
+                :class="stat.mod > 0 ? 'text-green-lighten-1' : 'text-red-lighten-1'"
+                class="font-weight-bold ms-1"
+              >
+                ({{ stat.mod >= 0 ? '+' : '' }}{{ stat.mod }})
+              </span>
+            </div>
           </div>
         </VCol>
       </VRow>
@@ -109,20 +121,19 @@
 import { computed } from 'vue'
 import { useCharacterCreation } from '@/composables/useCharacterCreation'
 
-const { draft, calculatedStats } = useCharacterCreation()
+const { draft, calculatedStats, raceStats, classStats } = useCharacterCreation()
 
 const characterImage = computed(() => {
   return draft.value.img || draft.value.race?.img || 'https://placehold.co/400x300?text=Forjando+Heroe'
 })
 
 const currentLiveStats = computed(() => {
-  const s = calculatedStats.value
   return [
-    { label: 'Cuerpo', icon: 'mdi-heart', color: 'red-lighten-1', value: s.hp },
-    { label: 'Mente', icon: 'mdi-brain', color: 'purple-lighten-2', value: s.mp },
-    { label: 'Ataque', icon: 'mdi-sword', color: 'orange-darken-1', value: `${s.atk}d` },
-    { label: 'Defensa', icon: 'mdi-shield', color: 'blue-lighten-1', value: `${s.def}d` },
-    { label: 'Movimiento', icon: 'mdi-run', color: 'teal-lighten-2', value: s.mov }
+    { label: 'Cuerpo (Vida)', icon: 'mdi-heart', color: 'red-lighten-1', base: raceStats.value.hp, mod: classStats.value.hp, isDice: false },
+    { label: 'Mente (Maná)', icon: 'mdi-brain', color: 'purple-lighten-2', base: raceStats.value.mp, mod: classStats.value.mp, isDice: false },
+    { label: 'Ataque', icon: 'mdi-sword', color: 'orange-darken-1', base: raceStats.value.atk, mod: classStats.value.atk, isDice: true },
+    { label: 'Defensa', icon: 'mdi-shield', color: 'blue-lighten-1', base: raceStats.value.def, mod: classStats.value.def, isDice: true },
+    { label: 'Movimiento', icon: 'mdi-run', color: 'teal-lighten-2', base: raceStats.value.mov, mod: classStats.value.mov, isDice: false }
   ]
 })
 

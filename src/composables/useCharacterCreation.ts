@@ -25,28 +25,36 @@ export function useCharacterCreation() {
   const currentStep = computed(() => creationStore.currentStep)
   const isLoading = computed(() => creationStore.isLoading)
 
+  const raceStats = computed(() => {
+    const race = creationStore.draft.race
+    return {
+      hp: race?.hp_base ?? 0,
+      atk: race?.atk_base ?? 0,
+      def: race?.def_base ?? 0,
+      mp: race?.mp_base ?? 0,
+      mov: race?.mov_base ?? 0
+    }
+  })
+
+  const classStats = computed(() => {
+    const cls = creationStore.draft.class
+    return {
+      hp: cls?.hp_mod ?? 0,
+      atk: cls?.atk_mod ?? 0,
+      def: cls?.def_mod ?? 0,
+      mp: cls?.mp_mod ?? 0,
+      mov: cls?.mov_mod ?? 0
+    }
+  })
 
   const calculatedStats = computed(() => {
 
-    const race = creationStore.draft.race
-    const cls = creationStore.draft.class
-
-    if (!race || !cls) {
-      return {
-        hp: 0,
-        atk: 0,
-        def: 0,
-        mp: 0,
-        mov: 0
-      }
-    }
-
     return {
-      hp: race.hp_base + cls.hp_mod,
-      atk: race.atk_base + cls.atk_mod,
-      def: race.def_base + cls.def_mod,
-      mp: race.mp_base + cls.mp_mod,
-      mov: race.mov_base + cls.mov_mod
+      hp: raceStats.value.hp + classStats.value.hp,
+      atk: raceStats.value.atk + classStats.value.atk,
+      def: raceStats.value.def + classStats.value.def,
+      mp: raceStats.value.mp + classStats.value.mp,
+      mov: raceStats.value.mov + classStats.value.mov
     }
   })
 
@@ -176,6 +184,8 @@ export function useCharacterCreation() {
     calculatedStats,
     canContinue,
     isReadyToCreate,
+    classStats,
+    raceStats,
     selectRace,
     selectClass,
     setName,
