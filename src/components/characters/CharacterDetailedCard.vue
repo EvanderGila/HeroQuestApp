@@ -160,76 +160,16 @@
       </div>
 
       <div v-if="activeTab === 'spells'" class="pa-4 pa-sm-6">
-        <div v-if="character.classes?.class_spells && character.classes.class_spells.length > 0">
-          <VRow dense>
-            <VCol cols="12" sm="6" v-for="cs in character.classes.class_spells" :key="cs.spells.id" class="pa-1">
-              <VCard 
-                variant="outlined" 
-                :color="isLevelUnlocked(cs.required_lvl) ? 'deep-purple-lighten-1' : 'grey-lighten-1'" 
-                class="border-thin pa-3 d-flex flex-column justify-space-between bg-surface h-100"
-                :disabled="!isLevelUnlocked(cs.required_lvl)"
-              >
-                <div>
-                  <div class="d-flex align-center justify-space-between mb-1">
-                    <span class="font-weight-black text-body-2"><VIcon icon="mdi-star-flash" color="deep-purple" size="16" class="me-1"/>{{ cs.spells.name }}</span>
-                    <VChip v-if="!isLevelUnlocked(cs.required_lvl)" size="x-small" color="error" variant="flat">Bloqueado (Nv. {{ cs.required_lvl }})</VChip>
-                  </div>
-                  <p class="hq-mini-desc italic mb-2 text-medium-emphasis">"{{ cs.spells.description }}"</p>
-                </div>
-                <div class="d-flex justify-space-between align-center pt-2 border-top-thin">
-                  <span class="text-caption font-weight-bold text-deep-purple">
-                    <VIcon icon="mdi-lightning-bolt" size="12" />{{ cs.spells.mana_cost || 0 }} PM
-                  </span>
-                  <VChip v-if="isLevelUnlocked(cs.required_lvl)" size="x-small" color="deep-purple" variant="flat">Listo</VChip>
-                </div>
-              </VCard>
-            </VCol>
-          </VRow>
-        </div>
-        <div v-else class="text-center py-8 text-medium-emphasis">
-          <VIcon icon="mdi-wizard-hat" size="36" class="mb-2 text-disabled" />
-          <p class="text-caption">Tu clase actual no puede canalizar o aprender hechizos arcanos.</p>
-        </div>
+        <SpellsTab
+        :character="character"
+        ></SpellsTab>
       </div>
 
       <div v-if="activeTab === 'equipment'" class="pa-4">
-        <div class="text-caption font-weight-bold text-uppercase mb-3 text-primary">Inventario de Ranuras Activas</div>
-        <VRow dense>
-          <VCol cols="6" sm="4" v-for="slot in availableSlots" :key="slot.key" class="pa-1">
-            <VCard 
-              variant="flat" 
-              class="hq-inventory-slot border-thin d-flex flex-column justify-space-between align-center pa-2 text-center h-100"
-              :class="getEquippedItemInSlot(slot.key) ? 'bg-amber-lighten-5 border-amber-lighten-2' : 'bg-white'"
-            >
-              <VIcon 
-                :icon="getEquippedItemInSlot(slot.key) ? 'mdi-shield-check' : slot.icon" 
-                :color="getEquippedItemInSlot(slot.key) ? 'amber-darken-3' : 'disabled'" 
-                size="20"
-                class="mb-1"
-              />
-              <div class="hq-slot-tag text-disabled font-weight-bold text-uppercase">{{ slot.label }}</div>
-              
-              <div class="my-1 flex-grow-1 d-flex align-center justify-center min-h-30">
-                <span v-if="getEquippedItemInSlot(slot.key)" class="hq-item-name font-weight-black text-high-emphasis">
-                  {{ getEquippedItemInSlot(slot.key).name }}
-                </span>
-                <span v-else class="text-caption text-disabled italic">Vacío</span>
-              </div>
-
-              <VBtn
-                v-if="getEquippedItemInSlot(slot.key)"
-                size="x-small"
-                color="error"
-                variant="tonal"
-                block
-                class="mt-1"
-                @click="$emit('unequipItem', { characterId: character.id, slot: slot.key })"
-              >
-                Quitar
-              </VBtn>
-            </VCard>
-          </VCol>
-        </VRow>
+        <EquipmentTab
+        :character="character"
+        @unequipItem="$emit('unequipItem', $event)"
+        ></EquipmentTab>
       </div>
 
     </div>
@@ -246,6 +186,8 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import AbilitiesTab from '@/components/characters/AbilitiesTab.vue'
+import SpellsTab from '@/components/characters/SpellsTab.vue'
+import EquipmentTab from '@/components/characters/EquipmentTab.vue';
 
 const props = defineProps<{
   character: any
@@ -282,26 +224,9 @@ const statsConfig = [
   { key: 'mov', modKey: 'mov_mod', label: 'Movimiento Base', icon: 'mdi-run', color: 'teal', upgradable: false }
 ]
 
-const availableSlots = [
-  { key: 'head', label: 'Cabeza', icon: 'mdi-hard-hat' },
-  { key: 'talisman', label: 'Amuleto', icon: 'mdi-necklace' },
-  { key: 'chest_inner', label: 'Ropa / Túnica', icon: 'mdi-tshirt-crew' },
-  { key: 'chest_outer', label: 'Armadura / Capa', icon: 'mdi-vest' },
-  { key: 'weapon_1h', label: 'Mano Dch (1H)', icon: 'mdi-sword' },
-  { key: 'weapon_2h', label: 'Dos Manos', icon: 'mdi-sword-cross' },
-  { key: 'shield', label: 'Mano Izq (Escudo)', icon: 'mdi-shield-star' },
-  { key: 'bracers', label: 'Brazales', icon: 'mdi-hand-back-right' },
-  { key: 'boots', label: 'Calzado', icon: 'mdi-shoe-print' }
-]
-
 
 function calculateExpPercentage(exp: number = 0) {
   return Math.min((exp / 1000) * 100, 100)
-}
-
-function getEquippedItemInSlot(slotKey: string) {
-  if (!props.equipmentList) return null
-  return props.equipmentList.find(e => e.slot === slotKey) || null
 }
 
 // Inicializa el estado de edición si no se ha hecho ya
