@@ -4,8 +4,8 @@
       <VProgressCircular color="warning" indeterminate size="64" />
     </VOverlay>
 
-    <VRow justify="center" align="center" class="ma-0 w-100 h-100">
-      <VCol cols="12" md="10" lg="9" class="pa-4">
+    <VRow>
+      <VCol cols="12" md="8" lg="8" class="pa-2">
         <VCard variant="flat" class="border-thin bg-surface elevation-12 rounded-xl overflow-hidden">
           
           <VCardTitle class="bg-grey-darken-3 text-white py-2 px-6 d-flex justify-space-between align-center">
@@ -43,6 +43,12 @@
 
         </VCard>
       </VCol>
+      <VCol cols="12" md="4" lg="4">
+        <div class="d-flex justify-center align-center pa-2 h-100">
+          <PreviewCharacterCard />
+        </div>
+        
+      </VCol>
     </VRow>
   </VContainer>
 </template>
@@ -56,6 +62,7 @@ import RaceSelectionCreation from '@/components/characters/creation/RaceSelectio
 import ClassSelectionCreation from '@/components/characters/creation/ClassSelectionCreation.vue'
 import IdentityAssignCreation from '@/components/characters/creation/IdentityAssignCreation.vue'
 import CharacterConfirmCreation from '@/components/characters/creation/CharacterConfirmCreation.vue'
+import PreviewCharacterCard from '@/components/characters/creation/PreviewCharacterCard.vue'
 
 
 const router = useRouter()
