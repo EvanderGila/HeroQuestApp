@@ -20,7 +20,7 @@
         >
           <VCarouselItem v-for="cls in characterStore.availableClasses" :key="cls.id">
             <VSheet class="d-flex fill-height align-center justify-center bg-transparent pa-1">
-              <VCard width="320" class="border-thin bg-grey-darken-3 text-white rounded-xl elevation-8 text-center overflow-hidden">
+              <VCard width="200" class="border-thin bg-grey-darken-3 text-white rounded-xl elevation-8 text-center overflow-hidden">
                 <VImg 
                   :src="cls.img || 'https://placehold.co/400x300?text=' + cls.name" 
                   height="280" 
