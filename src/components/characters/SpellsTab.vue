@@ -32,9 +32,10 @@
 </template>
 <script setup lang="ts">
 import { computed } from 'vue'
+import type { Character } from '@/types/character'
 
 const props = defineProps<{
-  character: any // Tu interfaz de personaje de Supabase
+  character: Character // Tu interfaz de personaje de Supabase
 }>()
 
 // La raza no tiene hechizos propios de momento

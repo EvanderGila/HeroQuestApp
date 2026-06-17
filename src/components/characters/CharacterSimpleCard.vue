@@ -77,7 +77,6 @@
 </template>
 
 <script setup lang="ts">
-// Importamos el tipo para que TypeScript valide las propiedades
 import type { Character } from '@/types/character'
 
 // Definimos las Props tipadas que recibirá de la vista madre

@@ -17,7 +17,7 @@
               
               <div class="my-1 flex-grow-1 d-flex align-center justify-center min-h-30">
                 <span v-if="getEquippedItemInSlot(slot.key)" class="hq-item-name font-weight-black text-high-emphasis">
-                  {{ getEquippedItemInSlot(slot.key).name }}
+                  {{ getEquippedItemInSlot(slot.key)?.name }}
                 </span>
                 <span v-else class="text-caption text-disabled italic">Vacío</span>
               </div>
@@ -39,9 +39,10 @@
 </template>
 <script setup lang="ts">
 import { computed } from 'vue'
+import type { Character } from '@/types/character'
 
 const props = defineProps<{
-  character: any // Tu interfaz de personaje de Supabase
+  character: Character // Tu interfaz de personaje de Supabase
 }>()
 
 const availableSlots = [

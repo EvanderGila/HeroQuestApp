@@ -2,7 +2,7 @@
     <div v-if="hasAbilities" class="d-flex flex-column gap-4">
           
           <div v-if="raceAbilities.length > 0" class="mb-4">
-            <h4 class="text-caption font-weight-bold text-uppercase text-primary mb-2">Rasgos de Raza ({{ characterRace.name }})</h4>
+            <h4 class="text-caption font-weight-bold text-uppercase text-primary mb-2">Rasgos de Raza ({{ characterRace?.name || 'Sin Raza' }})</h4>
             <VRow dense>
               <VCol cols="12" sm="12" v-for="ra in raceAbilities" :key="ra.abilities.id" class="pa-1">
                 <VCard variant="tonal" :color="isLevelUnlocked(ra.required_lvl) ? 'secondary' : 'grey'" class="border-thin pa-3 h-100" :disabled="!isLevelUnlocked(ra.required_lvl)">
@@ -42,7 +42,7 @@
           </div>
 
           <div v-if="classAbilities.length > 0">
-            <h4 class="text-caption font-weight-bold text-uppercase text-primary mb-2">Técnicas de Clase ({{ characterClass.name }})</h4>
+            <h4 class="text-caption font-weight-bold text-uppercase text-primary mb-2">Técnicas de Clase ({{ characterClass?.name || 'Sin clase' }})</h4>
             <VRow dense>
               <VCol cols="12" sm="12" v-for="ca in classAbilities" :key="ca.abilities.id" class="pa-1">
                 <VCard variant="tonal" :color="isLevelUnlocked(ca.required_lvl) ? 'primary' : 'grey'" class="border-thin pa-3 h-100" :disabled="!isLevelUnlocked(ca.required_lvl)">
@@ -89,16 +89,17 @@
 </template>
 <script setup lang="ts">
 import { computed } from 'vue'
+import type { Character } from '@/types/character'
 
 const props = defineProps<{
-  character: any // Tu interfaz de personaje de Supabase
+  character: Character // Tu interfaz de personaje de Supabase
 }>()
 
 // 🛡️ Computados seguros: si no existen, devuelven un objeto vacío o un array vacío por defecto
-const characterRace = computed(() => props.character?.races || {})
+const characterRace = computed(() => props.character?.races)
 const raceAbilities = computed(() => props.character?.races?.race_abilities || [])
 
-const characterClass = computed(() => props.character?.classes || {})
+const characterClass = computed(() => props.character?.classes)
 const classAbilities = computed(() => props.character?.classes?.class_abilities || [])
 
 // Simplificamos también el chequeo global usando los nuevos computados limpios

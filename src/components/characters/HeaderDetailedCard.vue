@@ -1,7 +1,7 @@
 <template>
     <div class="hq-header flex-shrink-0">
       <VImg
-        :src="characterRace.img || 'https://placehold.co/800x300?text=HeroQuest'"
+        :src="characterRace?.img || 'https://placehold.co/800x300?text=HeroQuest'"
         height="100%"
         cover
         crossorigin="anonymous"
@@ -13,7 +13,7 @@
               {{ character.name }}
             </h2>
             <div class="text-caption text-sm-subtitle-2 text-grey-lighten-2 font-weight-bold">
-              {{ characterRace.name }} — {{ characterClass.name }}
+              {{ characterRace?.name }} — {{ characterClass?.name }}
             </div>
           </div>
           <VAvatar color="warning" size="48" class="elevation-3 border-thin font-weight-black text-subtitle-1 text-black flex-shrink-0">
@@ -39,13 +39,14 @@
 </template>
 <script setup lang="ts">
 import { computed } from 'vue'
+import type { Character } from '@/types/character'
 
 const props = defineProps<{
-  character: any // Tu interfaz de personaje de Supabase
+  character: Character // Tu interfaz de personaje de Supabase
 }>()
 
-const characterClass = computed(() => props.character?.classes || {})
-const characterRace = computed(() => props.character?.races || {})
+const characterClass = computed(() => props.character?.classes)
+const characterRace = computed(() => props.character?.races)
 
 function calculateExpPercentage(exp: number = 0) {
   return Math.min((exp / 1000) * 100, 100)
