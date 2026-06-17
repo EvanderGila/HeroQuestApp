@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import type { Character, Race, Class } from '@/types/character'
+import type { Character } from '@/types/character'
+import type { Race } from '@/types/race'
+import type { Class } from '@/types/class'
 
 export const useCharacterStore = defineStore('characters', () => {
   const myCharacters = ref<Character[]>([])
