@@ -12,7 +12,7 @@ const appRoutes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(),
   routes : appRoutes,  // Usamos las rutas importadas
 })
 
