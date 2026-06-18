@@ -4,7 +4,7 @@
   </VContainer>
 
   <template v-else-if="authStore.user">
-    <DefaultNavBar :items="navItems" :user="authStore.user" />
+    <DefaultNavbar :items="navItems" :user="authStore.user" />
     <VMain>
       <VContainer fluid class="pa-0">
         <slot /> 
@@ -20,7 +20,7 @@
 <script setup>
 import { useAuthStore } from '@/store/authStore'
 import { useAuth } from '@/composables/useAuth'
-import DefaultNavBar from '@/components/common/DefaultNavBar.vue'
+import DefaultNavbar from '@/components/common/DefaultNavbar.vue'
 
 const authStore = useAuthStore()
 const { logout } = useAuth()
