@@ -8,8 +8,8 @@
     <div class="hq-glow-orb hq-orb-cyan-electric"></div>
 
     <!-- 🪪 Tarjeta de Login Premium con Borde de Energía Activa Celesta -->
-    <div class="hq-login-card-wrapper">
-      <VCard width="430" class="pa-9 rounded-xl hq-login-card text-white" variant="flat">
+    <div class="hq-login-card-wrapper w-100">
+      <VCard max-width="430" class="pa-9 rounded-xl hq-login-card text-white" variant="flat">
         
         <!-- 👑 Cabecera Monumental con Destellos Arcanos -->
         <div class="text-center mb-8 relative-container">
@@ -169,6 +169,9 @@ const handleLogin = () => {
   background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(33, 150, 243, 0.25) 40%, rgba(0, 229, 255, 0.15) 70%, rgba(255,255,255,0.02) 100%);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
   z-index: 1;
+
+  max-width: 430px; 
+  margin: 0 16px; /* Evita que choque contra los bordes físicos del móvil */
 }
 
 /* 🪪 TARJETA INTERNA: Cristal de Obsidiana con reflejos azulados */

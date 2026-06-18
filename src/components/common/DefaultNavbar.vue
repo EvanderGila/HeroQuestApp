@@ -24,7 +24,7 @@
 
     <div class="d-flex align-center gap-x-4">
       
-      <div v-if="user?.profile?.nickname" class="hq-player-display d-flex align-center me-2">
+      <div v-if="user?.profile?.nickname" class="hq-player-display d-flex align-center me-1">
         <div class="hq-status-indicator mr-2">
           <span class="hq-status-ping"></span>
           <span class="hq-status-dot"></span>
@@ -75,8 +75,8 @@ defineProps({
 .text-xxs { font-size: 0.75rem !important; }
 .tracking-widest { letter-spacing: 0.18em !important; }
 .tracking-wider { letter-spacing: 0.08em !important; }
-.gap-x-1 { column-gap: 6px !important; }
-.gap-x-4 { column-gap: 16px !important; }
+.gap-x-1 { column-gap: 2px !important; }
+.gap-x-4 { column-gap: 8px !important; }
 
 /* ── 🌌 BARRA DE NAVEGACIÓN BASE ── */
 .hq-main-navbar {

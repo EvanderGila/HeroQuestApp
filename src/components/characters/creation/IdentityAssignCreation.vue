@@ -39,9 +39,8 @@
                 :class="draft.img === url ? 'border-warning-heavy elevation-8 scale-active' : 'opacity-72'"
                 class="bg-grey-darken-3 rounded-lg overflow-hidden cursor-pointer transition-all"
                 variant="flat"
-                width="120"
               >
-                <VImg :src="url" height="150"  cover />
+                <VImg :src="url" aspect-ratio="4/5"  cover />
               </VCard>
             </VCol>
           </VRow>
