@@ -35,62 +35,86 @@
       </VChip>
     </VCard>
 
-    <!-- 📊 Rejilla de Atributos: Volvemos al cómodo layout original -->
-    <VRow dense class="flex-grow-1 align-content-start">
-      <VCol cols="12" sm="6" v-for="stat in statsConfig" :key="stat.key" class="pa-1">
-        <!-- 🎯 Añadido el Glow Mágico Condicional aquí -->
-        <VCard 
-          variant="outlined" 
-          class="pa-3 d-flex align-center justify-space-between bg-surface border-thin h-100 rounded-lg hq-stat-card"
-          :class="{
-            'upgradable-glow': stat.upgradable && currentAvailablePoints > 0
-          }"
-        >
-          <div class="d-flex align-center">
-            <VIcon :icon="stat.icon" :color="stat.color" size="28" class="me-3" />
-            <div>
-              <div class="text-caption text-medium-emphasis text-uppercase font-weight-bold lh-tight mb-1">
-                {{ stat.label }}
-              </div>
-              <div class="text-h6 font-weight-black lh-1">
-                {{ character[stat.key] }}
-                
-                <!-- Puntos asignados temporalmente -->
-                <span v-if="isEditing && (editedStats[stat.key] || 0) > 0" class="text-primary font-weight-bold ms-1 text-body-1">
-                  +{{ editedStats[stat.key] }}
-                </span>
-                
-                <!-- Bonus de equipamiento activo -->
-                <span v-if="character[stat.modKey]" class="text-success text-body-2 ms-1 font-weight-medium">
-                  (+{{ character[stat.modKey] }})
-                </span>
-              </div>
+    <!-- 📊 Rejilla de Atributos -->
+<VRow dense class="flex-grow-1 align-content-start">
+  <VCol cols="12" sm="6" v-for="stat in statsConfig" :key="stat.key" class="pa-1">
+
+    <VCard 
+      variant="outlined" 
+      class="pa-3 d-flex align-center justify-space-between bg-surface border-thin h-100 rounded-lg hq-stat-card"
+      :class="{
+        'upgradable-glow': stat.upgradable && currentAvailablePoints > 0
+      }"
+    >
+      <div class="d-flex align-center">
+        <div class="icon-wrapper">
+        <VIcon :icon="stat.icon" :color="stat.color" size="28" class="me-3" />
+          <div v-if="isEditing && (editedStats[stat.key] || 0) > 0"
+              class="stat-assigned-badge icon-badge">
+              +{{ editedStats[stat.key] }}
             </div>
+        </div>
+        <div class="ml-2">
+          <div class="text-caption text-medium-emphasis text-uppercase font-weight-bold lh-tight mb-1 ">
+            {{ stat.label }}
           </div>
-          
-          <!-- Controles de Atributos Subibles -->
-          <div v-if="stat.upgradable" class="d-flex align-center gap-x-1">
-            <VBtn
-              v-if="isEditing && (editedStats[stat.key] || 0) > 0"
-              icon="mdi-minus"
-              size="x-small"
-              color="error"
-              variant="tonal"
-              @click="decrementStat(stat.key)"
-            />
-            
-            <VBtn
-              icon="mdi-plus"
-              size="small"
-              variant="flat"
-              :color="currentAvailablePoints > 0 ? 'success' : 'surface-variant'"
-              :disabled="currentAvailablePoints <= 0"
-              @click="incrementStat(stat.key)"
-            />
+
+          <!-- 🧠 STAT VALUE WRAPPER -->
+          <div class="d-flex align-center">
+
+            <!-- Wrapper base + badge -->
+            <div class="stat-value-wrapper">
+
+              <!-- 🔢 VALOR BASE -->
+              <div class="text-h6 font-weight-black lh-1 stat-value"
+                :class="{
+                  'stat-value-active': isEditing && (editedStats[stat.key] || 0) > 0
+                }"
+              >
+                {{ character[stat.key] + ((isEditing && stat.upgradable) ? (editedStats[stat.key] || 0) : 0)}}
+              </div>
+
+            </div>
+
+            <!-- 🟢 BONUS EQUIPO (igual que antes) -->
+            <span
+              v-if="equipmentStats?.[stat.key as keyof typeof equipmentStats]"
+              class="text-success text-body-2 ms-1 font-weight-medium"
+              :class="equipmentStats?.[stat.key as keyof typeof equipmentStats] < 0 ? 'text-error' : 'text-success'"
+            >
+              ({{ equipmentStats?.[stat.key as keyof typeof equipmentStats] > 0 ? '+' : '' }}{{ equipmentStats?.[stat.key as keyof typeof equipmentStats] }})
+            </span>
+
           </div>
-        </VCard>
-      </VCol>
-    </VRow>
+        </div>
+      </div>
+
+      <!-- CONTROLES -->
+      <div v-if="stat.upgradable" class="d-flex align-center gap-x-1">
+
+        <VBtn
+          v-if="isEditing && (editedStats[stat.key] || 0) > 0"
+          icon="mdi-minus"
+          size="x-small"
+          color="error"
+          variant="tonal"
+          @click="decrementStat(stat.key)"
+        />
+
+        <VBtn
+          icon="mdi-plus"
+          size="small"
+          variant="flat"
+          :color="currentAvailablePoints > 0 ? 'success' : 'surface-variant'"
+          :disabled="currentAvailablePoints <= 0"
+          @click="incrementStat(stat.key)"
+        />
+
+      </div>
+    </VCard>
+
+  </VCol>
+</VRow>
 
     <!-- ⚠️ Notificación inferior de cambios sin guardar -->
     <VExpandTransition>
@@ -113,7 +137,8 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-
+import { toRef } from 'vue'
+import { useCharacterStats } from '@/composables/useCharacterStats'
 const props = defineProps<{
   character: any
 }>()
@@ -121,6 +146,10 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: 'saveStats', payload: { characterId: number; updates: Record<string, number>; totalSpent: number; onSuccess?: () => void }): void
 }>()
+
+const characterRef = toRef(props, 'character')
+
+const { equipmentStats } = useCharacterStats(characterRef)
 
 const isEditing = ref(false)
 const localPoints = ref(0)
@@ -286,5 +315,53 @@ function saveEdition() {
   0% { opacity: 1; }
   50% { opacity: 0.75; }
   100% { opacity: 1; }
+}
+.stat-value-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* número base */
+.stat-value {
+  transition: all .15s ease;
+}
+
+/* cuando está siendo modificado */
+.stat-value-active {
+  color: #42a5f5;
+  text-shadow: 0 0 8px rgba(66,165,245,.25);
+}
+
+/* badge azul de puntos asignados */
+.stat-assigned-badge {
+  position: absolute;
+  top: -12px;
+  right: -18px;
+
+  font-size: .65rem;
+  font-weight: 800;
+
+  color: #42a5f5;
+
+  background: rgba(66,165,245,.15);
+  border: 1px solid rgba(66,165,245,.25);
+
+  padding: 1px 4px;
+  border-radius: 999px;
+
+  backdrop-filter: blur(8px);
+  line-height: 1.4;
+
+  pointer-events: none;
+}
+.icon-wrapper {
+  position: relative;
+}
+
+.icon-badge {
+  position: absolute;
+  top: -6px;
+  right: -4px;
 }
 </style>

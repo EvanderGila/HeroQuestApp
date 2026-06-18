@@ -76,7 +76,11 @@
             <VIcon icon="mdi-heart" color="red" class="me-2" size="20" />
             <div>
               <div class="text-caption text-medium-emphasis lh-1">Vida</div>
-              <div class="font-weight-black text-body-1">{{ character.hp }}</div>
+              <div class="d-flex ">
+                <div class="font-weight-black text-body-1">{{ character.hp || 0 }}</div>
+                <div v-if="equipmentStats?.hp > 0" class="font-weight-light text-body-1 ml-1 text-green-lighten-1">{{ `(+` + equipmentStats?.hp + `)`}}  </div>
+                <div v-if="equipmentStats?.hp < 0" class="font-weight-light text-body-1 ml-1 text-red-lighten-1">{{ `(` + equipmentStats?.hp + `)`}}  </div>
+              </div>
             </div>
           </div>
         </VCol>
@@ -87,7 +91,11 @@
             <VIcon icon="mdi-brain" color="deep-purple" class="me-2" size="20" />
             <div>
               <div class="text-caption text-medium-emphasis lh-1">Mente</div>
-              <div class="font-weight-black text-body-1">{{ character.mp || 0 }}</div>
+              <div class="d-flex ">
+                <div class="font-weight-black text-body-1">{{ character.mp || 0 }}</div>
+                <div v-if="equipmentStats?.mp > 0" class="font-weight-light text-body-1 ml-1 text-green-lighten-1">{{ `(+` + equipmentStats?.mp + `)`}}  </div>
+                <div v-if="equipmentStats?.mp < 0" class="font-weight-light text-body-1 ml-1 text-red-lighten-1">{{ `(` + equipmentStats?.mp + `)`}}  </div>
+              </div>
             </div>
           </div>
         </VCol>
@@ -98,7 +106,11 @@
             <VIcon icon="mdi-sword" color="orange-darken-2" class="me-2" size="20" />
             <div>
               <div class="text-caption text-medium-emphasis lh-1">Ataque</div>
-              <div class="font-weight-black text-body-1">{{ character.atk }}</div>
+              <div class="d-flex ">
+                <div class="font-weight-black text-body-1">{{ character.atk || 0 }}</div>
+                <div v-if="equipmentStats?.atk > 0" class="font-weight-light text-body-1 ml-1 text-green-lighten-1">{{ `(+` + equipmentStats?.atk + `)`}}  </div>
+                <div v-if="equipmentStats?.atk < 0" class="font-weight-light text-body-1 ml-1 text-red-lighten-1">{{ `(` + equipmentStats?.atk + `)`}}  </div>
+              </div>
             </div>
           </div>
         </VCol>
@@ -109,7 +121,11 @@
             <VIcon icon="mdi-shield" color="blue-darken-2" class="me-2" size="20" />
             <div>
               <div class="text-caption text-medium-emphasis lh-1">Defensa</div>
-              <div class="font-weight-black text-body-1">{{ character.def }}</div>
+              <div class="d-flex ">
+                <div class="font-weight-black text-body-1">{{ character.def || 0 }}</div>
+                <div v-if="equipmentStats?.def > 0" class="font-weight-light text-body-1 ml-1 text-green-lighten-1">{{ `(+` + equipmentStats?.def + `)`}}  </div>
+                <div v-if="equipmentStats?.def < 0" class="font-weight-light text-body-1 ml-1 text-red-lighten-1">{{ `(` + equipmentStats?.def + `)`}}  </div>
+              </div>
             </div>
           </div>
         </VCol>
@@ -120,7 +136,11 @@
             <VIcon icon="mdi-run" color="teal-darken-1" class="me-2" size="20" />
             <div>
               <div class="text-caption text-medium-emphasis lh-1">Movimiento</div>
-              <div class="font-weight-black text-body-1">{{ character.mov || 0 }}</div>
+              <div class="d-flex ">
+                <div class="font-weight-black text-body-1">{{ character.mov || 0 }}</div>
+                <div v-if="equipmentStats?.mov > 0" class="font-weight-light text-body-1 ml-1 text-green-lighten-1">{{ `(+` + equipmentStats?.mov + `)`}}  </div>
+                <div v-if="equipmentStats?.mov < 0" class="font-weight-light text-body-1 ml-1 text-red-lighten-1">{{ `(` + equipmentStats?.mov + `)`}}  </div>
+              </div>
             </div>
           </div>
         </VCol>
@@ -143,11 +163,17 @@
 </template>
 
 <script setup lang="ts">
+import { toRef } from 'vue'
+import { useCharacterStats } from '@/composables/useCharacterStats'
 import type { Character } from '@/types/character'
 
-defineProps<{
+const props = defineProps<{
   character: Character
 }>()
+
+const characterRef = toRef(props, 'character')
+
+const { equipmentStats, totalStats } = useCharacterStats(characterRef)
 
 defineEmits<{
   (e: 'inspect', character: Character): void
