@@ -39,8 +39,9 @@
                 :class="draft.img === url ? 'border-warning-heavy elevation-8 scale-active' : 'opacity-70'"
                 class="bg-grey-darken-3 rounded-lg overflow-hidden cursor-pointer transition-all"
                 variant="flat"
+                width="120"
               >
-                <VImg :src="url" height="90" cover />
+                <VImg :src="url" height="150"  cover />
               </VCard>
             </VCol>
           </VRow>
@@ -64,12 +65,12 @@ const inputName = computed({
 
 // Lista temporal de imágenes de stock (reemplázalas por las tuyas del juego)
 const stockAvatars = [
-  'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
-  'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80',
-  'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80',
-  'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80',
-  'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=150&q=80',
-  'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80'
+  'https://wgansyvylniwllsgyfss.supabase.co/storage/v1/object/public/assets/classes/Barbaro.jpg',
+  'https://wgansyvylniwllsgyfss.supabase.co/storage/v1/object/public/assets/classes/Bardo.jpg',
+  'https://wgansyvylniwllsgyfss.supabase.co/storage/v1/object/public/assets/classes/Clerigo.png',
+  'https://wgansyvylniwllsgyfss.supabase.co/storage/v1/object/public/assets/classes/Paladin.png',
+  'https://wgansyvylniwllsgyfss.supabase.co/storage/v1/object/public/assets/classes/Montaraz.png',
+  'https://wgansyvylniwllsgyfss.supabase.co/storage/v1/object/public/assets/classes/Chaman.png'
 ]
 </script>
 
