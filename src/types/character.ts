@@ -1,5 +1,6 @@
 import type { Race } from './race'
 import type { Class } from './class'
+import type { Item } from './item'
 
 export interface Character {
   id:number
@@ -31,6 +32,5 @@ export interface EquippedItem {
   id: number
   character_id: number
   slot: string
-  name: string
-  // Añade aquí los campos de stats si los tienes (atk_mod, def_mod, etc.)
+  items: Item | null
 }
