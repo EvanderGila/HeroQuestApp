@@ -1,0 +1,9 @@
+# Ignorar la carpeta de configuración de VSCode
+.vscode/
+
+# Ignorar la carpeta de dependencias de Node
+node_modules/
+
+# Ignorar los archivos de bloqueo de dependencias
+package-lock.json
+

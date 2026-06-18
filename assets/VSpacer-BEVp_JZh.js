@@ -1,0 +1,1 @@
+import{R as e}from"./ripple-DQ5nH2Zv.js";var t=e(`v-spacer`,`div`,`VSpacer`);export{t};

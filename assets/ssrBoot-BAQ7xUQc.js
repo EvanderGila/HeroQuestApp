@@ -1,0 +1,1 @@
+import{Lt as e,fn as t,sn as n,un as r}from"./resizeObserver-DFzhKBeq.js";function i(){let i=r(!1);return e(()=>{window.requestAnimationFrame(()=>{i.value=!0})}),{ssrBootStyles:t(()=>i.value?void 0:{transition:`none !important`}),isBooted:n(i)}}export{i as t};
