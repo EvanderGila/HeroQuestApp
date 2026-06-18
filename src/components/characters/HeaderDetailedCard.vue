@@ -1,48 +1,78 @@
 <template>
-    <div class="hq-header flex-shrink-0">
+  <!-- 🪪 Cabecera Detallada: Fondo integrado y sin parches -->
+  <div class="d-flex align-center pa-4 border-bottom-thin gap-x-4 hq-header-container">
+    
+    <!-- Contenedor Retrato Vertical con Proporción 3:4 -->
+    <div class="avatar-detailed-container flex-shrink-0 border-thin elevation-2 bg-grey-lighten-3">
       <VImg
-        :src="character.img || characterRace?.img || 'https://placehold.co/800x300?text=HeroQuest'"
-        height="100%"
+        :src="character.img || characterRace?.img || 'https://placehold.co/508x676?text=HeroQuest'"
         cover
         crossorigin="anonymous"
-        class="align-end text-white"
-      >
-        <div class="bg-gradient-dark px-4 py-3 d-flex justify-space-between align-end">
-          <div>
-            <h2 class="text-h5 text-sm-h4 font-weight-black text-uppercase tracking-wide mb-0 text-white line-clamp-1">
-              {{ character.name }}
-            </h2>
-            <div class="text-caption text-sm-subtitle-2 text-grey-lighten-2 font-weight-bold">
-              {{ characterRace?.name }} — {{ characterClass?.name }}
-            </div>
-          </div>
-          <VAvatar color="warning" size="48" class="elevation-3 border-thin font-weight-black text-subtitle-1 text-black flex-shrink-0">
-            {{ character.lvl || 1 }}
-          </VAvatar>
-        </div>
-      </VImg>
-    </div>
-
-    <div class="px-4 py-2 bg-grey-lighten-4 border-bottom-thin flex-shrink-0">
-      <div class="d-flex justify-space-between hq-mini-text font-weight-bold mb-1">
-        <span>EXPERIENCIA</span>
-        <span>{{ character.current_xp || 0 }} / 1000 PX</span>
-      </div>
-      <VProgressLinear
-        :model-value="calculateExpPercentage(character.current_xp)"
-        color="warning"
-        height="6"
-        rounded
-        striped
+        alt="Retrato detallado"
+        class="h-100 w-100"
       />
     </div>
+
+    <!-- Zona de Información y Progreso -->
+    <div class="flex-grow-1 d-flex flex-column justify-space-between h-100 overflow-hidden">
+      
+      <!-- Fila Superior: Nombre (Izquierda) | Nivel con Badge de Puntos (Derecha) -->
+      <div class="d-flex align-start justify-space-between gap-x-2">
+        <div class="overflow-hidden">
+          <h2 class="text-h5 font-weight-black text-truncate lh-tight mb-1">
+            {{ character.name }}
+          </h2>
+          <div class="text-caption text-medium-emphasis font-weight-medium text-truncate mt-0.5">
+            {{ characterRace?.name }} — <span class="text-primary font-weight-bold">{{ characterClass?.name }}</span>
+          </div>
+        </div>
+
+        <!-- Badge de puntos disponibles sobre el nivel -->
+        <VBadge
+          :model-value="Boolean(character.available_points && character.available_points > 0)"
+          :content="`+${character.available_points}`"
+          color="warning"
+          density="compact"
+          offset-x="6"
+          offset-y="4"
+          class="flex-shrink-0 custom-mini-badge font-weight-black"
+          :class="{ 'animate-pulse': character.available_points && character.available_points > 0 }"
+        >
+          <VChip
+            color="primary"
+            variant="flat"
+            class="font-weight-black text-uppercase tracking-wider px-2.5 mt-0.5 mt-2"
+          >
+            Nivel {{ character.lvl || 1 }}
+          </VChip>
+        </VBadge>
+      </div>
+
+      <!-- Fila Inferior: Bloque de Experiencia unificado -->
+      <div class="mt-3">
+        <div class="d-flex align-center justify-space-between text-medium-emphasis text-uppercase font-weight-bold tracking-wide mb-1" style="font-size: 0.68rem;">
+          <span>Progreso de Experiencia</span>
+          <span>{{ character.current_xp || 0 }} / 1000 PX</span>
+        </div>
+        <VProgressLinear
+          :model-value="calculateExpPercentage(character.current_xp)"
+          color="lime-darken-1"
+          height="6"
+          rounded
+          striped
+        />
+      </div>
+
+    </div>
+  </div>
 </template>
+
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { Character } from '@/types/character'
 
 const props = defineProps<{
-  character: Character // Tu interfaz de personaje de Supabase
+  character: Character 
 }>()
 
 const characterClass = computed(() => props.character?.classes)
@@ -52,32 +82,49 @@ function calculateExpPercentage(exp: number = 0) {
   return Math.min((exp / 1000) * 100, 100)
 }
 </script>
+
 <style scoped>
-/* Cabecera proporcional */
-.hq-header {
-  height: 130px;
+/* 🏹 Contenedor de la cabecera con altura controlada */
+.hq-header-container {
+  min-height: 110px;
 }
 
-/* Estilos de tipografía compacta HeroQuest */
-.bg-gradient-dark {
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.2) 100%);
-  width: 100%;
-}
-.border-bottom-thin { border-bottom: 1px solid rgba(0, 0, 0, 0.08); }
-
-.hq-mini-text {
-  font-size: 0.7rem;
-  letter-spacing: 0.05em;
-}
-
-
-.line-clamp-1 {
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
+/* Retrato vertical con relación 3:4 exacta un poco más generoso para el panel completo */
+.avatar-detailed-container {
+  width: 82px;
+  height: 110px;
+  border-radius: 8px;
   overflow: hidden;
 }
 
+.lh-tight {
+  line-height: 1.2;
+}
+.gap-x-2 {
+  column-gap: 8px !important;
+}
+.gap-x-4 {
+  column-gap: 16px !important;
+}
+.border-bottom-thin { 
+  border-bottom: 1px solid rgba(var(--v-border-color), var(--v-border-opacity)) !important; 
+}
 
+/* Animación del Badge */
+.animate-pulse {
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
 
+/* Estilo profundo para encoger la notificación naranja */
+:deep(.custom-mini-badge .v-badge__badge) {
+  font-size: 0.5rem !important;
+  height: 12px !important;
+  min-width: 12px !important;
+  padding: 0 4px !important;
+}
 </style>

@@ -22,9 +22,9 @@
         />
 
         <!-- 🖼️ Selector de Avatares -->
-        <div class="bg-grey-darken-4 border-thin pa-3 rounded-xl">
+        <div class="hq-tabs-container border-thin pa-3 rounded-xl">
           <div class="text-caption font-weight-bold text-uppercase text-warning mb-3 tracking-wide d-flex justify-space-between align-center">
-            <span>Selecciona un Retrato de Stock</span>
+            <span>Selecciona un Retrato de Stock o Sube Una </span>
             <VBtn size="x-small" color="secondary" prepend-icon="mdi-upload" variant="tonal" disabled>
               Subir Propia (Próximamente)
             </VBtn>
@@ -36,7 +36,7 @@
               <VCard
                 clickable
                 @click="setImage(url)"
-                :class="draft.img === url ? 'border-warning-heavy elevation-8 scale-active' : 'opacity-70'"
+                :class="draft.img === url ? 'border-warning-heavy elevation-8 scale-active' : 'opacity-72'"
                 class="bg-grey-darken-3 rounded-lg overflow-hidden cursor-pointer transition-all"
                 variant="flat"
                 width="120"
@@ -75,6 +75,10 @@ const stockAvatars = [
 </script>
 
 <style scoped>
+.hq-tabs-container {
+  /* Un gris "carbón" más profundo que el grey-darken-4 (#212121) */
+  background-color: #151515cb !important; 
+}
 .transition-all {
   transition: all 0.2s ease-in-out;
 }

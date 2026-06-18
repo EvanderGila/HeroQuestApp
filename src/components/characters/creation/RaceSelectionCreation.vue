@@ -12,7 +12,6 @@
           v-if="characterStore.availableRaces.length > 0"
           v-model="activeSlideIndex"
           height="350"
-          hide-delimiter-background
           show-arrows="hover"
           hide-delimiters
           color="warning"
@@ -26,7 +25,7 @@
                   height="280" 
                   cover 
                 />
-                <VCardText class="py-3 bg-grey-darken-4 border-top-thin">
+                <VCardText class="py-3 hq-tabs-container border-top-thin">
                   <div class="text-h5 font-weight-black text-uppercase tracking-wide text-warning">
                     {{ race.name }}
                   </div>
@@ -37,32 +36,37 @@
         </VCarousel>
       </VCol>
 
-      <VCol cols="12" md="5">
-        <div v-if="currentSelectedRace" class="bg-grey-darken-4 border-thin pa-4 rounded-xl">
-          <div class="text-caption font-weight-bold text-uppercase text-warning mb-3 tracking-wide">
-            Atributos de la raza
-          </div>
-          
-          <div class="d-flex flex-column gap-y-2">
-            <div 
-              v-for="stat in displayedStats" 
-              :key="stat.label" 
-              class="d-flex align-center justify-space-between bg-grey-darken-3 px-4 py-2 rounded-lg border-thin"
-            >
-              <div class="d-flex align-center gap-x-2">
-                <VIcon :icon="stat.icon" :color="stat.color" size="18" />
-                <span class="text-body-2 font-weight-medium text-grey-lighten-1">{{ stat.label }}</span>
-              </div>
-              <span class="text-body-1 font-weight-black text-white">{{ stat.value }}</span>
-            </div>
-          </div>
+      <VCol cols="12" md="5" class="pa-2">
+  <div v-if="currentSelectedRace" class="hq-tabs-container border-thin pa-4 rounded-xl">
+    <div class="hq-section-header mb-4">
+      <span class="text-uppercase tracking-widest font-weight-bold text-xxs text-warning">
+        Atributos de la Raza
+      </span>
+    </div>
+    
+    <div class="d-flex flex-column gap-y-1">
+      <div 
+        v-for="stat in displayedStats" 
+        :key="stat.label" 
+        class="d-flex align-center justify-space-between bg-hq-row px-3 py-1 rounded-lg border-thin transition-all hq-stat-row"
+      >
+        <div class="d-flex align-center gap-x-2">
+          <VIcon :icon="stat.icon" :color="stat.color" size="15" />
+          <span class="text-caption text-grey-lighten-1 font-weight-medium">{{ stat.label }}</span>
         </div>
-      </VCol>
+        
+        <span class="text-caption font-weight-black text-white">
+          {{ stat.value }}
+        </span>
+      </div>
+    </div>
+  </div>
+</VCol>
     </VRow>
 
     <VDivider class="my-6" />
 
-    <div v-if="currentSelectedRace" class="bg-white border-thin pa-4 rounded-xl">
+    <div v-if="currentSelectedRace" class="hq-tabs-container border-thin pa-4 rounded-xl">
       <AbilitiesTab :character="mockCharacterForAbilities" />
     </div>
 
@@ -91,8 +95,8 @@ const displayedStats = computed(() => {
   return [
     { label: 'Puntos de Cuerpo (Vida)', icon: 'mdi-heart', color: 'red-lighten-1', value: r.hp_base },
     { label: 'Puntos de Mente (Maná)', icon: 'mdi-brain', color: 'purple-lighten-2', value: r.mp_base },
-    { label: 'Dados de Ataque', icon: 'mdi-sword', color: 'orange-darken-1', value: `${r.atk_base}d` },
-    { label: 'Dados de Defensa', icon: 'mdi-shield', color: 'blue-lighten-1', value: `${r.def_base}d` },
+    { label: 'Dados de Ataque', icon: 'mdi-sword', color: 'orange-darken-1', value: r.atk_base },
+    { label: 'Dados de Defensa', icon: 'mdi-shield', color: 'blue-lighten-1', value: r.def_base },
     { label: 'Velocidad de Movimiento', icon: 'mdi-run', color: 'teal-lighten-2', value: r.mov_base },
   ]
 })
@@ -121,6 +125,10 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.hq-tabs-container {
+  /* Un gris "carbón" más profundo que el grey-darken-4 (#212121) */
+  background-color: #151515cb !important; 
+}
 .gap-y-2 {
   row-gap: 8px !important;
 }
@@ -128,9 +136,39 @@ onMounted(() => {
   column-gap: 8px !important;
 }
 .border-top-thin {
-  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
 }
 :deep(.v-window__controls) {
   padding: 0 12px;
+}
+.text-xxs { 
+  font-size: 0.75rem !important; 
+}
+
+.tracking-widest {
+  letter-spacing: 0.1em !important;
+}
+
+.hq-section-header {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.hq-section-header::after {
+  content: '';
+  flex-grow: 1;
+  margin-left: 8px;
+  height: 1px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.08), transparent);
+  align-self: center;
+}
+
+.bg-hq-row {
+  background-color: rgba(255, 255, 255, 0.02) !important;
+  border-color: rgba(255, 255, 255, 0.05) !important;
+}
+.gap-y-1 {
+  row-gap: 6px !important;
 }
 </style>

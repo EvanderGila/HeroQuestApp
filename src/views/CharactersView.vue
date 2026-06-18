@@ -12,13 +12,24 @@
     <VRow v-else>
       <VCol cols="12" sm="6" md="4" lg="3">
         <VCard
-          color="primary"
-          class="d-flex flex-column align-center justify-center fill-height min-card-height custom-create-btn"
-          to="/character-create"
-        >
-          <VIcon icon="mdi-plus-circle-outline" size="48" class="mb-2" />
-          <span class="text-button font-weight-bold">Crear Personaje</span>
-        </VCard>
+    variant="outlined"
+    class="d-flex flex-column align-center justify-center fill-height min-card-height hq-create-card"
+    to="/character-create"
+  >
+    <div class="d-flex flex-column align-center justify-center text-center pa-6">
+      <VIcon 
+        icon="mdi-account-plus-outline" 
+        size="42" 
+        class="mb-3 hq-create-icon transition-all" 
+      />
+      <span class="text-button font-weight-black tracking-wider text-uppercase hq-create-text">
+        Crear Personaje
+      </span>
+      <span class="text-caption text-disabled mt-1 max-w-200">
+        Comienza una nueva crónica e invoca a tu héroe
+      </span>
+    </div>
+  </VCard>
       </VCol>
 
       <VCol 
@@ -37,7 +48,7 @@
     </VRow>
   </VContainer>
 
-  <VDialog v-model="isDetailsDialogOpen" max-width="900px" transition="dialog-bottom-transition">
+  <VDialog v-model="isDetailsDialogOpen" max-width="900px" width="auto" transition="dialog-bottom-transition">
   <CharacterDetailedCard 
     v-if="characterSelected"
     :character="liveCharacter" 
@@ -104,11 +115,46 @@ async function handleSaveStats(payload: { characterId: number; updates: Record<s
 .min-card-height {
   min-height: 290px;
 }
-.custom-create-btn {
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+.max-w-200 {
+  max-width: 200px;
 }
-.custom-create-btn:hover {
-  background-color: rgba(var(--v-theme-primary), 0.05);
+.transition-all {
+  transition: all 0.25s ease-in-out !important;
+}
+
+/* ── 🌌 ESTILO SILUETA PARA LA CARD DE CREACIÓN ── */
+.hq-create-card {
+  cursor: pointer;
+  border-style: dashed !important; /* Líneas discontinuas */
+  border-width: 2px !important;    /* Un pelín más gruesa para que se note el dashed */
+  border-color: rgba(var(--v-theme-primary), 0.25) !important; /* Semitransparente */
+  background-color: rgba(var(--v-theme-primary), 0.01) !important;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+/* El texto e iconos por defecto se ven sutiles, como un fantasma */
+.hq-create-card .hq-create-icon,
+.hq-create-card .hq-create-text {
+  color: rgba(var(--v-theme-primary), 0.6);
+}
+
+/* 🔥 EFECTO HOVER: Reacciona de forma mágica al pasar el ratón */
+.hq-create-card:hover {
+  background-color: rgba(var(--v-theme-primary), 0.04) !important;
+  border-color: rgba(var(--v-theme-primary), 0.6) !important; /* El borde se ilumina */
+  border-style: solid !important; /* Pasa de dashed a sólido al enfocar */
+  box-shadow: 0 0 16px rgba(var(--v-theme-primary), 0.12),
+              inset 0 0 12px rgba(var(--v-theme-primary), 0.03) !important;
+}
+
+/* Al hacer hover, el icono y el texto cobran "vida" */
+.hq-create-card:hover .hq-create-icon {
+  color: rgb(var(--v-theme-primary));
+  transform: translateY(-4px) scale(1.05); /* Micro-animación hacia arriba */
+}
+
+.hq-create-card:hover .hq-create-text {
+  color: rgb(var(--v-theme-primary));
+  letter-spacing: 0.1em !important; /* Ligero espaciado dinámico */
 }
 </style>

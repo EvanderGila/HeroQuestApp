@@ -26,7 +26,7 @@
                   height="280" 
                   cover 
                 />
-                <VCardText class="py-2 bg-grey-darken-4 border-top-thin">
+                <VCardText class="py-2 hq-tabs-container border-top-thin">
                   <div class="text-subtitle-1 font-weight-black text-uppercase tracking-wide text-warning">
                     {{ cls.name }}
                   </div>
@@ -38,34 +38,51 @@
       </VCol>
 
       <VCol cols="12" md="5" class="pa-2">
-        <div v-if="currentSelectedClass" class="bg-grey-darken-4 border-thin pa-4 rounded-xl">
-          <div class="text-caption font-weight-bold text-uppercase text-warning mb-3 tracking-wide">
-            Bonificadores de Clase
-          </div>
-          
-          <div class="d-flex flex-column gap-y-2">
-            <div 
-              v-for="stat in displayedModifiers" 
-              :key="stat.label" 
-              class="d-flex align-center justify-space-between bg-grey-darken-3 px-4 py-2 rounded-lg border-thin"
-            >
-              <div class="d-flex align-center gap-x-2">
-                <VIcon :icon="stat.icon" :color="stat.color" size="18" />
-                <span class="text-body-2 font-weight-medium text-grey-lighten-1">{{ stat.label }}</span>
-              </div>
-              <span class="text-body-1 font-weight-black text-white">{{ stat.value }}</span>
-            </div>
-          </div>
+  <div v-if="currentSelectedClass" class="hq-tabs-container border-thin pa-4 rounded-xl">
+    <!-- 🏷️ Encabezado RPG unificado con línea desvanecida -->
+    <div class="hq-section-header mb-4">
+      <span class="text-uppercase tracking-widest font-weight-bold text-xxs text-warning">
+        Bonificadores de Clase
+      </span>
+    </div>
+    
+    <!-- 📊 Contenedor de estadísticas estilizadas -->
+    <div class="d-flex flex-column gap-y-1">
+      <div 
+        v-for="stat in displayedModifiers" 
+        :key="stat.label" 
+        class="d-flex align-center justify-space-between bg-hq-row px-3 py-1 rounded-lg border-thin transition-all hq-stat-row"
+      >
+        <!-- Izquierda: Icono y Etiqueta -->
+        <div class="d-flex align-center gap-x-2">
+          <VIcon :icon="stat.icon" :color="stat.color" size="15" />
+          <span class="text-caption text-grey-lighten-1 font-weight-medium">{{ stat.label }}</span>
         </div>
-      </VCol>
+        
+        <!-- Derecha: Modificador formateado (ej: +1d o +5) con colores de Vuetify unificados -->
+        <span 
+          class="text-caption font-weight-black"
+          :class="{
+            'text-green-lighten-1': stat.rawVal > 0,
+            'text-red-lighten-1': stat.rawVal < 0,
+            'text-white': stat.rawVal === 0
+          }"
+        >
+          <!-- Si tu stat.value no incluye ya la 'd', puedes concatenarla según corresponda -->
+          {{ stat.value }}
+        </span>
+      </div>
+    </div>
+  </div>
+</VCol>
     </VRow>
 
     <VDivider class="my-3" />
 
-    <div v-if="currentSelectedClass" class="bg-white border-thin pa-3 rounded-xl">
+    <div v-if="currentSelectedClass" class="hq-tabs-container border-thin pa-3 rounded-xl">
       <VTabs v-model="activeTab" color="primary" density="compact" class="mb-2">
         <VTab value="abilities" class="text-caption font-weight-bold">Habilidades</VTab>
-        <VTab v-if="hasSpells" value="spells" class="text-caption font-weight-bold">Hechizos Iniciales</VTab>
+        <VTab v-if="hasSpells" value="spells" class="text-caption font-weight-bold">Hechizos</VTab>
       </VTabs>
 
       <VWindow v-model="activeTab">
@@ -102,16 +119,19 @@ const displayedModifiers = computed(() => {
   const c = currentSelectedClass.value
   if (!c) return []
   
-  const formatMod = (val: number, isDice = false) => {
-    const sign = val >= 0 ? '+' : ''
-    return `${sign}${val}${isDice ? 'd' : ''}`
+  const formatMod = (val: number) => {
+    if(val == 0){ return val }
+    else{
+      const sign = val >= 0 ? '+' : ''
+    return `${sign}${val}`
+    }
   }
 
   return [
     { label: 'Mod. Cuerpo', icon: 'mdi-heart', color: 'red-lighten-1', value: formatMod(c.hp_mod), rawVal: c.hp_mod },
     { label: 'Mod. Mente', icon: 'mdi-brain', color: 'purple-lighten-2', value: formatMod(c.mp_mod), rawVal: c.mp_mod },
-    { label: 'Mod. Ataque', icon: 'mdi-sword', color: 'orange-darken-1', value: formatMod(c.atk_mod, true), rawVal: c.atk_mod },
-    { label: 'Mod. Defensa', icon: 'mdi-shield', color: 'blue-lighten-1', value: formatMod(c.def_mod, true), rawVal: c.def_mod },
+    { label: 'Mod. Ataque', icon: 'mdi-sword', color: 'orange-darken-1', value: formatMod(c.atk_mod), rawVal: c.atk_mod },
+    { label: 'Mod. Defensa', icon: 'mdi-shield', color: 'blue-lighten-1', value: formatMod(c.def_mod), rawVal: c.def_mod },
     { label: 'Mod. Movimiento', icon: 'mdi-run', color: 'teal-lighten-2', value: formatMod(c.mov_mod), rawVal: c.mov_mod },
   ]
 })
@@ -152,6 +172,10 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.hq-tabs-container {
+  /* Un gris "carbón" más profundo que el grey-darken-4 (#212121) */
+  background-color: #151515cb !important; 
+}
 .lh-tight {
   line-height: 1.1;
 }
@@ -166,5 +190,37 @@ onMounted(() => {
 }
 :deep(.v-window__controls) {
   padding: 0 12px;
+}
+.text-xxs { 
+  font-size: 0.75rem !important; 
+}
+
+.tracking-widest {
+  letter-spacing: 0.1em !important;
+}
+
+/* 🏷️ LÍNEA SEPARADORA DESVANECIDA SECCIÓN */
+.hq-section-header {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.hq-section-header::after {
+  content: '';
+  flex-grow: 1;
+  margin-left: 8px;
+  height: 1px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.08), transparent);
+  align-self: center;
+}
+
+/* 📊 FILAS DE ESTADÍSTICA CON OPACIDAD PREMIUM */
+.bg-hq-row {
+  background-color: rgba(255, 255, 255, 0.02) !important;
+  border-color: rgba(255, 255, 255, 0.05) !important;
+}
+.gap-y-1 {
+  row-gap: 6px !important;
 }
 </style>

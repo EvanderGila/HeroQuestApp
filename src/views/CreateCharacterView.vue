@@ -20,7 +20,7 @@
             :model-value="currentStep"
             :items="['Raza', 'Clase', 'Identidad', 'Resumen']"
             hide-actions
-            class="bg-transparent"
+            class="bg-transparent elevation-0 v-theme--surface"
           >
             <template v-slot:item.1>
               <VRow>
@@ -139,3 +139,16 @@ async function handleSave() {
   }
 }
 </script>
+<style scoped>
+.min-card-height {
+  min-height: 290px;
+}
+.custom-create-btn {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.custom-create-btn:hover {
+  background-color: rgba(var(--v-theme-primary), 0.05);
+}
+
+</style>
