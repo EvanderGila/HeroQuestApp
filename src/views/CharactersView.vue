@@ -12,7 +12,6 @@
     <VRow v-else>
       <VCol cols="12" sm="6" md="4" lg="3">
         <VCard
-          variant="dashed"
           color="primary"
           class="d-flex flex-column align-center justify-center fill-height min-card-height custom-create-btn"
           to="/character-create"
