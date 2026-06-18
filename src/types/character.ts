@@ -7,6 +7,7 @@ export interface Character {
   lvl:number
   current_xp:number
   available_points:number
+  img: string
 
   hp:number
   atk:number

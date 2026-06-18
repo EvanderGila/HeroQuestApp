@@ -1,7 +1,7 @@
 <template>
     <div class="hq-header flex-shrink-0">
       <VImg
-        :src="characterRace?.img || 'https://placehold.co/800x300?text=HeroQuest'"
+        :src="character.img || characterRace?.img || 'https://placehold.co/800x300?text=HeroQuest'"
         height="100%"
         cover
         crossorigin="anonymous"

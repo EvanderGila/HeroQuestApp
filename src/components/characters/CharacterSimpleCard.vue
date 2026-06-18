@@ -1,7 +1,7 @@
 <template>
   <VCard class="fill-height d-flex flex-column border-thin elevation-2 character-card">
     <VImg
-      :src="character.races?.img || 'https://placehold.co/400x200?text=HeroQuest'"
+      :src="character.img || character.races?.img || 'https://placehold.co/400x200?text=HeroQuest'"
       height="160"
       cover
       crossorigin="anonymous"
