@@ -17,10 +17,10 @@
         />
         <div>
           <div class="text-subtitle-2 font-weight-black text-uppercase">
-            {{ isEditing ? 'Distribuyendo Puntos' : 'Puntos de Atributo' }}
+            {{ isEditing ? 'Distribuyendo Puntos' : 'Puntos de Nivel' }}
           </div>
           <div class="text-caption text-medium-emphasis">
-            {{ isEditing ? 'Ajusta tus stats y pulsa Guardar al terminar' : 'Gástalos para mejorar tus estadísticas básicas' }}
+            {{ isEditing ? 'Ajusta tus stats y pulsa Guardar al terminar' : 'Gástalos para mejorar tus estadísticas' }}
           </div>
         </div>
       </div>
@@ -30,8 +30,7 @@
         class="font-weight-black text-body-2 px-3"
         :class="{ 'animate-pulse': currentAvailablePoints > 0 }"
         size="small"
-      >
-        {{ currentAvailablePoints }} DISP.
+      >{{ currentAvailablePoints }} P
       </VChip>
     </VCard>
 
