@@ -1,5 +1,5 @@
 <template>
-  <VContainer class="py-8">
+  <VContainer fluid class="py-8 px-4 px-md-12">
     <div class="mb-6">
       <h1 class="text-h4 font-weight-bold">Tus Héroes</h1>
       <p class="text-subtitle-1 text-medium-emphasis">Gestiona tus fichas de personaje activos.</p>
@@ -9,54 +9,45 @@
       <VProgressCircular indeterminate color="primary" size="64" />
     </div>
 
-    <VRow v-else>
-      <VCol cols="12" sm="6" md="4" lg="3">
+    <div v-else class="hq-heroes-flex-grid">
+      
+      <div class="hq-flex-card-wrapper">
         <VCard
-    variant="outlined"
-    class="d-flex flex-column align-center justify-center fill-height min-card-height hq-create-card"
-    to="/character-create"
-  >
-    <div class="d-flex flex-column align-center justify-center text-center pa-6">
-      <VIcon 
-        icon="mdi-account-plus-outline" 
-        size="42" 
-        class="mb-3 hq-create-icon transition-all" 
-      />
-      <span class="text-button font-weight-black tracking-wider text-uppercase hq-create-text">
-        Crear Personaje
-      </span>
-      <span class="text-caption text-disabled mt-1 max-w-200">
-        Comienza una nueva crónica e invoca a tu héroe
-      </span>
-    </div>
-  </VCard>
-      </VCol>
+          variant="outlined"
+          class="d-flex flex-column align-center justify-center fill-height min-card-height hq-create-card"
+          to="/character-create"
+        >
+          <div class="d-flex flex-column align-center justify-center text-center pa-6">
+            <VIcon 
+              icon="mdi-account-plus-outline" 
+              size="42" 
+              class="mb-3 hq-create-icon transition-all" 
+            />
+            <span class="text-button font-weight-black tracking-wider text-uppercase hq-create-text">
+              Crear Personaje
+            </span>
+            <span class="text-caption text-disabled mt-1 max-w-200">
+              Comienza una nueva crónica e invoca a tu héroe
+            </span>
+          </div>
+        </VCard>
+      </div>
 
-      <VCol 
+      <div 
         v-for="character in charStore.myCharacters" 
         :key="character.id" 
-        cols="12" 
-        sm="6" 
-        md="4" 
-        lg="3"
+        class="hq-flex-card-wrapper"
       >
         <CharacterSimpleCard 
           :character="character" 
           @inspect="handleInspectCharacter"
         />
-      </VCol>
-    </VRow>
+      </div>
+
+    </div>
   </VContainer>
 
-  <VDialog v-model="isDetailsDialogOpen" max-width="900px" width="auto" transition="dialog-bottom-transition">
-  <CharacterDetailedCard 
-    v-if="characterSelected"
-    :character="liveCharacter" 
-    @close="isDetailsDialogOpen = false"
-    @saveStats="handleSaveStats"
-  />
-</VDialog>
-</template>
+  </template>
 
 <script setup lang="ts">
 import { onMounted, ref, computed } from 'vue'
@@ -156,5 +147,35 @@ async function handleSaveStats(payload: { characterId: number; updates: Record<s
 .hq-create-card:hover .hq-create-text {
   color: rgb(var(--v-theme-primary));
   letter-spacing: 0.1em !important; /* Ligero espaciado dinámico */
+}
+
+:deep(.v-overlay__content) {
+  @media (orientation: landscape) and (max-height: 500px) {
+    overflow-y: auto !important;
+    max-height: 100dvh !important;
+    display: block !important; /* Evita que flexbox aplaste la tarjeta */
+  }
+}
+
+.hq-heroes-flex-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px; /* Un pelín más de separación entre héroes para que respire */
+  width: 100%;
+}
+
+/* 🛡️ Cada celda individual se estira y encoge dinámicamente */
+.hq-flex-card-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;        
+}
+
+/* En móviles pequeños (cuando la pantalla no da ni para dos de 280px), quitamos el max-width para que llene la fila */
+@media (max-width: 599px) {
+  .hq-flex-card-wrapper {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

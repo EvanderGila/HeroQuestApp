@@ -96,7 +96,19 @@ const activeTab = ref('stats')
 @media (min-width: 600px) {
   .hq-hq-card {
     height: 720px !important;
-    max-height: 790px !important;
+    max-height: 900px !important;
+  }
+}
+@media (orientation: landscape) and (max-height: 500px) {
+
+  .hq-hq-card {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  .hq-scroll-body {
+    overflow: visible !important;
   }
 }
 
