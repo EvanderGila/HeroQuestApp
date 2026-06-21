@@ -173,8 +173,11 @@ const getBadgeStyle = (item: any) => {
 
 /* ── 🖼️ IMAGEN CUADRADA ── */
 .hq-item-image-wrapper {
+  position: relative;
   overflow: hidden;
   width: 100%;
+  aspect-ratio: 1 / 1 !important;
+  display: flex;
 }
 
 .hq-item-overlay {
