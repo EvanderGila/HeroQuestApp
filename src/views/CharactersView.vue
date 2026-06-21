@@ -46,9 +46,16 @@
 
     </div>
   </VContainer>
-
-  </template>
-
+  
+  <VDialog v-model="isDetailsDialogOpen" max-width="900px" width="auto" transition="dialog-bottom-transition">
+  <CharacterDetailedCard 
+    v-if="characterSelected"
+    :character="liveCharacter" 
+    @close="isDetailsDialogOpen = false"
+    @saveStats="handleSaveStats"
+  />
+</VDialog>
+</template>
 <script setup lang="ts">
 import { onMounted, ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
