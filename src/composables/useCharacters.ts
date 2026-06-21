@@ -1,4 +1,5 @@
 import { characterService } from '@/services/characterService'
+import { compendiumService } from '@/services/compendiumService'
 import { useCharacterStore } from '@/store/characterStore'
 
 export function useCharacters() {
@@ -10,8 +11,8 @@ export function useCharacters() {
     try {
       // Lanzamos ambas peticiones a la vez (Promise.all)
       const [races, classes] = await Promise.all([
-        characterService.getRaces(),
-        characterService.getClasses()
+        compendiumService.getRacesDetailed(),
+        compendiumService.getClassesDetailed()
       ])
       charStore.setRaces(races)
       charStore.setClasses(classes)

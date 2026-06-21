@@ -36,44 +36,6 @@ export const characterService = {
     return data
   },
 
-  // 2. Obtener el catálogo de clases con sus habilidades y hechizos iniciales
-async getClasses() {
-  const { data, error } = await supabase
-    .from('classes')
-    .select(`
-      *,
-      class_abilities (
-        required_lvl,
-        abilities (*)
-      ),
-      class_spells (
-        required_lvl,
-        spells (*)
-      )
-    `)
-    .order('name', { ascending: true })
-  
-  if (error) throw error
-  return data
-},
-
-  // 3. Obtener el catálogo de razas con sus rasgos nativos
-async getRaces() {
-  const { data, error } = await supabase
-    .from('races')
-    .select(`
-      *,
-      race_abilities (
-        required_lvl,
-        abilities (*)
-      )
-    `)
-    .order('name', { ascending: true })
-  
-  if (error) throw error
-  return data
-},
-
   // 4. Subir de nivel los stats
   async updateCharacterStats(characterId: number, currentHp: number, currentMp: number, currentPoints: number, hpAdded: number, mpAdded: number, totalSpent: number) {
     const finalHp = currentHp + hpAdded
