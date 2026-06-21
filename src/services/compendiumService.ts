@@ -49,17 +49,7 @@ export const compendiumService = {
     async getClasses() {
         const { data, error } = await supabase
             .from('classes')
-            .select(`
-            *,
-            class_abilities (
-                required_lvl,
-                abilities (*)
-            ),
-            class_spells (
-                required_lvl,
-                spells (*)
-            )
-            `)
+            .select(`*`)
             .order('name', { ascending: true })
         
         if (error) throw error
