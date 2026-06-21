@@ -1,0 +1,170 @@
+<template>
+  <div class="hq-compendium-grid py-2">
+    <VCard
+      v-for="race in compStore.races"
+      :key="race.id"
+      variant="flat"
+      class="hq-race-card border-thin rounded-xl overflow-hidden position-relative"
+      elevation="2"
+    >
+      <div class="hq-navbar-noise"></div>
+
+      <div class="hq-race-image-wrapper">
+        <VImg
+          :src="race.img || '/placeholder-race.png'"
+          aspect-ratio="4/5"
+          cover
+          class="hq-race-image"
+        >
+          <template #placeholder>
+            <div class="d-flex align-center justify-center fill-height bg-grey-darken-4">
+              <VProgressCircular indeterminate color="primary" size="32" />
+            </div>
+          </template>
+        </VImg>
+        
+        <div class="hq-race-overlay"></div>
+      </div>
+
+      <div class="hq-race-content pa-3 d-flex flex-column justify-end">
+        <h3 class="hq-race-title font-weight-black text-uppercase text-center text-truncate">
+          {{ race.name }}
+        </h3>
+        
+        <div class="hq-race-mini-stats d-flex justify-center gap-x-1 mt-1">
+          <span class="text-xxs text-disabled hq-stat-item">❤️{{ race.hp_base }}</span>
+          <span class="text-xxs text-disabled hq-stat-item">⚔️{{ race.atk_base }}</span>
+          <span class="text-xxs text-disabled hq-stat-item">🛡️{{ race.def_base }}</span>
+          <span class="text-xxs text-disabled hq-stat-item">✨{{ race.mp_base }}</span>
+          <span class="text-xxs text-disabled hq-stat-item">💨{{ race.mov_base }}</span>
+        </div>
+      </div>
+    </VCard>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { useCompendiumStore } from '@/store/compendiumStore';
+
+const compStore = useCompendiumStore()
+</script>
+
+<style scoped>
+.text-xxs { font-size: 0.65rem !important; }
+/* Bajamos un pelo el gap por defecto para ganar margen de maniobra */
+.gap-x-1 { column-gap: 6px !important; }
+
+/* 🧙‍♂️ Rejilla Base Desktop */
+.hq-compendium-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+
+/* ── 🎴 LA TARJETA ── */
+.hq-race-card {
+  background: linear-gradient(180deg, rgba(15, 20, 32, 0.9) 0%, rgba(5, 6, 8, 0.98) 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+  cursor: pointer;
+}
+
+.hq-race-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(33, 150, 243, 0.4) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 12px rgba(33, 150, 243, 0.1) !important;
+}
+
+.hq-race-card:hover .hq-race-image {
+  transform: scale(1.03);
+}
+
+.hq-race-image-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.hq-race-image {
+  transition: transform 0.4s ease;
+}
+
+.hq-race-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 50%,
+    rgba(5, 6, 8, 0.85) 82%,
+    rgba(5, 6, 8, 1) 100%
+  );
+  z-index: 1;
+}
+
+.hq-race-content {
+  position: relative;
+  z-index: 2;
+  margin-top: -30px;
+  background: rgba(5, 6, 8, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.hq-race-title {
+  font-size: 0.9rem;
+  color: #ffffff;
+  letter-spacing: 0.05em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hq-race-card:hover .hq-race-title {
+  color: #2196f3;
+}
+
+/* 🛡️ Evita que un stat se rompa o baje de línea */
+.hq-stat-item {
+  white-space: nowrap !important;
+  display: inline-flex;
+  align-items: center;
+}
+
+.hq-navbar-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.02;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  z-index: 2;
+}
+
+/* 📱 OPTIMIZACIÓN RESPONSIVE */
+
+/* Caso Vertical: Dos columnas perfectas en móviles comunes */
+@media (max-width: 480px) and (orientation: portrait) {
+  .hq-compendium-grid {
+    grid-template-columns: repeat(2, 1fr) !important; /* Forzamos exactamente 2 columnas sin importar los px */
+    gap: 10px;
+  }
+  .hq-race-title {
+    font-size: 0.8rem;
+  }
+  .hq-race-mini-stats {
+    column-gap: 4px !important; /* Estrechamos los iconos para que quepan en pantallas mini */
+  }
+  .text-xxs {
+    font-size: 0.58rem !important; /* Reducimos un pelín la fuente en móvil vertical */
+  }
+}
+
+/* Caso Horizontal (Landscape): Evita que los cromos se vuelvan gigantes a lo ancho */
+@media (max-height: 480px) and (orientation: landscape) {
+  .hq-compendium-grid {
+    /* Forzamos 4 columnas en horizontal para que las tarjetas mantengan su proporción estilizada y compacta */
+    grid-template-columns: repeat(4, 1fr) !important; 
+    gap: 12px;
+  }
+  .hq-race-title {
+    font-size: 0.8rem;
+  }
+}
+</style>
