@@ -79,21 +79,20 @@
 
         <!-- OPCIÓN 4: COMPENDIO / REGISTRO -->
         <VCol cols="12" sm="6">
-          <div
-            class="py-6 px-4 h-100 d-flex flex-column align-center justify-center hq-rpg-card border-thin hq-card-info"
-            @click="actionNotImplemented('Compendio del Juego')"
-          >
-            <div class="hq-navbar-noise"></div>
-            <div class="hq-icon-frame mb-3 color-info">
-              <VIcon icon="mdi-book-open-page-variant" size="32" />
+          <RouterLink to="/compendium" class="text-decoration-none d-block h-100">
+            <div class="py-6 px-4 h-100 d-flex flex-column align-center justify-center hq-rpg-card border-thin hq-card-info">
+              <div class="hq-navbar-noise"></div>
+              <div class="hq-icon-frame mb-3 color-info">
+                <VIcon icon="mdi-book-open-page-variant" size="32" />
+              </div>
+              <div class="text-center card-content">
+                <h2 class="hq-card-title text-h6 font-weight-bold mb-1">Compendio y Registro</h2>
+                <p class="hq-card-subtitle text-wrap mb-0 text-body-2">
+                  Consulta el bestiario, el listado de hechizos elementales y artefactos míticos.
+                </p>
+              </div>
             </div>
-            <div class="text-center card-content">
-              <h2 class="hq-card-title text-h6 font-weight-bold mb-1">Compendio y Registro</h2>
-              <p class="hq-card-subtitle text-wrap mb-0 text-body-2">
-                Consulta el bestiario, el listado de hechizos elementales y artefactos míticos.
-              </p>
-            </div>
-          </div>
+          </RouterLink>
         </VCol>
 
       </VRow>
