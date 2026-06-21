@@ -9,7 +9,7 @@
     <VRow align="center" no-gutters>
       <VCol cols="12" md="7" class="d-flex align-center justify-center pa-2">
         <VCarousel
-          v-if="characterStore.availableClasses.length > 0"
+          v-if="compendiumStore.classes.length > 0"
           v-model="activeSlideIndex"
           height="350"
           hide-delimiter-background
@@ -18,7 +18,7 @@
           color="warning"
           class="hq-hero-carousel w-100"
         >
-          <VCarouselItem v-for="cls in characterStore.availableClasses" :key="cls.id">
+          <VCarouselItem v-for="cls in compendiumStore.classes" :key="cls.id">
             <VSheet class="d-flex fill-height align-center justify-center bg-transparent pa-1">
               <VCard width="200" class="border-thin bg-grey-darken-3 text-white rounded-xl elevation-8 text-center overflow-hidden">
                 <VImg 
@@ -99,19 +99,19 @@
 
 <script setup lang="ts">
 import { ref, watch, onMounted, computed } from 'vue'
-import { useCharacterStore } from '@/store/characterStore'
+import { useCompendiumStore } from '@/store/compendiumStore'
 import { useCharacterCreation } from '@/composables/useCharacterCreation'
 import AbilitiesTab from '@/components/characters/AbilitiesTab.vue'
 import SpellsTab from '@/components/characters/SpellsTab.vue' // Asegúrate de importar tu pestaña de hechizos
 
-const characterStore = useCharacterStore()
+const compendiumStore = useCompendiumStore()
 const { selectClass, nextStep, previousStep, canContinue, draft } = useCharacterCreation()
 
 const activeSlideIndex = ref(0)
 const activeTab = ref('abilities')
 
 const currentSelectedClass = computed(() => {
-  return characterStore.availableClasses[activeSlideIndex.value] || null
+  return compendiumStore.classes[activeSlideIndex.value] || null
 })
 
 // Mapeo adaptado para mostrar los incrementos (+ / -) que aporta la clase elegida
@@ -157,16 +157,16 @@ watch(hasSpells, (newHasSpells) => {
 
 // Sincronizar el movimiento del carrusel con el estado del borrador global
 watch(activeSlideIndex, (newIndex) => {
-  const selectedClass = characterStore.availableClasses[newIndex]
+  const selectedClass = compendiumStore.classes[newIndex]
   if (selectedClass) selectClass(selectedClass)
 })
 
 onMounted(() => {
   if (draft.value.class) {
-    const idx = characterStore.availableClasses.findIndex(c => c.id === draft.value.class?.id)
+    const idx = compendiumStore.classes.findIndex(c => c.id === draft.value.class?.id)
     if (idx !== -1) activeSlideIndex.value = idx
-  } else if (characterStore.availableClasses.length > 0) {
-    selectClass(characterStore.availableClasses[0])
+  } else if (compendiumStore.classes.length > 0) {
+    selectClass(compendiumStore.classes[0])
   }
 })
 </script>

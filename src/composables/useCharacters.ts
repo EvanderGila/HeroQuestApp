@@ -1,9 +1,11 @@
 import { characterService } from '@/services/characterService'
 import { compendiumService } from '@/services/compendiumService'
 import { useCharacterStore } from '@/store/characterStore'
+import { useCompendiumStore } from '@/store/compendiumStore'
 
 export function useCharacters() {
   const charStore = useCharacterStore()
+  const compStore = useCompendiumStore()
 
   // Cargar datos necesarios para crear personajes (Razas + Clases)
   async function loadCreationData() {
@@ -14,8 +16,8 @@ export function useCharacters() {
         compendiumService.getRacesDetailed(),
         compendiumService.getClassesDetailed()
       ])
-      charStore.setRaces(races)
-      charStore.setClasses(classes)
+      compStore.setRaces(races)
+      compStore.setClasses(classes)
     } catch (e) {
       console.error("Error al cargar especies:", e)
     } finally {

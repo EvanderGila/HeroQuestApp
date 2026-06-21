@@ -33,6 +33,12 @@ export const useCompendiumStore = defineStore('compendium', () => {
 
   })
 
+  function setRaces(racesNew: Race[]) { races.value = racesNew }
+  function setClasses(classesNew: Class[]) { classes.value = classesNew }
+  function setAbilities(abilitiesNew: Ability[]) { abilities.value = abilitiesNew }
+  function setSpells(spellsNew: Spell[]) { spells.value = spellsNew }
+  function setItems(itemsNew: Item[]) { items.value = itemsNew }
+
   return {
 
     races,
@@ -49,8 +55,13 @@ export const useCompendiumStore = defineStore('compendium', () => {
 
     loaded,
 
-    isLoading
+    isLoading,
 
+    setRaces,
+    setClasses,
+    setAbilities,
+    setSpells,
+    setItems
   }
 
 })

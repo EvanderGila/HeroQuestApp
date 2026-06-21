@@ -9,7 +9,7 @@
     <VRow align="center">
       <VCol cols="12" md="7" class="d-flex align-center justify-center">
         <VCarousel
-          v-if="characterStore.availableRaces.length > 0"
+          v-if="compendiumStore.races.length > 0"
           v-model="activeSlideIndex"
           height="350"
           show-arrows="hover"
@@ -17,7 +17,7 @@
           color="warning"
           class="hq-hero-carousel w-100"
         >
-          <VCarouselItem v-for="race in characterStore.availableRaces" :key="race.id">
+          <VCarouselItem v-for="race in compendiumStore.races" :key="race.id">
             <VSheet class="d-flex fill-height align-center justify-center bg-transparent">
               <VCard width="200" class="border-thin bg-grey-darken-3 text-white rounded-xl elevation-8 text-center overflow-hidden">
                 <VImg 
@@ -75,17 +75,17 @@
 
 <script setup lang="ts">
 import { ref, watch, onMounted, computed } from 'vue'
-import { useCharacterStore } from '@/store/characterStore'
+import { useCompendiumStore } from '@/store/compendiumStore'
 import { useCharacterCreation } from '@/composables/useCharacterCreation'
 import AbilitiesTab from '@/components/characters/AbilitiesTab.vue'
 
-const characterStore = useCharacterStore()
+const compendiumStore = useCompendiumStore()
 const { selectRace, nextStep, canContinue, draft } = useCharacterCreation()
 
 const activeSlideIndex = ref(0)
 
 const currentSelectedRace = computed(() => {
-  return characterStore.availableRaces[activeSlideIndex.value] || null
+  return compendiumStore.races[activeSlideIndex.value] || null
 })
 
 // Mapeo adaptado para el formato lista compacta
@@ -110,16 +110,16 @@ const mockCharacterForAbilities = computed<any>(() => {
 })
 
 watch(activeSlideIndex, (newIndex) => {
-  const selectedRace = characterStore.availableRaces[newIndex]
+  const selectedRace = compendiumStore.races[newIndex]
   if (selectedRace) selectRace(selectedRace)
 })
 
 onMounted(() => {
   if (draft.value.race) {
-    const idx = characterStore.availableRaces.findIndex(r => r.id === draft.value.race?.id)
+    const idx = compendiumStore.races.findIndex(r => r.id === draft.value.race?.id)
     if (idx !== -1) activeSlideIndex.value = idx
-  } else if (characterStore.availableRaces.length > 0) {
-    selectRace(characterStore.availableRaces[0])
+  } else if (compendiumStore.races.length > 0) {
+    selectRace(compendiumStore.races[0])
   }
 })
 </script>
