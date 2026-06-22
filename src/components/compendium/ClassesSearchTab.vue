@@ -135,7 +135,7 @@ function handleInspectClass(class_id: any) {
     max-height: calc(100dvh - 24px) !important;
     width: calc(100vw - 24px) !important;
     margin: 12px !important;
-    overflow-y: auto !important;
+    overflow: visible !important;
     display: block !important; /* Evita que flexbox aplaste la tarjeta */
   }
 }

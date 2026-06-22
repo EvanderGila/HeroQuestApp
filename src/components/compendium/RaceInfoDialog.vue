@@ -154,6 +154,8 @@ watch(() => props.raceId, (newId) => {
   background: #090d16 !important;
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8) !important;
+  max-height: calc(100dvh - 24px);
+  overflow-y: auto !important;
 }
 
 .hq-detail-section {
