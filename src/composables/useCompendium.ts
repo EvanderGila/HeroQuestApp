@@ -7,7 +7,9 @@ import type { Race } from '@/types/race'
 export function useCompendium() {
 
     const compStore = useCompendiumStore()
-    const { getRaces, getClasses, getAbilities, getSpells, getItems, getRaceById, getClassById, getAbilityById } = compendiumService
+    const { getRaces, getClasses, getAbilities,
+        getSpells, getItems, getRaceById, getClassById,
+        getAbilityById, getSpellById, getItemById } = compendiumService
 
     const selectedRace = computed(()=> compStore.selectedRace)
     const selectedClass = computed(()=> compStore.selectedClass)
@@ -198,7 +200,52 @@ export function useCompendium() {
     finally{
       compStore.isLoading = false
     }
+  }
 
+    async function fetchSpellDetails(id:number){
+
+    // Si ya está cargada y coincide, no hacemos nada
+    if(compStore.selectedSpell?.id === id){
+      return
+    }
+
+    compStore.isLoading = true
+
+    try {
+
+      const spell = await getSpellById(id)
+      compStore.setSelectedSpell(spell)
+
+    }
+    catch(e){
+      console.error(e)
+    }
+    finally{
+      compStore.isLoading = false
+    }
+  }
+
+    async function fetchItemDetails(id:number){
+
+    // Si ya está cargada y coincide, no hacemos nada
+    if(compStore.selectedItem?.id === id){
+      return
+    }
+
+    compStore.isLoading = true
+
+    try {
+
+      const item = await getItemById(id)
+      compStore.setSelectedItem(item)
+
+    }
+    catch(e){
+      console.error(e)
+    }
+    finally{
+      compStore.isLoading = false
+    }
   }
 
     return {
@@ -209,6 +256,8 @@ export function useCompendium() {
         selectedItem,
         fetchRaceDetails,
         fetchClassDetails,
-        fetchAbilityDetails, 
+        fetchAbilityDetails,
+        fetchSpellDetails,
+        fetchItemDetails,
         loadTab }
 }

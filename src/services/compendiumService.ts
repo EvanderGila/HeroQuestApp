@@ -149,7 +149,7 @@ export const compendiumService = {
         return data
     },
 
-    async getSpellsById(id:number) {
+    async getSpellById(id:number) {
 
         const { data, error } = await supabase
         .from('spells')
@@ -158,7 +158,7 @@ export const compendiumService = {
             class_spells (
                 required_lvl,
                 classes (id, name)
-            ),
+            )
             `)
         .eq('id', id)
         .order('name')

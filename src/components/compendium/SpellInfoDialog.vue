@@ -1,0 +1,202 @@
+<template>
+  <div v-if="!selectedSpell" class="d-flex flex-column align-center justify-center pa-12 hq-spell-loading">
+    <VProgressCircular indeterminate color="primary" size="48" class="mb-3" />
+    <span class="text-caption text-disabled font-weight-bold text-uppercase tracking-widest">
+      Consultando Códice Arcángel...
+    </span>
+  </div>
+
+  <VCard v-else variant="flat" class="hq-spell-card overflow-hidden rounded-xl position-relative">
+    <VBtn
+      icon="mdi-close"
+      variant="text"
+      color="grey-lighten-1"
+      size="small"
+      class="hq-close-btn"
+      @click="$emit('close')"
+    />
+
+    <div class="hq-navbar-noise"></div>
+
+    <VCardText class="pa-4 pa-md-6">
+      <div class="d-flex flex-column flex-sm-row gap-x-4 align-start">
+        
+        <VAvatar 
+          size="80" 
+          rounded="xl" 
+          class="border-thin flex-shrink-0 bg-grey-darken-4 hq-spell-avatar mb-4 mb-sm-0 mx-auto mx-sm-0"
+        >
+          <VImg 
+            :src="selectedSpell.img || 'https://placehold.co/150?text=Spell'" 
+            cover 
+            crossorigin="anonymous"
+          >
+            <template #placeholder>
+              <div class="d-flex align-center justify-center fill-height bg-grey-darken-4">
+                <VProgressCircular indeterminate color="primary" size="24" />
+              </div>
+            </template>
+          </VImg>
+        </VAvatar>
+
+        <div class="flex-grow-1 w-100 text-center text-sm-left">
+          <div class="d-flex align-center justify-center justify-sm-start gap-x-2 mb-1 flex-wrap">
+            <span class="text-uppercase tracking-widest text-xxs font-weight-bold text-cyan-lighten-2">
+              Detalle de Hechizo
+            </span>
+            <span class="text-disabled text-xxs">—</span>
+            <VChip
+              size="x-small"
+              color="cyan-darken-1"
+              variant="flat"
+              class="font-weight-black text-uppercase px-2"
+            >
+              💧 {{ selectedSpell.mana_cost }} MP
+            </VChip>
+          </div>
+
+          <h2 class="text-h5 font-weight-black text-white text-uppercase tracking-wide mb-2">
+            {{ selectedSpell.name }}
+          </h2>
+
+          <div v-if="provenanceInfo" class="hq-provenance-tag d-inline-flex align-center px-2 py-1 rounded bg-hq-row border-thin mb-3">
+            <VIcon :icon="provenanceInfo.icon" size="13" :color="provenanceInfo.color" class="me-1" />
+            <span class="text-xxs font-weight-bold text-grey-lighten-1">
+              Req. Nv. {{ provenanceInfo.lvl }} por <span class="text-white">{{ provenanceInfo.name }}</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hq-spell-desc-section mt-4 border-thin pa-4 rounded-xl">
+        <div class="hq-section-header mb-2">
+          <span class="text-uppercase tracking-widest font-weight-bold text-xxs text-disabled">
+            Efecto del Conjuro
+          </span>
+        </div>
+        <p class="hq-desc-text font-italic mb-0 text-medium-emphasis text-justify">
+          "{{ selectedSpell.description || 'Este hechizo canaliza flujos de energía mística no documentados formalmente.' }}"
+        </p>
+      </div>
+    </VCardText>
+  </VCard>
+</template>
+
+<script setup lang="ts">
+import { computed, onMounted, watch } from 'vue'
+import { useCompendium } from '@/composables/useCompendium'
+
+const props = defineProps<{
+  spellId: number
+}>()
+
+defineEmits(['close'])
+
+const { selectedSpell, fetchSpellDetails } = useCompendium()
+
+// Mapea la procedencia del hechizo según su clase asignada
+const provenanceInfo = computed(() => {
+  if (!selectedSpell.value) return null
+
+  if (selectedSpell.value.class_spells?.length > 0) {
+    const classData = selectedSpell.value.class_spells[0]
+    return {
+      name: classData.classes?.name,
+      lvl: classData.required_lvl,
+      icon: 'mdi-auto-fix',
+      color: 'blue-lighten-2'
+    }
+  }
+
+  return null
+})
+
+onMounted(() => {
+  fetchSpellDetails(props.spellId)
+})
+
+watch(() => props.spellId, (newId) => {
+  fetchSpellDetails(newId)
+})
+</script>
+
+<style scoped>
+.text-xxs { font-size: 0.65rem !important; }
+.gap-x-2 { column-gap: 8px !important; }
+.gap-x-4 { column-gap: 16px !important; }
+.tracking-widest { letter-spacing: 0.12em !important; }
+
+/* ── ❌ BOTÓN CERRAR FLOTANTE ── */
+.hq-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
+  background: rgba(5, 7, 12, 0.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(4px);
+  transition: all 0.2s ease;
+}
+.hq-close-btn:hover {
+  background: rgba(244, 67, 54, 0.2) !important;
+  border-color: rgba(244, 67, 54, 0.4) !important;
+  color: #fff !important;
+}
+
+/* ── 🎴 DIÁLOGO BASE ── */
+.hq-spell-card {
+  background: #090d16 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8) !important;
+}
+
+.hq-spell-loading {
+  background: #090d16 !important;
+  min-height: 200px;
+}
+
+/* 🖼️ AVATAR 1:1 */
+.hq-spell-avatar {
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* 📜 SECCIÓN DESCRIPCIÓN */
+.hq-spell-desc-section {
+  background: rgba(15, 22, 36, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.03) !important;
+}
+
+.bg-hq-row {
+  background: rgba(5, 7, 12, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.02) !important;
+}
+
+.hq-desc-text {
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+/* 🏷️ LÍNEA DEL TÍTULO DE SECCIÓN */
+.hq-section-header {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.hq-section-header::after {
+  content: '';
+  flex-grow: 1;
+  margin-left: 12px;
+  height: 1px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.05), transparent);
+}
+
+.hq-navbar-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.015;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+</style>
