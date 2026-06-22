@@ -3,6 +3,10 @@ import type { Ability } from './ability'
 export interface RaceAbility {
   required_lvl:number
   abilities:Ability
+  races?: {
+    id: number
+    name: string
+  } | null
 }
 
 export interface Race {

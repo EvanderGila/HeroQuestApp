@@ -4,6 +4,10 @@ import type { Ability } from './ability'
 export interface ClassAbility {
   required_lvl:number
   abilities:Ability
+  classes?: { 
+    id: number
+    name: string
+  } | null
 }
 
 export interface Class {
