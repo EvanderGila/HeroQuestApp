@@ -7,7 +7,7 @@ import type { Race } from '@/types/race'
 export function useCompendium() {
 
     const compStore = useCompendiumStore()
-    const { getRaces, getClasses, getAbilities, getSpells, getItems, getRaceById, getClassById } = compendiumService
+    const { getRaces, getClasses, getAbilities, getSpells, getItems, getRaceById, getClassById, getAbilityById } = compendiumService
 
     const selectedRace = computed(()=> compStore.selectedRace)
     const selectedClass = computed(()=> compStore.selectedClass)
@@ -177,6 +177,30 @@ export function useCompendium() {
 
   }
 
+    async function fetchAbilityDetails(id:number){
+
+    // Si ya está cargada y coincide, no hacemos nada
+    if(compStore.selectedAbility?.id === id){
+      return
+    }
+
+    compStore.isLoading = true
+
+    try {
+
+      const abl = await getAbilityById(id)
+      compStore.setSelectedAbility(abl)
+
+    }
+    catch(e){
+      console.error(e)
+    }
+    finally{
+      compStore.isLoading = false
+    }
+
+  }
+
     return {
         selectedRace,
         selectedClass,
@@ -184,6 +208,7 @@ export function useCompendium() {
         selectedSpell,
         selectedItem,
         fetchRaceDetails,
-        fetchClassDetails, 
+        fetchClassDetails,
+        fetchAbilityDetails, 
         loadTab }
 }

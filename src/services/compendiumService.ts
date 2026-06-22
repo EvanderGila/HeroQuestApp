@@ -111,7 +111,7 @@ export const compendiumService = {
         return data
     },
 
-    async getAbilitiesById(id:number) {
+    async getAbilityById(id:number) {
 
         const { data, error } = await supabase
         .from('abilities')
@@ -124,7 +124,7 @@ export const compendiumService = {
             race_abilities (
                 required_lvl,
                 races (id, name)
-            ),
+            )
             `)
         .eq('id', id)
         .order('name')
