@@ -5,7 +5,8 @@
       :key="item.id"
       variant="flat"
       class="hq-item-card border-thin rounded-xl overflow-hidden position-relative d-flex flex-column"
-    >
+      @click="handleInspectItem(item.id)"
+      >
       <div class="hq-navbar-noise"></div>
 
       <div class="hq-item-image-wrapper position-relative">
@@ -56,12 +57,29 @@
       </div>
     </VCard>
   </div>
+  <VDialog v-model="isDetailsDialogOpen" max-width="900px" width="auto" transition="dialog-bottom-transition">
+    <ItemInfoDialog 
+      v-if="itemSelected"
+      :itemId="itemSelected" 
+      @close="isDetailsDialogOpen = false"
+    />
+  </VDialog>
 </template>
 
 <script setup lang="ts">
-import { useCompendiumStore } from '@/store/compendiumStore';
+import { ref } from 'vue'
+import { useCompendiumStore } from '@/store/compendiumStore'
+import ItemInfoDialog from '@/components/compendium/ItemInfoDialog.vue'
 
 const compStore = useCompendiumStore()
+
+const isDetailsDialogOpen = ref(false)
+const itemSelected = ref<any>(null)
+
+function handleInspectItem(item_id: any) {
+  itemSelected.value = item_id
+  isDetailsDialogOpen.value = true
+}
 
 // Mapeo de slots para textos descriptivos cortos
 const slotMapping: Record<string, { text: string }> = {
@@ -205,6 +223,16 @@ const getBadgeStyle = (item: any) => {
   opacity: 0.02;
   pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+:deep(.v-overlay__content) {
+  @media (max-width: 959px), (max-height: 1000px) {
+    max-height: calc(100dvh - 24px) !important;
+    width: calc(100vw - 24px) !important;
+    margin: 12px !important;
+    overflow: visible !important;
+    display: block !important; /* Evita que flexbox aplaste la tarjeta */
+  }
 }
 
 /* Adaptación responsive */
