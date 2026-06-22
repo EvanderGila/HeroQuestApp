@@ -144,6 +144,16 @@
                     >
                       Nv. {{ ca.required_lvl }}
                     </VChip>
+                    <VChip 
+                      v-else 
+                      size="x-small" 
+                      color="warning" 
+                      variant="flat"
+                      prepend-icon="mdi-lock-open"
+                      class="font-weight-black px-2 ml-2"
+                    >
+                      Nv. {{ ca.required_lvl }}
+                    </VChip>
                   </div>
                 </div>
 

@@ -99,7 +99,7 @@ const { selectedRace, fetchRaceDetails } = useCompendium()
 
 const mockCharacterForAbilities = computed<any>(() => {
   return {
-    lvl: 1,
+    lvl: 100,
     races: selectedRace.value,
     classes: null
   }
