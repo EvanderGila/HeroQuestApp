@@ -40,6 +40,7 @@ export const compendiumService = {
             `)
             .eq('id', id)
             .order('name', { ascending: true })
+            .single()
         
         if (error) throw error
         return data
@@ -92,6 +93,7 @@ export const compendiumService = {
             `)
             .eq('id', id)
             .order('name', { ascending: true })
+            .single()
         
         if (error) throw error
         return data
@@ -126,6 +128,7 @@ export const compendiumService = {
             `)
         .eq('id', id)
         .order('name')
+        .single()
 
         if(error) throw error
 
@@ -159,6 +162,7 @@ export const compendiumService = {
             `)
         .eq('id', id)
         .order('name')
+        .single()
 
         if(error) throw error
 
@@ -171,6 +175,20 @@ export const compendiumService = {
         .from('items')
         .select('*')
         .order('name')
+
+        if(error) throw error
+
+        return data
+    },
+
+    async getItemById(id:number){
+
+        const { data, error } = await supabase
+        .from('items')
+        .select('*')
+        .eq('id', id)
+        .order('name')
+        .single()
 
         if(error) throw error
 
