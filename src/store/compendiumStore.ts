@@ -39,6 +39,12 @@ export const useCompendiumStore = defineStore('compendium', () => {
   function setSpells(spellsNew: Spell[]) { spells.value = spellsNew }
   function setItems(itemsNew: Item[]) { items.value = itemsNew }
 
+  function setSelectedRace(race: Race | null) { selectedRace.value = race }
+  function setSelectedClass(cls: Class | null) { selectedClass.value = cls }
+  function setSelectedAbility(ablty: Ability | null) { selectedAbility.value = ablty }
+  function setSelectedSpell(spell: Spell | null) { selectedSpell.value = spell }
+  function setSelectedItem(item: Item | null) { selectedItem.value = item }
+
   return {
 
     races,
@@ -61,7 +67,13 @@ export const useCompendiumStore = defineStore('compendium', () => {
     setClasses,
     setAbilities,
     setSpells,
-    setItems
+    setItems,
+
+    setSelectedRace,
+    setSelectedClass,
+    setSelectedAbility,
+    setSelectedSpell,
+    setSelectedItem
   }
 
 })

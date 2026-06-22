@@ -6,6 +6,7 @@
       variant="flat"
       class="hq-race-card border-thin rounded-xl overflow-hidden position-relative"
       elevation="2"
+      @click="handleInspectRace(race.id)"
     >
       <div class="hq-navbar-noise"></div>
 
@@ -41,12 +42,30 @@
       </div>
     </VCard>
   </div>
+  
+  <VDialog v-model="isDetailsDialogOpen" max-width="900px" width="auto" transition="dialog-bottom-transition">
+    <RaceInfoDialog 
+      v-if="raceSelected"
+      :raceId="raceSelected" 
+      @close="isDetailsDialogOpen = false"
+    />
+  </VDialog>
 </template>
 
 <script setup lang="ts">
-import { useCompendiumStore } from '@/store/compendiumStore';
+import { ref } from 'vue'
+import { useCompendiumStore } from '@/store/compendiumStore'
+import RaceInfoDialog from '@/components/compendium/RaceInfoDialog.vue'
 
 const compStore = useCompendiumStore()
+
+const isDetailsDialogOpen = ref(false)
+const raceSelected = ref<any>(null)
+
+function handleInspectRace(race_id: any) {
+  raceSelected.value = race_id
+  isDetailsDialogOpen.value = true
+}
 </script>
 
 <style scoped>
@@ -135,6 +154,16 @@ const compStore = useCompendiumStore()
   pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   z-index: 2;
+}
+
+:deep(.v-overlay__content) {
+  @media (max-width: 959px), (max-height: 500px) {
+    max-height: calc(100dvh - 24px) !important;
+    width: calc(100vw - 24px) !important;
+    margin: 12px !important;
+    overflow-y: auto !important;
+    display: block !important; /* Evita que flexbox aplaste la tarjeta */
+  }
 }
 
 /* 📱 OPTIMIZACIÓN RESPONSIVE */

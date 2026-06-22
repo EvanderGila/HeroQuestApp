@@ -1,11 +1,15 @@
+import { computed } from 'vue'
 import { compendiumService } from '@/services/compendiumService'
 import { characterService } from '@/services/characterService'
 import { useCompendiumStore } from '@/store/compendiumStore'
+import type { Race } from '@/types/race'
 
 export function useCompendium() {
 
     const compStore = useCompendiumStore()
-    const { getRaces, getClasses, getAbilities, getSpells, getItems } = compendiumService
+    const { getRaces, getClasses, getAbilities, getSpells, getItems, getRaceById } = compendiumService
+
+    const selectedRace = computed(()=> compStore.selectedRace)
 
 
     async function loadRaces() {
@@ -121,5 +125,32 @@ export function useCompendium() {
 
     }
 
-    return { loadTab }
+    async function fetchRaceDetails(id:number){
+
+    // Si ya está cargada y coincide, no hacemos nada
+    if(compStore.selectedRace?.id === id){
+      return
+    }
+
+    compStore.isLoading = true
+
+    try {
+
+      const race = await getRaceById(id)
+      compStore.setSelectedRace(race)
+
+    }
+    catch(e){
+      console.error(e)
+    }
+    finally{
+      compStore.isLoading = false
+    }
+
+  }
+
+    return {
+        selectedRace,
+        fetchRaceDetails, 
+        loadTab }
 }
