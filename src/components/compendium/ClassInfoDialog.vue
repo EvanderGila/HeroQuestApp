@@ -89,7 +89,7 @@
         </VWindowItem>
         <VWindowItem value="spells">
             <div class="hq-scrollable-tab-content">
-          <SpellsTab :character="mockCharacterForClass" />
+          <SpellsTab :character="mockCharacterForClass" :one-col="true"/>
           </div>
         </VWindowItem>
       </VWindow>

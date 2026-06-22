@@ -11,7 +11,7 @@
     </div>
 
     <VRow dense>
-      <VCol cols="12" sm="6" v-for="cs in classSpells" :key="cs.spells.id" class="pa-1">
+      <VCol cols="12" :sm="props.oneCol ? '12' : '6'" v-for="cs in classSpells" :key="cs.spells.id" class="pa-1">
         <VCard 
           variant="outlined" 
           class="pa-3 rounded-lg hq-spell-card transition-all h-100 d-flex flex-column justify-space-between"
@@ -92,9 +92,15 @@
 import { computed } from 'vue'
 import type { Character } from '@/types/character'
 
-const props = defineProps<{
-  character: Character
-}>()
+const props = withDefaults(
+  defineProps<{
+    character: Character
+    oneCol?: boolean
+  }>(),
+  {
+    oneCol: false
+  }
+)
 
 const characterClass = computed(() => props.character?.classes)
 const classSpells = computed(() => props.character?.classes?.class_spells || [])
