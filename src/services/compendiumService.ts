@@ -77,7 +77,7 @@ export const compendiumService = {
         return data
     },
     
-    async getClassesById(id:number) {
+    async getClassById(id:number) {
         const { data, error } = await supabase
             .from('classes')
             .select(`
