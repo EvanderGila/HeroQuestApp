@@ -5,7 +5,8 @@ export const characterService = {
   async getCharactersByUserId(userId: string) {
     const { data, error } = await supabase
       .from('characters')
-      .select(`
+      .select(
+        `
         *,
         races (
           id, name, img, hp_base, atk_base, def_base, mp_base, mov_base,
@@ -29,15 +30,24 @@ export const characterService = {
           slot,
           items(*)
         )
-      `)
+      `
+      )
       .eq('user_id', userId)
-    
+
     if (error) throw error
     return data
   },
 
   // 4. Subir de nivel los stats
-  async updateCharacterStats(characterId: number, currentHp: number, currentMp: number, currentPoints: number, hpAdded: number, mpAdded: number, totalSpent: number) {
+  async updateCharacterStats(
+    characterId: number,
+    currentHp: number,
+    currentMp: number,
+    currentPoints: number,
+    hpAdded: number,
+    mpAdded: number,
+    totalSpent: number
+  ) {
     const finalHp = currentHp + hpAdded
     const finalMp = currentMp + mpAdded
     const finalPoints = currentPoints - totalSpent
@@ -58,11 +68,9 @@ export const characterService = {
   },
 
   // 5. Añadir un nuevo personaje trayéndose TODAS sus relaciones al nacer
-async createCharacter(characterData: any) {
-  const { data, error } = await supabase
-    .from('characters')
-    .insert(characterData)
-    .select(`
+  async createCharacter(characterData: any) {
+    const { data, error } = await supabase.from('characters').insert(characterData)
+      .select(`
       *,
       races (
         id, name, img, hp_base, atk_base, def_base, mp_base, mov_base,
@@ -75,8 +83,8 @@ async createCharacter(characterData: any) {
       ),
       character_equipment (slot, items(*))
     `)
-  
-  if (error) throw error
-  return data[0]
-}
+
+    if (error) throw error
+    return data[0]
+  }
 }

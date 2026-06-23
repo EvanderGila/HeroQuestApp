@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import type { AppUser } from '@/types/auth' 
+import type { AppUser } from '@/types/auth'
 
 export const useAuthStore = defineStore('auth', () => {
   const user = ref<AppUser | null>(null)
@@ -13,7 +13,7 @@ export const useAuthStore = defineStore('auth', () => {
     user.value = newUser
     isAuthenticated.value = !!newUser
     // Limpiamos errores al cambiar de usuario con éxito
-    authError.value = null 
+    authError.value = null
   }
 
   function setLoading(status: boolean) {
@@ -25,18 +25,18 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   function setInitialized(value: boolean) {
-  isInitialized.value = value
-}
+    isInitialized.value = value
+  }
 
-  return { 
-    user, 
-    isAuthenticated, 
-    isLoading, 
+  return {
+    user,
+    isAuthenticated,
+    isLoading,
     authError,
-    isInitialized, 
-    setUser, 
-    setLoading, 
+    isInitialized,
+    setUser,
+    setLoading,
     setError,
-    setInitialized 
+    setInitialized
   }
 })

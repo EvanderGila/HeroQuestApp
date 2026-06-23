@@ -6,9 +6,7 @@ import type { Class } from '@/types/class'
 import type { Ability } from '@/types/ability'
 import type { Spell } from '@/types/spell'
 
-
 export const useCompendiumStore = defineStore('compendium', () => {
-
   const races = ref<Race[]>([])
   const classes = ref<Class[]>([])
   const items = ref<Item[]>([])
@@ -24,29 +22,46 @@ export const useCompendiumStore = defineStore('compendium', () => {
   const isLoading = ref(false)
 
   const loaded = ref({
-
-    races:false,
-    classes:false,
-    items:false,
-    abilities:false,
-    spells:false
-
+    races: false,
+    classes: false,
+    items: false,
+    abilities: false,
+    spells: false
   })
 
-  function setRaces(racesNew: Race[]) { races.value = racesNew }
-  function setClasses(classesNew: Class[]) { classes.value = classesNew }
-  function setAbilities(abilitiesNew: Ability[]) { abilities.value = abilitiesNew }
-  function setSpells(spellsNew: Spell[]) { spells.value = spellsNew }
-  function setItems(itemsNew: Item[]) { items.value = itemsNew }
+  function setRaces(racesNew: Race[]) {
+    races.value = racesNew
+  }
+  function setClasses(classesNew: Class[]) {
+    classes.value = classesNew
+  }
+  function setAbilities(abilitiesNew: Ability[]) {
+    abilities.value = abilitiesNew
+  }
+  function setSpells(spellsNew: Spell[]) {
+    spells.value = spellsNew
+  }
+  function setItems(itemsNew: Item[]) {
+    items.value = itemsNew
+  }
 
-  function setSelectedRace(race: Race | null) { selectedRace.value = race }
-  function setSelectedClass(cls: Class | null) { selectedClass.value = cls }
-  function setSelectedAbility(ablty: Ability | null) { selectedAbility.value = ablty }
-  function setSelectedSpell(spell: Spell | null) { selectedSpell.value = spell }
-  function setSelectedItem(item: Item | null) { selectedItem.value = item }
+  function setSelectedRace(race: Race | null) {
+    selectedRace.value = race
+  }
+  function setSelectedClass(cls: Class | null) {
+    selectedClass.value = cls
+  }
+  function setSelectedAbility(ablty: Ability | null) {
+    selectedAbility.value = ablty
+  }
+  function setSelectedSpell(spell: Spell | null) {
+    selectedSpell.value = spell
+  }
+  function setSelectedItem(item: Item | null) {
+    selectedItem.value = item
+  }
 
   return {
-
     races,
     classes,
     items,
@@ -75,5 +90,4 @@ export const useCompendiumStore = defineStore('compendium', () => {
     setSelectedSpell,
     setSelectedItem
   }
-
 })

@@ -2,14 +2,11 @@ import { computed, type Ref } from 'vue'
 import type { Character } from '@/types/character'
 
 export function useCharacterStats(character: Ref<Character>) {
-
   const equipmentStats = computed(() => {
-
     const equipment = character.value.character_equipment || []
 
     return equipment.reduce(
       (acc, eq) => {
-
         const item = eq.items
 
         acc.hp += item?.hp_mod || 0
@@ -19,7 +16,6 @@ export function useCharacterStats(character: Ref<Character>) {
         acc.mov += item?.mov_mod || 0
 
         return acc
-
       },
 
       {
@@ -29,38 +25,23 @@ export function useCharacterStats(character: Ref<Character>) {
         mp: 0,
         mov: 0
       }
-
     )
-
   })
 
   const totalStats = computed(() => ({
+    hp: character.value.hp + equipmentStats.value.hp,
 
-    hp:
-      character.value.hp
-      + equipmentStats.value.hp,
+    atk: character.value.atk + equipmentStats.value.atk,
 
-    atk:
-      character.value.atk
-      + equipmentStats.value.atk,
+    def: character.value.def + equipmentStats.value.def,
 
-    def:
-      character.value.def
-      + equipmentStats.value.def,
+    mp: character.value.mp + equipmentStats.value.mp,
 
-    mp:
-      character.value.mp
-      + equipmentStats.value.mp,
-
-    mov:
-      character.value.mov
-      + equipmentStats.value.mov,
-
+    mov: character.value.mov + equipmentStats.value.mov
   }))
 
   return {
     equipmentStats,
     totalStats
   }
-
 }

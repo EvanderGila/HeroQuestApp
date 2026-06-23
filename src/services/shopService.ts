@@ -8,7 +8,7 @@ export const shopService = {
       .from('shop_items')
       .select('*, items:item_id (*)')
       .not('item_id', 'is', null)
-    
+
     if (error) throw error
     return data as unknown as ShopItem[]
   },
@@ -19,7 +19,7 @@ export const shopService = {
       .from('shop_items')
       .update({ stock: currentStock - quantity })
       .eq('id', shopItemId)
-  
+
     if (error) throw error
   }
 }

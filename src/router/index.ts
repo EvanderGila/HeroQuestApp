@@ -6,16 +6,11 @@ import { routes as compRoutes } from '@/router/routes/compendium-routes'
 
 import { setupGuards } from '@/router/guard'
 
-const appRoutes = [
-  ...authRoutes,
-  ...charRoutes,
-  ...shopRoutes,
-  ...compRoutes,
-]
+const appRoutes = [...authRoutes, ...charRoutes, ...shopRoutes, ...compRoutes]
 
 const router = createRouter({
   history: createWebHistory(),
-  routes : appRoutes,  // Usamos las rutas importadas
+  routes: appRoutes // Usamos las rutas importadas
 })
 
 // Aplicamos la lógica de seguridad

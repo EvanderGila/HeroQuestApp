@@ -2,7 +2,6 @@ import supabase from '@/lib/supabase'
 import type { SignInWithPasswordCredentials } from '@supabase/supabase-js'
 
 export const authService = {
-
   async login(credentials: SignInWithPasswordCredentials) {
     const { data, error } = await supabase.auth.signInWithPassword(credentials)
     if (error) throw error
@@ -16,7 +15,10 @@ export const authService = {
 
   // Obtiene el usuario de la capa de Autenticación (Email, ID, etc.)
   async getCurrentAuthUser() {
-    const { data: { user }, error } = await supabase.auth.getUser()
+    const {
+      data: { user },
+      error
+    } = await supabase.auth.getUser()
     if (error) throw error
     return user
   },
@@ -28,9 +30,8 @@ export const authService = {
       .select('nickname')
       .eq('id', userId)
       .maybeSingle()
-    
+
     if (error) throw error
     return data
   }
-  
 }

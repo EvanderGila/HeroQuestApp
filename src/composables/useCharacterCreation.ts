@@ -1,7 +1,5 @@
 // composables/useCharacterCreation.ts
-
 import { computed } from 'vue'
-
 import { useCharacterCreationStore } from '@/store/characterCreationStore'
 import { useCharacterStore } from '@/store/characterStore'
 import { useAuthStore } from '@/store/authStore'
@@ -11,11 +9,9 @@ import type { Race } from '@/types/race'
 import type { Class } from '@/types/class'
 
 export function useCharacterCreation() {
-
   const authStore = useAuthStore()
   const creationStore = useCharacterCreationStore()
   const characterStore = useCharacterStore()
-
 
   // ==============================
   // COMPUTED
@@ -48,7 +44,6 @@ export function useCharacterCreation() {
   })
 
   const calculatedStats = computed(() => {
-
     return {
       hp: raceStats.value.hp + classStats.value.hp,
       atk: raceStats.value.atk + classStats.value.atk,
@@ -59,7 +54,6 @@ export function useCharacterCreation() {
   })
 
   const canContinue = computed(() => {
-
     switch (creationStore.currentStep) {
       case 1:
         return !!creationStore.draft.race
@@ -73,7 +67,6 @@ export function useCharacterCreation() {
   })
 
   const isReadyToCreate = computed(() => {
-
     return (
       creationStore.draft.race &&
       creationStore.draft.class &&
@@ -113,7 +106,6 @@ export function useCharacterCreation() {
     }
   }
 
-
   function resetDraft() {
     creationStore.draft = {
       race: null,
@@ -124,13 +116,11 @@ export function useCharacterCreation() {
     creationStore.currentStep = 1
   }
 
-
   // ==============================
   // CREAR PERSONAJE
   // ==============================
 
   async function createCharacter() {
-
     const userId = authStore.user?.id
 
     if (!userId) {
@@ -144,7 +134,6 @@ export function useCharacterCreation() {
     creationStore.isLoading = true
 
     try {
-
       const payload = {
         user_id: userId,
         race_id: creationStore.draft.race!.id,
@@ -166,16 +155,13 @@ export function useCharacterCreation() {
       characterStore.myCharacters.push(newCharacter)
       resetDraft()
       return true
-    }
-    catch(error){
+    } catch (error) {
       console.error(error)
       return false
-    }
-    finally{
+    } finally {
       creationStore.isLoading = false
     }
   }
-
 
   return {
     draft,

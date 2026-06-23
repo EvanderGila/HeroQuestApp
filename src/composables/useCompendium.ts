@@ -1,263 +1,223 @@
 import { computed } from 'vue'
 import { compendiumService } from '@/services/compendiumService'
-import { characterService } from '@/services/characterService'
 import { useCompendiumStore } from '@/store/compendiumStore'
-import type { Race } from '@/types/race'
 
 export function useCompendium() {
+  const compStore = useCompendiumStore()
+  const {
+    getRaces,
+    getClasses,
+    getAbilities,
+    getSpells,
+    getItems,
+    getRaceById,
+    getClassById,
+    getAbilityById,
+    getSpellById,
+    getItemById
+  } = compendiumService
 
-    const compStore = useCompendiumStore()
-    const { getRaces, getClasses, getAbilities,
-        getSpells, getItems, getRaceById, getClassById,
-        getAbilityById, getSpellById, getItemById } = compendiumService
+  const selectedRace = computed(() => compStore.selectedRace)
+  const selectedClass = computed(() => compStore.selectedClass)
+  const selectedAbility = computed(() => compStore.selectedAbility)
+  const selectedSpell = computed(() => compStore.selectedSpell)
+  const selectedItem = computed(() => compStore.selectedItem)
 
-    const selectedRace = computed(()=> compStore.selectedRace)
-    const selectedClass = computed(()=> compStore.selectedClass)
-    const selectedAbility = computed(()=> compStore.selectedAbility)
-    const selectedSpell = computed(()=> compStore.selectedSpell)
-    const selectedItem = computed(()=> compStore.selectedItem)
+  async function loadRaces() {
+    if (compStore.loaded.races) return
 
+    compStore.isLoading = true
 
-    async function loadRaces() {
+    try {
+      const races = await getRaces()
 
-        if(compStore.loaded.races)
-            return
-
-        compStore.isLoading = true
-
-        try {
-            const races = await getRaces()
-
-            compStore.races = races
-            compStore.loaded.races = true
-        }
-        finally {
-            compStore.isLoading = false
-        }
+      compStore.races = races
+      compStore.loaded.races = true
+    } finally {
+      compStore.isLoading = false
     }
+  }
 
-    async function loadClasses() {
+  async function loadClasses() {
+    if (compStore.loaded.classes) return
 
-        if(compStore.loaded.classes)
-            return
+    compStore.isLoading = true
 
-        compStore.isLoading = true
+    try {
+      const classes = await getClasses()
 
-        try {
-            const classes = await getClasses()
-
-            compStore.classes = classes
-            compStore.loaded.classes = true
-        }
-        finally {
-            compStore.isLoading = false
-        }
+      compStore.classes = classes
+      compStore.loaded.classes = true
+    } finally {
+      compStore.isLoading = false
     }
+  }
 
-    async function loadItems() {
+  async function loadItems() {
+    if (compStore.loaded.items) return
 
-        if(compStore.loaded.items)
-            return
+    compStore.isLoading = true
 
-        compStore.isLoading = true
+    try {
+      const items = await getItems()
 
-        try {
-            const items = await getItems()
-
-            compStore.items = items
-            compStore.loaded.items = true
-        }
-        finally {
-            compStore.isLoading = false
-        }
+      compStore.items = items
+      compStore.loaded.items = true
+    } finally {
+      compStore.isLoading = false
     }
+  }
 
-    async function loadAbilities() {
+  async function loadAbilities() {
+    if (compStore.loaded.abilities) return
 
-        if(compStore.loaded.abilities)
-            return
+    compStore.isLoading = true
 
-        compStore.isLoading = true
+    try {
+      const abilities = await getAbilities()
 
-        try {
-            const abilities = await getAbilities()
-
-            compStore.abilities = abilities
-            compStore.loaded.abilities = true
-        }
-        finally {
-            compStore.isLoading = false
-        }
+      compStore.abilities = abilities
+      compStore.loaded.abilities = true
+    } finally {
+      compStore.isLoading = false
     }
+  }
 
-    async function loadSpells() {
+  async function loadSpells() {
+    if (compStore.loaded.spells) return
 
-        if(compStore.loaded.spells)
-            return
+    compStore.isLoading = true
 
-        compStore.isLoading = true
+    try {
+      const spells = await getSpells()
 
-        try {
-            const spells = await getSpells()
-
-            compStore.spells = spells
-            compStore.loaded.spells = true
-        }
-        finally {
-            compStore.isLoading = false
-        }
+      compStore.spells = spells
+      compStore.loaded.spells = true
+    } finally {
+      compStore.isLoading = false
     }
+  }
 
-    async function loadTab(tab:string){
+  async function loadTab(tab: string) {
+    switch (tab) {
+      case 'races':
+        return loadRaces()
 
-        switch(tab){
+      case 'classes':
+        return loadClasses()
 
-            case 'races':
-            return loadRaces()
+      case 'items':
+        return loadItems()
 
-            case 'classes':
-            return loadClasses()
+      case 'abilities':
+        return loadAbilities()
 
-            case 'items':
-            return loadItems()
-
-            case 'abilities':
-            return loadAbilities()
-
-            case 'spells':
-            return loadSpells()
-
-        }
-
+      case 'spells':
+        return loadSpells()
     }
+  }
 
-    async function fetchRaceDetails(id:number){
-
+  async function fetchRaceDetails(id: number) {
     // Si ya está cargada y coincide, no hacemos nada
-    if(compStore.selectedRace?.id === id){
+    if (compStore.selectedRace?.id === id) {
       return
     }
 
     compStore.isLoading = true
 
     try {
-
       const race = await getRaceById(id)
       compStore.setSelectedRace(race)
-
-    }
-    catch(e){
+    } catch (e) {
       console.error(e)
-    }
-    finally{
+    } finally {
       compStore.isLoading = false
     }
-
   }
 
-  async function fetchClassDetails(id:number){
-
+  async function fetchClassDetails(id: number) {
     // Si ya está cargada y coincide, no hacemos nada
-    if(compStore.selectedClass?.id === id){
+    if (compStore.selectedClass?.id === id) {
       return
     }
 
     compStore.isLoading = true
 
     try {
-
       const cls = await getClassById(id)
       compStore.setSelectedClass(cls)
-
-    }
-    catch(e){
+    } catch (e) {
       console.error(e)
-    }
-    finally{
+    } finally {
       compStore.isLoading = false
     }
-
   }
 
-    async function fetchAbilityDetails(id:number){
-
+  async function fetchAbilityDetails(id: number) {
     // Si ya está cargada y coincide, no hacemos nada
-    if(compStore.selectedAbility?.id === id){
+    if (compStore.selectedAbility?.id === id) {
       return
     }
 
     compStore.isLoading = true
 
     try {
-
       const abl = await getAbilityById(id)
       compStore.setSelectedAbility(abl)
-
-    }
-    catch(e){
+    } catch (e) {
       console.error(e)
-    }
-    finally{
+    } finally {
       compStore.isLoading = false
     }
   }
 
-    async function fetchSpellDetails(id:number){
-
+  async function fetchSpellDetails(id: number) {
     // Si ya está cargada y coincide, no hacemos nada
-    if(compStore.selectedSpell?.id === id){
+    if (compStore.selectedSpell?.id === id) {
       return
     }
 
     compStore.isLoading = true
 
     try {
-
       const spell = await getSpellById(id)
       compStore.setSelectedSpell(spell)
-
-    }
-    catch(e){
+    } catch (e) {
       console.error(e)
-    }
-    finally{
+    } finally {
       compStore.isLoading = false
     }
   }
 
-    async function fetchItemDetails(id:number){
-
+  async function fetchItemDetails(id: number) {
     // Si ya está cargada y coincide, no hacemos nada
-    if(compStore.selectedItem?.id === id){
+    if (compStore.selectedItem?.id === id) {
       return
     }
 
     compStore.isLoading = true
 
     try {
-
       const item = await getItemById(id)
       compStore.setSelectedItem(item)
-
-    }
-    catch(e){
+    } catch (e) {
       console.error(e)
-    }
-    finally{
+    } finally {
       compStore.isLoading = false
     }
   }
 
-    return {
-        selectedRace,
-        selectedClass,
-        selectedAbility,
-        selectedSpell,
-        selectedItem,
-        fetchRaceDetails,
-        fetchClassDetails,
-        fetchAbilityDetails,
-        fetchSpellDetails,
-        fetchItemDetails,
-        loadTab }
+  return {
+    selectedRace,
+    selectedClass,
+    selectedAbility,
+    selectedSpell,
+    selectedItem,
+    fetchRaceDetails,
+    fetchClassDetails,
+    fetchAbilityDetails,
+    fetchSpellDetails,
+    fetchItemDetails,
+    loadTab
+  }
 }

@@ -1,66 +1,69 @@
 import supabase from '@/lib/supabase'
 
 export const compendiumService = {
+  async getRaces() {
+    const { data, error } = await supabase
+      .from('races')
+      .select(`*`)
+      .order('name', { ascending: true })
 
-    async getRaces() {
-        const { data, error } = await supabase
-            .from('races')
-            .select(`*`)
-            .order('name', { ascending: true })
-        
-        if (error) throw error
-        return data
-    },
+    if (error) throw error
+    return data
+  },
 
-    async getRacesDetailed() {
-        const { data, error } = await supabase
-            .from('races')
-            .select(`
+  async getRacesDetailed() {
+    const { data, error } = await supabase
+      .from('races')
+      .select(
+        `
             *,
             race_abilities (
                 required_lvl,
                 abilities (*)
             )
-            `)
-            .order('name', { ascending: true })
-        
-        if (error) throw error
-        return data
-    },
+            `
+      )
+      .order('name', { ascending: true })
 
-    async getRaceById(id:number) {
-        const { data, error } = await supabase
-            .from('races')
-            .select(`
+    if (error) throw error
+    return data
+  },
+
+  async getRaceById(id: number) {
+    const { data, error } = await supabase
+      .from('races')
+      .select(
+        `
             *,
             race_abilities (
                 required_lvl,
                 abilities (*)
             )
-            `)
-            .eq('id', id)
-            .order('name', { ascending: true })
-            .single()
-        
-        if (error) throw error
-        return data
-    },
+            `
+      )
+      .eq('id', id)
+      .order('name', { ascending: true })
+      .single()
 
+    if (error) throw error
+    return data
+  },
 
-    async getClasses() {
-        const { data, error } = await supabase
-            .from('classes')
-            .select(`*`)
-            .order('name', { ascending: true })
-        
-        if (error) throw error
-        return data
-    },
+  async getClasses() {
+    const { data, error } = await supabase
+      .from('classes')
+      .select(`*`)
+      .order('name', { ascending: true })
 
-    async getClassesDetailed() {
-        const { data, error } = await supabase
-            .from('classes')
-            .select(`
+    if (error) throw error
+    return data
+  },
+
+  async getClassesDetailed() {
+    const { data, error } = await supabase
+      .from('classes')
+      .select(
+        `
             *,
             class_abilities (
                 required_lvl,
@@ -70,17 +73,19 @@ export const compendiumService = {
                 required_lvl,
                 spells (*)
             )
-            `)
-            .order('name', { ascending: true })
-        
-        if (error) throw error
-        return data
-    },
-    
-    async getClassById(id:number) {
-        const { data, error } = await supabase
-            .from('classes')
-            .select(`
+            `
+      )
+      .order('name', { ascending: true })
+
+    if (error) throw error
+    return data
+  },
+
+  async getClassById(id: number) {
+    const { data, error } = await supabase
+      .from('classes')
+      .select(
+        `
             *,
             class_abilities (
                 required_lvl,
@@ -90,32 +95,29 @@ export const compendiumService = {
                 required_lvl,
                 spells (*)
             )
-            `)
-            .eq('id', id)
-            .order('name', { ascending: true })
-            .single()
-        
-        if (error) throw error
-        return data
-    },
+            `
+      )
+      .eq('id', id)
+      .order('name', { ascending: true })
+      .single()
 
-    async getAbilities() {
+    if (error) throw error
+    return data
+  },
 
-        const { data, error } = await supabase
-        .from('abilities')
-        .select('*')
-        .order('name')
+  async getAbilities() {
+    const { data, error } = await supabase.from('abilities').select('*').order('name')
 
-        if(error) throw error
+    if (error) throw error
 
-        return data
-    },
+    return data
+  },
 
-    async getAbilityById(id:number) {
-
-        const { data, error } = await supabase
-        .from('abilities')
-        .select(`
+  async getAbilityById(id: number) {
+    const { data, error } = await supabase
+      .from('abilities')
+      .select(
+        `
             *,
             class_abilities (
                 required_lvl,
@@ -125,73 +127,64 @@ export const compendiumService = {
                 required_lvl,
                 races (id, name)
             )
-            `)
-        .eq('id', id)
-        .order('name')
-        .single()
+            `
+      )
+      .eq('id', id)
+      .order('name')
+      .single()
 
-        if(error) throw error
+    if (error) throw error
 
-        return data
-    },
+    return data
+  },
 
+  async getSpells() {
+    const { data, error } = await supabase.from('spells').select('*').order('name')
 
+    if (error) throw error
 
-    async getSpells() {
+    return data
+  },
 
-        const { data, error } = await supabase
-        .from('spells')
-        .select('*')
-        .order('name')
-
-        if(error) throw error
-
-        return data
-    },
-
-    async getSpellById(id:number) {
-
-        const { data, error } = await supabase
-        .from('spells')
-        .select(`
+  async getSpellById(id: number) {
+    const { data, error } = await supabase
+      .from('spells')
+      .select(
+        `
             *,
             class_spells (
                 required_lvl,
                 classes (id, name)
             )
-            `)
-        .eq('id', id)
-        .order('name')
-        .single()
+            `
+      )
+      .eq('id', id)
+      .order('name')
+      .single()
 
-        if(error) throw error
+    if (error) throw error
 
-        return data
-    },
+    return data
+  },
 
-    async getItems() {
+  async getItems() {
+    const { data, error } = await supabase.from('items').select('*').order('name')
 
-        const { data, error } = await supabase
-        .from('items')
-        .select('*')
-        .order('name')
+    if (error) throw error
 
-        if(error) throw error
+    return data
+  },
 
-        return data
-    },
+  async getItemById(id: number) {
+    const { data, error } = await supabase
+      .from('items')
+      .select('*')
+      .eq('id', id)
+      .order('name')
+      .single()
 
-    async getItemById(id:number){
+    if (error) throw error
 
-        const { data, error } = await supabase
-        .from('items')
-        .select('*')
-        .eq('id', id)
-        .order('name')
-        .single()
-
-        if(error) throw error
-
-        return data
-    }
+    return data
+  }
 }

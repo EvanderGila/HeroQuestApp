@@ -1,8 +1,7 @@
-import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/store/authStore'
 import { authService } from '@/services/authService'
-import type { AppUser } from '@/types/auth' 
+import type { AppUser } from '@/types/auth'
 import supabase from '@/lib/supabase'
 
 let isFetching = false
@@ -17,8 +16,8 @@ export function useAuth() {
     return {
       ...authUser,
       profile: {
-        ...publicData,
-      },
+        ...publicData
+      }
     }
   }
 
@@ -29,7 +28,9 @@ export function useAuth() {
     authStore.setLoading(true)
 
     try {
-      const { data: { session } } = await supabase.auth.getSession()
+      const {
+        data: { session }
+      } = await supabase.auth.getSession()
 
       if (session?.user) {
         await fetchFullUserProfile(session.user)
@@ -39,7 +40,6 @@ export function useAuth() {
 
       // 👇 listener limpio
       supabase.auth.onAuthStateChange(async (event, session) => {
-
         if (event === 'SIGNED_IN') {
           await fetchFullUserProfile(session?.user)
         }
@@ -48,9 +48,8 @@ export function useAuth() {
           authStore.setUser(null)
         }
       })
-
     } catch (e) {
-      console.error("Init auth error:", e)
+      console.error('Init auth error:', e)
       authStore.setUser(null)
     } finally {
       authStore.setLoading(false)
@@ -63,7 +62,7 @@ export function useAuth() {
     isFetching = true
 
     try {
-      const user = authUser || await authService.getCurrentAuthUser()
+      const user = authUser || (await authService.getCurrentAuthUser())
       if (!user) {
         authStore.setUser(null)
         return
@@ -71,9 +70,8 @@ export function useAuth() {
 
       const fullUser = await resolveFullUser(user)
       authStore.setUser(fullUser)
-
     } catch (e) {
-      console.error("Profile error:", e)
+      console.error('Profile error:', e)
       authStore.setUser(null)
     } finally {
       isFetching = false
@@ -86,12 +84,11 @@ export function useAuth() {
     try {
       const { user } = await authService.login({ email, password: pass })
 
-      if (!user) throw new Error("No user")
+      if (!user) throw new Error('No user')
 
       await fetchFullUserProfile(user)
 
       router.push('/')
-
     } catch (e: any) {
       authStore.setError(e.message)
     } finally {

@@ -9,7 +9,7 @@ export const setupGuards = (router: Router) => {
 
     // Esperar a que initAuth termine (Tu lógica de inicialización impecable)
     if (!authStore.isInitialized) {
-      await new Promise(resolve => {
+      await new Promise((resolve) => {
         const stop = watch(
           () => authStore.isInitialized,
           (val) => {
@@ -35,7 +35,7 @@ export const setupGuards = (router: Router) => {
       return '/'
     }
 
-    // 4. Eliminamos el "next()". En Vue Router moderno, si no se retorna nada, 
+    // 4. Eliminamos el "next()". En Vue Router moderno, si no se retorna nada,
     // se asume que la navegación es totalmente válida y continúa.
   })
 }
