@@ -3,7 +3,11 @@
     <VProgressCircular indeterminate color="primary" size="64" />
   </div>
 
-  <VCard v-else variant="flat" class="hq-detail-card overflow-hidden rounded-xl position-relative">
+  <VCard
+    v-else
+    variant="flat"
+    class="hq-detail-card overflow-hidden rounded-xl position-relative"
+  >
     <VBtn
       icon="mdi-close"
       variant="text"
@@ -24,15 +28,19 @@
             class="hq-detail-image"
           >
             <template #placeholder>
-              <div class="d-flex align-center justify-center fill-height bg-grey-darken-4">
+              <div
+                class="d-flex align-center justify-center fill-height bg-grey-darken-4"
+              >
                 <VProgressCircular indeterminate color="primary" size="48" />
               </div>
             </template>
           </VImg>
           <div class="hq-detail-overlay"></div>
-          
+
           <div class="hq-image-floating-title pa-4">
-            <span class="text-uppercase tracking-widest text-xxs font-weight-bold text-amber">
+            <span
+              class="text-uppercase tracking-widest text-xxs font-weight-bold text-amber"
+            >
               Compendio de Razas
             </span>
             <h2 class="text-h4 font-weight-black text-white text-uppercase tracking-wide">
@@ -41,24 +49,31 @@
           </div>
         </VCol>
 
-        <VCol cols="12" sm="7" class="pa-4 pa-md-6 d-flex flex-column gap-y-4 hq-info-column">
-          
+        <VCol
+          cols="12"
+          sm="7"
+          class="pa-4 pa-md-6 d-flex flex-column gap-y-4 hq-info-column"
+        >
           <div class="hq-detail-section border-thin pa-4 rounded-xl">
             <div class="hq-section-header mb-3">
-              <span class="text-uppercase tracking-widest font-weight-bold text-xxs text-warning">
+              <span
+                class="text-uppercase tracking-widest font-weight-bold text-xxs text-warning"
+              >
                 ⚔️ Atributos de la Raza
               </span>
             </div>
-            
+
             <div class="d-flex flex-column gap-y-1">
-              <div 
-                v-for="stat in displayedStats" 
-                :key="stat.label" 
+              <div
+                v-for="stat in displayedStats"
+                :key="stat.label"
                 class="d-flex align-center justify-space-between bg-hq-row px-3 py-2 rounded-lg border-thin hq-stat-row"
               >
                 <div class="d-flex align-center gap-x-2">
                   <VIcon :icon="stat.icon" :color="stat.color" size="16" />
-                  <span class="text-caption text-grey-lighten-1 font-weight-medium">{{ stat.label }}</span>
+                  <span class="text-caption text-grey-lighten-1 font-weight-medium">
+                    {{ stat.label }}
+                  </span>
                 </div>
                 <span class="text-caption font-weight-black text-white">
                   {{ stat.value }}
@@ -69,14 +84,15 @@
 
           <div class="hq-detail-section border-thin pa-4 rounded-xl flex-grow-1">
             <div class="hq-section-header mb-3">
-              <span class="text-uppercase tracking-widest font-weight-bold text-xxs text-cyan-lighten-2">
+              <span
+                class="text-uppercase tracking-widest font-weight-bold text-xxs text-cyan-lighten-2"
+              >
                 📜 Habilidades de Sangre y Linaje
               </span>
             </div>
 
             <AbilitiesTab :character="mockCharacterForAbilities" />
           </div>
-
         </VCol>
       </VRow>
     </VCardText>
@@ -108,11 +124,36 @@ const mockCharacterForAbilities = computed<any>(() => {
 const displayedStats = computed(() => {
   if (!selectedRace.value) return []
   return [
-    { label: 'Puntos de Cuerpo (Vida)', value: selectedRace.value.hp_base, icon: 'mdi-heart', color: 'red-lighten-1' },
-    { label: 'Ataque Base', value: selectedRace.value.atk_base, icon: 'mdi-sword', color: 'orange-lighten-2' },
-    { label: 'Defensa Base', value: selectedRace.value.def_base, icon: 'mdi-shield', color: 'blue-lighten-2' },
-    { label: 'Puntos de Mente (Maná)', value: selectedRace.value.mp_base, icon: 'mdi-creation', color: 'cyan-lighten-2' },
-    { label: 'Movimiento Base', value: selectedRace.value.mov_base, icon: 'mdi-shoe-print', color: 'green-lighten-2' },
+    {
+      label: 'Puntos de Cuerpo (Vida)',
+      value: selectedRace.value.hp_base,
+      icon: 'mdi-heart',
+      color: 'red-lighten-1'
+    },
+    {
+      label: 'Ataque Base',
+      value: selectedRace.value.atk_base,
+      icon: 'mdi-sword',
+      color: 'orange-lighten-2'
+    },
+    {
+      label: 'Defensa Base',
+      value: selectedRace.value.def_base,
+      icon: 'mdi-shield',
+      color: 'blue-lighten-2'
+    },
+    {
+      label: 'Puntos de Mente (Maná)',
+      value: selectedRace.value.mp_base,
+      icon: 'mdi-creation',
+      color: 'cyan-lighten-2'
+    },
+    {
+      label: 'Movimiento Base',
+      value: selectedRace.value.mov_base,
+      icon: 'mdi-shoe-print',
+      color: 'green-lighten-2'
+    }
   ]
 })
 
@@ -120,16 +161,27 @@ onMounted(() => {
   fetchRaceDetails(props.raceId)
 })
 
-watch(() => props.raceId, (newId) => { 
-  fetchRaceDetails(newId) 
-})
+watch(
+  () => props.raceId,
+  (newId) => {
+    fetchRaceDetails(newId)
+  }
+)
 </script>
 
 <style scoped>
-.text-xxs { font-size: 0.65rem !important; }
-.gap-x-2 { column-gap: 8px !important; }
-.gap-y-1 { row-gap: 4px !important; }
-.gap-y-4 { row-gap: 16px !important; }
+.text-xxs {
+  font-size: 0.65rem !important;
+}
+.gap-x-2 {
+  column-gap: 8px !important;
+}
+.gap-y-1 {
+  row-gap: 4px !important;
+}
+.gap-y-4 {
+  row-gap: 16px !important;
+}
 
 /* ── ❌ BOTÓN CERRAR FLOTANTE ── */
 .hq-close-dialog-btn {
@@ -144,7 +196,12 @@ watch(() => props.raceId, (newId) => {
 }
 
 .hq-close-dialog-btn:hover {
-  background: rgba(244, 67, 54, 0.2) !important; /* Destello sutil rojo al pasar el ratón */
+  background: rgba(
+    244,
+    67,
+    54,
+    0.2
+  ) !important; /* Destello sutil rojo al pasar el ratón */
   border-color: rgba(244, 67, 54, 0.4) !important;
   color: #fff !important;
 }
@@ -172,7 +229,7 @@ watch(() => props.raceId, (newId) => {
 .hq-image-column {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 5 !important; 
+  aspect-ratio: 4 / 5 !important;
 }
 
 .hq-detail-image {
@@ -183,7 +240,12 @@ watch(() => props.raceId, (newId) => {
 .hq-detail-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(9, 13, 22, 0) 60%, rgba(9, 13, 22, 0.9) 95%, rgba(9, 13, 22, 1) 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(9, 13, 22, 0) 60%,
+    rgba(9, 13, 22, 0.9) 95%,
+    rgba(9, 13, 22, 1) 100%
+  );
   z-index: 1;
 }
 
@@ -207,16 +269,21 @@ watch(() => props.raceId, (newId) => {
 /* 📱 RESPONSIVE */
 @media (max-width: 599px) {
   .hq-image-column {
-    aspect-ratio: 16 / 9 !important; 
+    aspect-ratio: 16 / 9 !important;
   }
   .hq-detail-overlay {
-    background: linear-gradient(to bottom, rgba(9, 13, 22, 0) 20%, rgba(9, 13, 22, 0.85) 80%, rgba(9, 13, 22, 1) 100%) !important;
+    background: linear-gradient(
+      to bottom,
+      rgba(9, 13, 22, 0) 20%,
+      rgba(9, 13, 22, 0.85) 80%,
+      rgba(9, 13, 22, 1) 100%
+    ) !important;
   }
 }
 
 @media (max-height: 500px) and (orientation: landscape) {
   .hq-image-column {
-    aspect-ratio: 21 / 9 !important; 
+    aspect-ratio: 21 / 9 !important;
   }
 }
 </style>

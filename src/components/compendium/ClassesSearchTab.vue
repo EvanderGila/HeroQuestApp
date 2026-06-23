@@ -31,35 +31,58 @@
         </h3>
 
         <div class="hq-class-mini-stats d-flex justify-center gx-2 mt-1 flex-wrap">
-          
-          <span v-if="clas.hp_mod !== 0 && clas.hp_mod !== null" class="text-xxs font-weight-bold mx-1" :class="clas.hp_mod > 0 ? 'text-green-lighten-1' : 'text-red-lighten-1'">
+          <span
+            v-if="clas.hp_mod !== 0 && clas.hp_mod !== null"
+            class="text-xxs font-weight-bold mx-1"
+            :class="clas.hp_mod > 0 ? 'text-green-lighten-1' : 'text-red-lighten-1'"
+          >
             ❤️{{ clas.hp_mod > 0 ? '+' : '' }}{{ clas.hp_mod }}
           </span>
 
-          <span v-if="clas.atk_mod !== 0 && clas.atk_mod !== null" class="text-xxs font-weight-bold mx-1" :class="clas.atk_mod > 0 ? 'text-green-lighten-1' : 'text-red-lighten-1'">
+          <span
+            v-if="clas.atk_mod !== 0 && clas.atk_mod !== null"
+            class="text-xxs font-weight-bold mx-1"
+            :class="clas.atk_mod > 0 ? 'text-green-lighten-1' : 'text-red-lighten-1'"
+          >
             ⚔️{{ clas.atk_mod > 0 ? '+' : '' }}{{ clas.atk_mod }}
           </span>
 
-          <span v-if="clas.def_mod !== 0 && clas.def_mod !== null" class="text-xxs font-weight-bold mx-1" :class="clas.def_mod > 0 ? 'text-green-lighten-1' : 'text-red-lighten-1'">
+          <span
+            v-if="clas.def_mod !== 0 && clas.def_mod !== null"
+            class="text-xxs font-weight-bold mx-1"
+            :class="clas.def_mod > 0 ? 'text-green-lighten-1' : 'text-red-lighten-1'"
+          >
             🛡️{{ clas.def_mod > 0 ? '+' : '' }}{{ clas.def_mod }}
           </span>
 
-          <span v-if="clas.mp_mod !== 0 && clas.mp_mod !== null" class="text-xxs font-weight-bold mx-1" :class="clas.mp_mod > 0 ? 'text-green-lighten-1' : 'text-red-lighten-1'">
+          <span
+            v-if="clas.mp_mod !== 0 && clas.mp_mod !== null"
+            class="text-xxs font-weight-bold mx-1"
+            :class="clas.mp_mod > 0 ? 'text-green-lighten-1' : 'text-red-lighten-1'"
+          >
             ✨{{ clas.mp_mod > 0 ? '+' : '' }}{{ clas.mp_mod }}
           </span>
 
-          <span v-if="clas.mov_mod !== 0 && clas.mov_mod !== null" class="text-xxs font-weight-bold mx-1" :class="clas.mov_mod > 0 ? 'text-green-lighten-1' : 'text-red-lighten-1'">
+          <span
+            v-if="clas.mov_mod !== 0 && clas.mov_mod !== null"
+            class="text-xxs font-weight-bold mx-1"
+            :class="clas.mov_mod > 0 ? 'text-green-lighten-1' : 'text-red-lighten-1'"
+          >
             💨{{ clas.mov_mod > 0 ? '+' : '' }}{{ clas.mov_mod }}
           </span>
-
         </div>
       </div>
     </VCard>
   </div>
-  <VDialog v-model="isDetailsDialogOpen" max-width="900px" width="auto" transition="dialog-bottom-transition">
-    <ClassInfoDialog 
+  <VDialog
+    v-model="isDetailsDialogOpen"
+    max-width="900px"
+    width="auto"
+    transition="dialog-bottom-transition"
+  >
+    <ClassInfoDialog
       v-if="classSelected"
-      :classId="classSelected" 
+      :classId="classSelected"
       @close="isDetailsDialogOpen = false"
     />
   </VDialog>
@@ -82,7 +105,9 @@ function handleInspectClass(class_id: any) {
 </script>
 
 <style scoped>
-.text-xxs { font-size: 0.65rem !important; }
+.text-xxs {
+  font-size: 0.65rem !important;
+}
 
 /* 🧙‍♂️ Rejilla elástica */
 .hq-compendium-grid {
@@ -93,7 +118,11 @@ function handleInspectClass(class_id: any) {
 
 /* ── 🎴 TARJETA DE CLASE ── */
 .hq-class-card {
-  background: linear-gradient(180deg, rgba(15, 20, 32, 0.95) 0%, rgba(5, 6, 8, 1) 100%) !important;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 20, 32, 0.95) 0%,
+    rgba(5, 6, 8, 1) 100%
+  ) !important;
   border: 1px solid rgba(255, 255, 255, 0.05) !important;
   transition: all 0.3s ease;
 }
@@ -101,7 +130,7 @@ function handleInspectClass(class_id: any) {
 .hq-class-card:hover {
   transform: translateY(-4px);
   border-color: rgba(33, 150, 243, 0.3) !important;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 /* ── 🖼️ IMAGEN ── */
@@ -144,7 +173,10 @@ function handleInspectClass(class_id: any) {
 /* Caso Vertical: Dos columnas perfectas en móviles comunes */
 @media (max-width: 480px) and (orientation: portrait) {
   .hq-compendium-grid {
-    grid-template-columns: repeat(2, 1fr) !important; /* Forzamos exactamente 2 columnas sin importar los px */
+    grid-template-columns: repeat(
+      2,
+      1fr
+    ) !important; /* Forzamos exactamente 2 columnas sin importar los px */
     gap: 10px;
   }
   .hq-race-title {
@@ -162,7 +194,7 @@ function handleInspectClass(class_id: any) {
 @media (max-height: 480px) and (orientation: landscape) {
   .hq-compendium-grid {
     /* Forzamos 4 columnas en horizontal para que las tarjetas mantengan su proporción estilizada y compacta */
-    grid-template-columns: repeat(4, 1fr) !important; 
+    grid-template-columns: repeat(4, 1fr) !important;
     gap: 12px;
   }
   .hq-race-title {

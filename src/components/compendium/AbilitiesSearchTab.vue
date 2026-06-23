@@ -6,18 +6,19 @@
       variant="flat"
       class="hq-ability-card border-thin rounded-xl overflow-hidden position-relative d-flex flex-column"
       @click="handleInspectAbility(ability.id)"
-      >
+    >
       <div class="hq-navbar-noise"></div>
 
       <div class="hq-ability-image-wrapper position-relative">
-        
-        <div 
+        <div
           class="hq-ability-floating-badge d-flex align-center"
           :class="ability.type === 'active' ? 'hq-badge-active' : 'hq-badge-passive'"
         >
-          <VIcon 
-            :icon="ability.type === 'active' ? 'mdi-lightning-bolt' : 'mdi-book-open-variant'" 
-            size="12" 
+          <VIcon
+            :icon="
+              ability.type === 'active' ? 'mdi-lightning-bolt' : 'mdi-book-open-variant'
+            "
+            size="12"
             class="me-1"
             :color="ability.type === 'active' ? 'blue-lighten-3' : 'grey-lighten-2'"
           />
@@ -42,16 +43,23 @@
       </div>
 
       <div class="hq-ability-content pa-3 d-flex flex-column flex-grow-1 justify-center">
-        <h3 class="hq-ability-title font-weight-black text-uppercase text-center text-truncate">
+        <h3
+          class="hq-ability-title font-weight-black text-uppercase text-center text-truncate"
+        >
           {{ ability.name }}
         </h3>
       </div>
     </VCard>
   </div>
-  <VDialog v-model="isDetailsDialogOpen" max-width="900px" width="auto" transition="dialog-bottom-transition">
-    <AbilityInfoDialog 
+  <VDialog
+    v-model="isDetailsDialogOpen"
+    max-width="900px"
+    width="auto"
+    transition="dialog-bottom-transition"
+  >
+    <AbilityInfoDialog
       v-if="abilitySelected"
-      :abilityId="abilitySelected" 
+      :abilityId="abilitySelected"
       @close="isDetailsDialogOpen = false"
     />
   </VDialog>
@@ -74,7 +82,9 @@ function handleInspectAbility(ability_id: any) {
 </script>
 
 <style scoped>
-.text-xxs { font-size: 0.62rem !important; }
+.text-xxs {
+  font-size: 0.62rem !important;
+}
 
 /* Rejilla elástica */
 .hq-compendium-grid {
@@ -85,14 +95,20 @@ function handleInspectAbility(ability_id: any) {
 
 /* ── 🎴 TARJETA DE HABILIDAD ── */
 .hq-ability-card {
-  background: linear-gradient(180deg, rgba(15, 20, 32, 0.95) 0%, rgba(5, 6, 8, 1) 100%) !important;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 20, 32, 0.95) 0%,
+    rgba(5, 6, 8, 1) 100%
+  ) !important;
   border: 1px solid rgba(255, 255, 255, 0.05) !important;
   transition: all 0.3s ease;
 }
 
 .hq-ability-card:hover {
   border-color: rgba(33, 150, 243, 0.4) !important; /* Brillo azulado al pasar el ratón */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(33, 150, 243, 0.15) !important;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.5),
+    0 0 15px rgba(33, 150, 243, 0.15) !important;
 }
 
 /* ── ⚡ BADGES FLOTANTES DE HABILIDAD ── */
@@ -102,12 +118,12 @@ function handleInspectAbility(ability_id: any) {
   right: 0;
   z-index: 3;
   box-shadow: -2px -2px 10px rgba(0, 0, 0, 0.6);
-  
+
   /* Aumentamos el padding: 4px arriba/abajo y 12px a los lados */
-  padding: 4px 12px !important; 
-  
+  padding: 4px 12px !important;
+
   /* Suavizamos más la curva al ser más grande */
-  border-top-left-radius: 10px; 
+  border-top-left-radius: 10px;
   backdrop-filter: blur(4px);
 }
 .hq-ability-floating-badge span {
@@ -122,7 +138,11 @@ function handleInspectAbility(ability_id: any) {
 
 /* Estilo específico para habilidades Activas (Fuego/Rayo) */
 .hq-badge-active {
-  background: linear-gradient(90deg, #0d47a1 0%, #1565c0 100%) !important; /* Azul eléctrico */
+  background: linear-gradient(
+    90deg,
+    #0d47a1 0%,
+    #1565c0 100%
+  ) !important; /* Azul eléctrico */
   border-left: 1px solid rgba(33, 150, 243, 0.3);
   border-top: 1px solid rgba(33, 150, 243, 0.3);
 }
@@ -130,14 +150,16 @@ function handleInspectAbility(ability_id: any) {
 /* Estilo específico para habilidades Pasivas (Metal/Pergamino) */
 .hq-badge-passive {
   /* degradado dorado más sutil y apagado, tirando a ocre/arena */
-  background: linear-gradient(135deg, #d7ccc8 0%, #a1887f 100%) !important; 
-  
+  background: linear-gradient(135deg, #d7ccc8 0%, #a1887f 100%) !important;
+
   /* Borde dorado envejecido con un tono más pálido */
-  border-left: 2px solid #8d6e63; 
+  border-left: 2px solid #8d6e63;
   border-top: 2px solid #8d6e63;
-  
+
   /* Sombra interna sutil */
-  box-shadow: inset 0 0 10px rgba(141, 110, 99, 0.2), -2px -2px 10px rgba(0, 0, 0, 0.5); 
+  box-shadow:
+    inset 0 0 10px rgba(141, 110, 99, 0.2),
+    -2px -2px 10px rgba(0, 0, 0, 0.5);
 }
 
 /* Texto y icono para el badge pasivo dorado apagado */

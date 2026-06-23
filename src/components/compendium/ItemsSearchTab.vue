@@ -6,23 +6,26 @@
       variant="flat"
       class="hq-item-card border-thin rounded-xl overflow-hidden position-relative d-flex flex-column"
       @click="handleInspectItem(item.id)"
-      >
+    >
       <div class="hq-navbar-noise"></div>
 
       <div class="hq-item-image-wrapper position-relative">
-        
-        <div 
+        <div
           v-if="item.type === 'consumable' || item.slot"
           class="hq-item-floating-badge px-3 py-1 d-flex align-center"
-          :style="{ background: getBadgeStyle(item).bg, borderTop: getBadgeStyle(item).border, borderLeft: getBadgeStyle(item).border }"
+          :style="{
+            background: getBadgeStyle(item).bg,
+            borderTop: getBadgeStyle(item).border,
+            borderLeft: getBadgeStyle(item).border
+          }"
         >
-          <VIcon 
-            :icon="getBadgeStyle(item).icon" 
-            size="13" 
+          <VIcon
+            :icon="getBadgeStyle(item).icon"
+            size="13"
             class="me-1"
             :color="getBadgeStyle(item).iconColor"
           />
-          <span 
+          <span
             class="text-xxs font-weight-black tracking-wider"
             :style="{ color: getBadgeStyle(item).textColor }"
           >
@@ -30,7 +33,12 @@
           </span>
         </div>
 
-        <VImg :src="item.img || '/placeholder-item.png'" aspect-ratio="1/1" cover class="hq-item-image">
+        <VImg
+          :src="item.img || '/placeholder-item.png'"
+          aspect-ratio="1/1"
+          cover
+          class="hq-item-image"
+        >
           <template #placeholder>
             <div class="d-flex align-center justify-center fill-height bg-grey-darken-4">
               <VProgressCircular indeterminate color="primary" size="32" />
@@ -41,26 +49,74 @@
       </div>
 
       <div class="hq-item-content pa-3 d-flex flex-column flex-grow-1 justify-center">
-        <h3 class="hq-item-title font-weight-black text-uppercase text-center mb-1 text-truncate">
+        <h3
+          class="hq-item-title font-weight-black text-uppercase text-center mb-1 text-truncate"
+        >
           {{ item.name }}
         </h3>
 
         <div class="hq-item-mini-stats d-flex justify-center gap-x-1 flex-wrap">
-          <span v-if="item.hp_mod" class="text-xxs font-weight-bold" :class="item.hp_mod > 0 ? 'text-green-lighten-1' : 'text-red-lighten-1'">❤️{{ item.hp_mod > 0 ? '+' : '' }}{{ item.hp_mod }}</span>
-          <span v-if="item.atk_mod" class="text-xxs font-weight-bold" :class="item.atk_mod > 0 ? 'text-green-lighten-1' : 'text-red-lighten-1'">⚔️{{ item.atk_mod > 0 ? '+' : '' }}{{ item.atk_mod }}</span>
-          <span v-if="item.def_mod" class="text-xxs font-weight-bold" :class="item.def_mod > 0 ? 'text-green-lighten-1' : 'text-red-lighten-1'">🛡️{{ item.def_mod > 0 ? '+' : '' }}{{ item.def_mod }}</span>
-          <span v-if="item.mp_mod" class="text-xxs font-weight-bold" :class="item.mp_mod > 0 ? 'text-green-lighten-1' : 'text-red-lighten-1'">✨{{ item.mp_mod > 0 ? '+' : '' }}{{ item.mp_mod }}</span>
-          <span v-if="item.mov_mod" class="text-xxs font-weight-bold" :class="item.mov_mod > 0 ? 'text-green-lighten-1' : 'text-red-lighten-1'">💨{{ item.mov_mod > 0 ? '+' : '' }}{{ item.mov_mod }}</span>
-          
-          <span v-if="!item.hp_mod && !item.atk_mod && !item.def_mod && !item.mp_mod && !item.mov_mod" class="text-xxs text-disabled font-weight-medium">Sin atributos</span>
+          <span
+            v-if="item.hp_mod"
+            class="text-xxs font-weight-bold"
+            :class="item.hp_mod > 0 ? 'text-green-lighten-1' : 'text-red-lighten-1'"
+          >
+            ❤️{{ item.hp_mod > 0 ? '+' : '' }}{{ item.hp_mod }}
+          </span>
+          <span
+            v-if="item.atk_mod"
+            class="text-xxs font-weight-bold"
+            :class="item.atk_mod > 0 ? 'text-green-lighten-1' : 'text-red-lighten-1'"
+          >
+            ⚔️{{ item.atk_mod > 0 ? '+' : '' }}{{ item.atk_mod }}
+          </span>
+          <span
+            v-if="item.def_mod"
+            class="text-xxs font-weight-bold"
+            :class="item.def_mod > 0 ? 'text-green-lighten-1' : 'text-red-lighten-1'"
+          >
+            🛡️{{ item.def_mod > 0 ? '+' : '' }}{{ item.def_mod }}
+          </span>
+          <span
+            v-if="item.mp_mod"
+            class="text-xxs font-weight-bold"
+            :class="item.mp_mod > 0 ? 'text-green-lighten-1' : 'text-red-lighten-1'"
+          >
+            ✨{{ item.mp_mod > 0 ? '+' : '' }}{{ item.mp_mod }}
+          </span>
+          <span
+            v-if="item.mov_mod"
+            class="text-xxs font-weight-bold"
+            :class="item.mov_mod > 0 ? 'text-green-lighten-1' : 'text-red-lighten-1'"
+          >
+            💨{{ item.mov_mod > 0 ? '+' : '' }}{{ item.mov_mod }}
+          </span>
+
+          <span
+            v-if="
+              !item.hp_mod &&
+              !item.atk_mod &&
+              !item.def_mod &&
+              !item.mp_mod &&
+              !item.mov_mod
+            "
+            class="text-xxs text-disabled font-weight-medium"
+          >
+            Sin atributos
+          </span>
         </div>
       </div>
     </VCard>
   </div>
-  <VDialog v-model="isDetailsDialogOpen" max-width="900px" width="auto" transition="dialog-bottom-transition">
-    <ItemInfoDialog 
+  <VDialog
+    v-model="isDetailsDialogOpen"
+    max-width="900px"
+    width="auto"
+    transition="dialog-bottom-transition"
+  >
+    <ItemInfoDialog
       v-if="itemSelected"
-      :itemId="itemSelected" 
+      :itemId="itemSelected"
       @close="isDetailsDialogOpen = false"
     />
   </VDialog>
@@ -91,7 +147,7 @@ const slotMapping: Record<string, { text: string }> = {
   talisman: { text: 'Talismán' },
   weapon_1h: { text: 'Arma 1M' },
   weapon_2h: { text: 'Arma 2M' },
-  shield: { text: 'Escudo' },
+  shield: { text: 'Escudo' }
 }
 
 const getSlotBadge = (slot: string | null) => {
@@ -109,9 +165,9 @@ const getBadgeStyle = (item: any) => {
       textColor: '#ffffff'
     }
   }
-  
+
   // Si es equipamiento, derivamos iconos y colores según el slot
-  const slot = item.slot || '';
+  const slot = item.slot || ''
   if (slot.includes('weapon')) {
     return {
       bg: 'linear-gradient(90deg, #b71c1c 0%, #c62828 100%)', // Rojo arma
@@ -137,7 +193,7 @@ const getBadgeStyle = (item: any) => {
       textColor: '#ffffff'
     }
   }
-  
+
   // Por defecto (botas, cabeza, brazales...) un bronce/acero neutro elegante
   return {
     bg: 'linear-gradient(90deg, #263238 0%, #37474f 100%)',
@@ -150,8 +206,12 @@ const getBadgeStyle = (item: any) => {
 </script>
 
 <style scoped>
-.text-xxs { font-size: 0.65rem !important; }
-.gap-x-1 { column-gap: 6px !important; }
+.text-xxs {
+  font-size: 0.65rem !important;
+}
+.gap-x-1 {
+  column-gap: 6px !important;
+}
 
 /* 🧙‍♂️ Rejilla elástica unificada */
 .hq-compendium-grid {
@@ -162,7 +222,11 @@ const getBadgeStyle = (item: any) => {
 
 /* ── 🎴 TARJETA DE OBJETO ── */
 .hq-item-card {
-  background: linear-gradient(180deg, rgba(15, 20, 32, 0.95) 0%, rgba(5, 6, 8, 1) 100%) !important;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 20, 32, 0.95) 0%,
+    rgba(5, 6, 8, 1) 100%
+  ) !important;
   border: 1px solid rgba(255, 255, 255, 0.05) !important;
   transition: all 0.3s ease;
 }
@@ -257,7 +321,7 @@ const getBadgeStyle = (item: any) => {
 @media (max-height: 480px) and (orientation: landscape) {
   .hq-compendium-grid {
     /* Forzamos 4 columnas en horizontal para que mantengan la proporción compacta */
-    grid-template-columns: repeat(4, 1fr) !important; 
+    grid-template-columns: repeat(4, 1fr) !important;
     gap: 12px;
   }
   .hq-item-title {

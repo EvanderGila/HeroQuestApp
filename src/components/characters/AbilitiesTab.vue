@@ -1,10 +1,11 @@
 <template>
   <div v-if="hasAbilities" class="d-flex flex-column gap-y-4">
-    
     <!-- 🧬 SECCIÓN: RASGOS DE RAZA -->
     <div v-if="raceAbilities.length > 0" class="mb-4">
       <div class="hq-section-header mb-3">
-        <span class="text-uppercase tracking-widest font-weight-bold text-caption text-primary">
+        <span
+          class="text-uppercase tracking-widest font-weight-bold text-caption text-primary"
+        >
           Rasgos de Raza
         </span>
         <span class="text-caption text-disabled ms-1 font-weight-medium">
@@ -14,40 +15,44 @@
 
       <VRow dense>
         <VCol cols="12" v-for="ra in raceAbilities" :key="ra.abilities.id" class="pa-1">
-          <VCard 
-            variant="outlined" 
+          <VCard
+            variant="outlined"
             class="pa-3 rounded-lg hq-ability-card transition-all"
             :class="[
-              isLevelUnlocked(ra.required_lvl) 
-                ? `unlocked-card is-${ra.abilities.type}` 
+              isLevelUnlocked(ra.required_lvl)
+                ? `unlocked-card is-${ra.abilities.type}`
                 : 'locked-card'
             ]"
           >
             <div class="d-flex align-start gap-x-3">
               <!-- Avatar de la habilidad 1:1 -->
-              <VAvatar 
-                size="44" 
-                rounded="lg" 
+              <VAvatar
+                size="44"
+                rounded="lg"
                 class="border-thin flex-shrink-0 bg-grey-lighten-3 hq-ability-avatar"
               >
-                <VImg 
-                  :src="ra.abilities.img || 'https://placehold.co/150?text=Skill'" 
-                  cover 
+                <VImg
+                  :src="ra.abilities.img || 'https://placehold.co/150?text=Skill'"
+                  cover
                   crossorigin="anonymous"
                 />
               </VAvatar>
 
               <!-- Cuerpo de la habilidad -->
               <div class="flex-grow-1 overflow-hidden">
-                <div class="d-flex align-center justify-space-between flex-wrap gap-1 mb-1">
-                  <span class="font-weight-black text-body-2 text-truncate lh-tight max-w-70">
+                <div
+                  class="d-flex align-center justify-space-between flex-wrap gap-1 mb-1"
+                >
+                  <span
+                    class="font-weight-black text-body-2 text-truncate lh-tight max-w-70"
+                  >
                     {{ ra.abilities.name }}
                   </span>
-                  
+
                   <div class="d-flex align-center gap-x-1.5">
                     <!-- Chip Activa / Pasiva Estilizado -->
-                    <VChip 
-                      size="x-small" 
+                    <VChip
+                      size="x-small"
                       variant="flat"
                       :color="ra.abilities.type === 'passive' ? 'success' : 'info'"
                       class="skill-type-chip px-2"
@@ -56,10 +61,10 @@
                     </VChip>
 
                     <!-- Candado de Bloqueo -->
-                    <VChip 
-                      v-if="!isLevelUnlocked(ra.required_lvl)" 
-                      size="x-small" 
-                      color="error" 
+                    <VChip
+                      v-if="!isLevelUnlocked(ra.required_lvl)"
+                      size="x-small"
+                      color="error"
                       variant="flat"
                       prepend-icon="mdi-lock"
                       class="font-weight-black px-2"
@@ -82,7 +87,9 @@
     <!-- ⚔️ SECCIÓN: TÉCNICAS DE CLASE -->
     <div v-if="classAbilities.length > 0">
       <div class="hq-section-header mb-3">
-        <span class="text-uppercase tracking-widest font-weight-bold text-caption text-primary">
+        <span
+          class="text-uppercase tracking-widest font-weight-bold text-caption text-primary"
+        >
           Técnicas de Clase
         </span>
         <span class="text-caption text-disabled ms-1 font-weight-medium">
@@ -92,40 +99,44 @@
 
       <VRow dense>
         <VCol cols="12" v-for="ca in classAbilities" :key="ca.abilities.id" class="pa-1">
-          <VCard 
-            variant="outlined" 
+          <VCard
+            variant="outlined"
             class="pa-3 rounded-lg hq-ability-card transition-all"
             :class="[
-              isLevelUnlocked(ca.required_lvl) 
-                ? `unlocked-card is-${ca.abilities.type}` 
+              isLevelUnlocked(ca.required_lvl)
+                ? `unlocked-card is-${ca.abilities.type}`
                 : 'locked-card'
             ]"
           >
             <div class="d-flex align-start gap-x-3">
               <!-- Avatar de la habilidad 1:1 -->
-              <VAvatar 
-                size="44" 
-                rounded="lg" 
+              <VAvatar
+                size="44"
+                rounded="lg"
                 class="border-thin flex-shrink-0 bg-grey-lighten-3 hq-ability-avatar"
               >
-                <VImg 
-                  :src="ca.abilities.img || 'https://placehold.co/150?text=Skill'" 
-                  cover 
+                <VImg
+                  :src="ca.abilities.img || 'https://placehold.co/150?text=Skill'"
+                  cover
                   crossorigin="anonymous"
                 />
               </VAvatar>
 
               <!-- Cuerpo de la habilidad -->
               <div class="flex-grow-1 overflow-hidden">
-                <div class="d-flex align-center justify-space-between flex-wrap gap-1 mb-1">
-                  <span class="font-weight-black text-body-2 text-truncate lh-tight max-w-70">
+                <div
+                  class="d-flex align-center justify-space-between flex-wrap gap-1 mb-1"
+                >
+                  <span
+                    class="font-weight-black text-body-2 text-truncate lh-tight max-w-70"
+                  >
                     {{ ca.abilities.name }}
                   </span>
-                  
+
                   <div class="d-flex align-center gap-x-1.5">
                     <!-- Chip Activa / Pasiva Estilizado -->
-                    <VChip 
-                      size="x-small" 
+                    <VChip
+                      size="x-small"
                       variant="flat"
                       :color="ca.abilities.type === 'passive' ? 'success' : 'info'"
                       class="skill-type-chip px-2"
@@ -134,20 +145,20 @@
                     </VChip>
 
                     <!-- Candado de Bloqueo -->
-                    <VChip 
-                      v-if="!isLevelUnlocked(ca.required_lvl)" 
-                      size="x-small" 
-                      color="error" 
+                    <VChip
+                      v-if="!isLevelUnlocked(ca.required_lvl)"
+                      size="x-small"
+                      color="error"
                       variant="flat"
                       prepend-icon="mdi-lock"
                       class="font-weight-black px-2 ml-2"
                     >
                       Nv. {{ ca.required_lvl }}
                     </VChip>
-                    <VChip 
-                      v-else 
-                      size="x-small" 
-                      color="warning" 
+                    <VChip
+                      v-else
+                      size="x-small"
+                      color="warning"
                       variant="flat"
                       prepend-icon="mdi-lock-open"
                       class="font-weight-black px-2 ml-2"
@@ -166,7 +177,6 @@
         </VCol>
       </VRow>
     </div>
-
   </div>
 
   <!-- Estado vacío -->
@@ -200,11 +210,21 @@ function isLevelUnlocked(requiredLvl: number): boolean {
 </script>
 
 <style scoped>
-.gap-y-4 { row-gap: 16px !important; }
-.gap-x-3 { column-gap: 12px !important; }
-.lh-tight { line-height: 1.25; }
-.max-w-70 { max-width: 70%; }
-.transition-all { transition: all 0.25s ease-in-out; }
+.gap-y-4 {
+  row-gap: 16px !important;
+}
+.gap-x-3 {
+  column-gap: 12px !important;
+}
+.lh-tight {
+  line-height: 1.25;
+}
+.max-w-70 {
+  max-width: 70%;
+}
+.transition-all {
+  transition: all 0.25s ease-in-out;
+}
 
 .hq-mini-desc {
   font-size: 0.75rem;
@@ -264,7 +284,7 @@ function isLevelUnlocked(requiredLvl: number): boolean {
 /* 🏷️ CHIP DE TIPO DE HABILIDAD (Suave, sin negrita) */
 .skill-type-chip {
   font-size: 0.65rem !important;
-  font-weight: 400 !important;   /* Tipografía fina/regular, elimina el bold gordo */
+  font-weight: 400 !important; /* Tipografía fina/regular, elimina el bold gordo */
   letter-spacing: 0.02em;
   height: 18px !important;
   opacity: 0.9;

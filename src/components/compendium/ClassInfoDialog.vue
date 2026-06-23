@@ -3,7 +3,11 @@
     <VProgressCircular indeterminate color="primary" size="64" />
   </div>
 
-  <VCard v-else variant="flat" class="hq-detail-card overflow-hidden rounded-xl position-relative">
+  <VCard
+    v-else
+    variant="flat"
+    class="hq-detail-card overflow-hidden rounded-xl position-relative"
+  >
     <VBtn
       icon="mdi-close"
       variant="text"
@@ -24,15 +28,19 @@
             class="hq-detail-image"
           >
             <template #placeholder>
-              <div class="d-flex align-center justify-center fill-height bg-grey-darken-4">
+              <div
+                class="d-flex align-center justify-center fill-height bg-grey-darken-4"
+              >
                 <VProgressCircular indeterminate color="primary" size="48" />
               </div>
             </template>
           </VImg>
           <div class="hq-detail-overlay"></div>
-          
+
           <div class="hq-image-floating-title pa-4">
-            <span class="text-uppercase tracking-widest text-xxs font-weight-bold text-amber">
+            <span
+              class="text-uppercase tracking-widest text-xxs font-weight-bold text-amber"
+            >
               Compendio de Clases
             </span>
             <h2 class="text-h4 font-weight-black text-white text-uppercase tracking-wide">
@@ -41,60 +49,68 @@
           </div>
         </VCol>
 
-        <VCol cols="12" sm="7" class="pa-4 pa-md-6 d-flex flex-column gap-y-4 hq-info-column">
-          
+        <VCol
+          cols="12"
+          sm="7"
+          class="pa-4 pa-md-6 d-flex flex-column gap-y-4 hq-info-column"
+        >
           <div class="hq-detail-section border-thin pa-4 rounded-xl">
-  <div class="hq-section-header mb-3">
-    <span class="text-uppercase tracking-widest font-weight-bold text-xxs text-warning">
-      📊 Modificadores de la Clase
-    </span>
-  </div>
-  
-  <div class="d-flex flex-column gap-y-1">
-    <div 
-      v-for="stat in displayedModifiers" 
-      :key="stat.label" 
-      class="d-flex align-center justify-space-between bg-hq-row px-3 py-1 rounded-lg border-thin transition-all hq-stat-row"
-    >
-      <div class="d-flex align-center gap-x-2">
-        <VIcon :icon="stat.icon" :color="stat.color" size="15" />
-        <span class="text-caption text-grey-lighten-1 font-weight-medium">{{ stat.label }}</span>
-      </div>
-      
-      <span 
-        class="text-caption font-weight-black"
-        :class="{
-          'text-green-lighten-1': stat.rawVal > 0,
-          'text-red-lighten-1': stat.rawVal < 0,
-          'text-white': stat.rawVal === 0
-        }"
-      >
-        {{ stat.value }}
-      </span>
-    </div>
-  </div>
-</div>
+            <div class="hq-section-header mb-3">
+              <span
+                class="text-uppercase tracking-widest font-weight-bold text-xxs text-warning"
+              >
+                📊 Modificadores de la Clase
+              </span>
+            </div>
+
+            <div class="d-flex flex-column gap-y-1">
+              <div
+                v-for="stat in displayedModifiers"
+                :key="stat.label"
+                class="d-flex align-center justify-space-between bg-hq-row px-3 py-1 rounded-lg border-thin transition-all hq-stat-row"
+              >
+                <div class="d-flex align-center gap-x-2">
+                  <VIcon :icon="stat.icon" :color="stat.color" size="15" />
+                  <span class="text-caption text-grey-lighten-1 font-weight-medium">
+                    {{ stat.label }}
+                  </span>
+                </div>
+
+                <span
+                  class="text-caption font-weight-black"
+                  :class="{
+                    'text-green-lighten-1': stat.rawVal > 0,
+                    'text-red-lighten-1': stat.rawVal < 0,
+                    'text-white': stat.rawVal === 0
+                  }"
+                >
+                  {{ stat.value }}
+                </span>
+              </div>
+            </div>
+          </div>
 
           <div class="hq-tabs-container border-thin pa-3 rounded-xl">
-      <VTabs v-model="activeTab" color="primary" density="compact" class="mb-2">
-        <VTab value="abilities" class="text-caption font-weight-bold">Habilidades</VTab>
-        <VTab value="spells" class="text-caption font-weight-bold">Hechizos</VTab>
-      </VTabs>
+            <VTabs v-model="activeTab" color="primary" density="compact" class="mb-2">
+              <VTab value="abilities" class="text-caption font-weight-bold">
+                Habilidades
+              </VTab>
+              <VTab value="spells" class="text-caption font-weight-bold">Hechizos</VTab>
+            </VTabs>
 
-      <VWindow v-model="activeTab">
-        <VWindowItem value="abilities">
-            <div class="hq-scrollable-tab-content">
-          <AbilitiesTab :character="mockCharacterForClass" />
+            <VWindow v-model="activeTab">
+              <VWindowItem value="abilities">
+                <div class="hq-scrollable-tab-content">
+                  <AbilitiesTab :character="mockCharacterForClass" />
+                </div>
+              </VWindowItem>
+              <VWindowItem value="spells">
+                <div class="hq-scrollable-tab-content">
+                  <SpellsTab :character="mockCharacterForClass" :one-col="true" />
+                </div>
+              </VWindowItem>
+            </VWindow>
           </div>
-        </VWindowItem>
-        <VWindowItem value="spells">
-            <div class="hq-scrollable-tab-content">
-          <SpellsTab :character="mockCharacterForClass" :one-col="true"/>
-          </div>
-        </VWindowItem>
-      </VWindow>
-      </div>
-
         </VCol>
       </VRow>
     </VCardText>
@@ -128,9 +144,9 @@ const mockCharacterForClass = computed<any>(() => {
 
 const displayedModifiers = computed(() => {
   if (!selectedClass.value) return []
-  
+
   const c = selectedClass.value
-  
+
   // Helper para formatear de forma segura el texto (ej: 2 -> "+2", 0 -> "0")
   const formatMod = (val: number | null) => {
     if (val === null || val === 0) return '0'
@@ -138,11 +154,41 @@ const displayedModifiers = computed(() => {
   }
 
   return [
-    { label: 'Modificador de Cuerpo (Vida)', value: formatMod(c.hp_mod), rawVal: c.hp_mod || 0, icon: 'mdi-heart', color: 'red-lighten-1' },
-    { label: 'Modificador de Ataque', value: formatMod(c.atk_mod), rawVal: c.atk_mod || 0, icon: 'mdi-sword', color: 'orange-lighten-2' },
-    { label: 'Modificador de Defensa', value: formatMod(c.def_mod), rawVal: c.def_mod || 0, icon: 'mdi-shield', color: 'blue-lighten-2' },
-    { label: 'Modificador de Mente (Maná)', value: formatMod(c.mp_mod), rawVal: c.mp_mod || 0, icon: 'mdi-creation', color: 'cyan-lighten-2' },
-    { label: 'Modificador de Movimiento', value: formatMod(c.mov_mod), rawVal: c.mov_mod || 0, icon: 'mdi-shoe-print', color: 'green-lighten-2' },
+    {
+      label: 'Modificador de Cuerpo (Vida)',
+      value: formatMod(c.hp_mod),
+      rawVal: c.hp_mod || 0,
+      icon: 'mdi-heart',
+      color: 'red-lighten-1'
+    },
+    {
+      label: 'Modificador de Ataque',
+      value: formatMod(c.atk_mod),
+      rawVal: c.atk_mod || 0,
+      icon: 'mdi-sword',
+      color: 'orange-lighten-2'
+    },
+    {
+      label: 'Modificador de Defensa',
+      value: formatMod(c.def_mod),
+      rawVal: c.def_mod || 0,
+      icon: 'mdi-shield',
+      color: 'blue-lighten-2'
+    },
+    {
+      label: 'Modificador de Mente (Maná)',
+      value: formatMod(c.mp_mod),
+      rawVal: c.mp_mod || 0,
+      icon: 'mdi-creation',
+      color: 'cyan-lighten-2'
+    },
+    {
+      label: 'Modificador de Movimiento',
+      value: formatMod(c.mov_mod),
+      rawVal: c.mov_mod || 0,
+      icon: 'mdi-shoe-print',
+      color: 'green-lighten-2'
+    }
   ]
 })
 
@@ -150,15 +196,18 @@ onMounted(() => {
   fetchClassDetails(props.classId)
 })
 
-watch(() => props.classId, (newId) => { 
-  fetchClassDetails(newId) 
-})
+watch(
+  () => props.classId,
+  (newId) => {
+    fetchClassDetails(newId)
+  }
+)
 </script>
 
 <style scoped>
 .hq-tabs-container {
   /* Un gris "carbón" más profundo que el grey-darken-4 (#212121) */
-  background-color: #151515cb !important; 
+  background-color: #151515cb !important;
 }
 
 .bg-hq-row {
@@ -175,12 +224,24 @@ watch(() => props.classId, (newId) => {
   background: rgba(5, 7, 12, 1) !important;
 }
 
-.gap-y-1 { row-gap: 4px !important; }
-.gap-x-2 { column-gap: 8px !important; }
-.text-xxs { font-size: 0.65rem !important; }
-.gap-x-2 { column-gap: 8px !important; }
-.gap-y-1 { row-gap: 4px !important; }
-.gap-y-4 { row-gap: 16px !important; }
+.gap-y-1 {
+  row-gap: 4px !important;
+}
+.gap-x-2 {
+  column-gap: 8px !important;
+}
+.text-xxs {
+  font-size: 0.65rem !important;
+}
+.gap-x-2 {
+  column-gap: 8px !important;
+}
+.gap-y-1 {
+  row-gap: 4px !important;
+}
+.gap-y-4 {
+  row-gap: 16px !important;
+}
 
 /* ── ❌ BOTÓN CERRAR FLOTANTE ── */
 .hq-close-dialog-btn {
@@ -195,7 +256,12 @@ watch(() => props.classId, (newId) => {
 }
 
 .hq-close-dialog-btn:hover {
-  background: rgba(244, 67, 54, 0.2) !important; /* Destello sutil rojo al pasar el ratón */
+  background: rgba(
+    244,
+    67,
+    54,
+    0.2
+  ) !important; /* Destello sutil rojo al pasar el ratón */
   border-color: rgba(244, 67, 54, 0.4) !important;
   color: #fff !important;
 }
@@ -223,7 +289,7 @@ watch(() => props.classId, (newId) => {
 .hq-image-column {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 5 !important; 
+  aspect-ratio: 4 / 5 !important;
 }
 
 .hq-detail-image {
@@ -234,7 +300,12 @@ watch(() => props.classId, (newId) => {
 .hq-detail-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(9, 13, 22, 0) 60%, rgba(9, 13, 22, 0.9) 95%, rgba(9, 13, 22, 1) 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(9, 13, 22, 0) 60%,
+    rgba(9, 13, 22, 0.9) 95%,
+    rgba(9, 13, 22, 1) 100%
+  );
   z-index: 1;
 }
 
@@ -258,16 +329,21 @@ watch(() => props.classId, (newId) => {
 /* 📱 RESPONSIVE */
 @media (max-width: 599px) {
   .hq-image-column {
-    aspect-ratio: 16 / 9 !important; 
+    aspect-ratio: 16 / 9 !important;
   }
   .hq-detail-overlay {
-    background: linear-gradient(to bottom, rgba(9, 13, 22, 0) 20%, rgba(9, 13, 22, 0.85) 80%, rgba(9, 13, 22, 1) 100%) !important;
+    background: linear-gradient(
+      to bottom,
+      rgba(9, 13, 22, 0) 20%,
+      rgba(9, 13, 22, 0.85) 80%,
+      rgba(9, 13, 22, 1) 100%
+    ) !important;
   }
 }
 
 @media (max-height: 500px) and (orientation: landscape) {
   .hq-image-column {
-    aspect-ratio: 21 / 9 !important; 
+    aspect-ratio: 21 / 9 !important;
   }
 }
 

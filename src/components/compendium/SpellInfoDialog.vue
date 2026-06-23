@@ -1,12 +1,21 @@
 <template>
-  <div v-if="!selectedSpell" class="d-flex flex-column align-center justify-center pa-12 hq-spell-loading">
+  <div
+    v-if="!selectedSpell"
+    class="d-flex flex-column align-center justify-center pa-12 hq-spell-loading"
+  >
     <VProgressCircular indeterminate color="primary" size="48" class="mb-3" />
-    <span class="text-caption text-disabled font-weight-bold text-uppercase tracking-widest">
+    <span
+      class="text-caption text-disabled font-weight-bold text-uppercase tracking-widest"
+    >
       Consultando Códice Arcángel...
     </span>
   </div>
 
-  <VCard v-else variant="flat" class="hq-spell-card overflow-hidden rounded-xl position-relative">
+  <VCard
+    v-else
+    variant="flat"
+    class="hq-spell-card overflow-hidden rounded-xl position-relative"
+  >
     <VBtn
       icon="mdi-close"
       variant="text"
@@ -20,19 +29,20 @@
 
     <VCardText class="pa-4 pa-md-6">
       <div class="d-flex flex-column flex-sm-row gap-x-4 align-start">
-        
-        <VAvatar 
-          size="80" 
-          rounded="xl" 
+        <VAvatar
+          size="80"
+          rounded="xl"
           class="border-thin flex-shrink-0 bg-grey-darken-4 hq-spell-avatar mb-4 mb-sm-0 mx-auto mx-sm-0"
         >
-          <VImg 
-            :src="selectedSpell.img || 'https://placehold.co/150?text=Spell'" 
-            cover 
+          <VImg
+            :src="selectedSpell.img || 'https://placehold.co/150?text=Spell'"
+            cover
             crossorigin="anonymous"
           >
             <template #placeholder>
-              <div class="d-flex align-center justify-center fill-height bg-grey-darken-4">
+              <div
+                class="d-flex align-center justify-center fill-height bg-grey-darken-4"
+              >
                 <VProgressCircular indeterminate color="primary" size="24" />
               </div>
             </template>
@@ -40,8 +50,12 @@
         </VAvatar>
 
         <div class="flex-grow-1 w-100 text-center text-sm-left">
-          <div class="d-flex align-center justify-center justify-sm-start gap-x-2 mb-1 flex-wrap">
-            <span class="text-uppercase tracking-widest text-xxs font-weight-bold text-cyan-lighten-2">
+          <div
+            class="d-flex align-center justify-center justify-sm-start gap-x-2 mb-1 flex-wrap"
+          >
+            <span
+              class="text-uppercase tracking-widest text-xxs font-weight-bold text-cyan-lighten-2"
+            >
               Detalle de Hechizo
             </span>
             <span class="text-disabled text-xxs">—</span>
@@ -55,14 +69,25 @@
             </VChip>
           </div>
 
-          <h2 class="text-h5 font-weight-black text-white text-uppercase tracking-wide mb-2">
+          <h2
+            class="text-h5 font-weight-black text-white text-uppercase tracking-wide mb-2"
+          >
             {{ selectedSpell.name }}
           </h2>
 
-          <div v-if="provenanceInfo" class="hq-provenance-tag d-inline-flex align-center px-2 py-1 rounded bg-hq-row border-thin mb-3">
-            <VIcon :icon="provenanceInfo.icon" size="13" :color="provenanceInfo.color" class="me-1" />
+          <div
+            v-if="provenanceInfo"
+            class="hq-provenance-tag d-inline-flex align-center px-2 py-1 rounded bg-hq-row border-thin mb-3"
+          >
+            <VIcon
+              :icon="provenanceInfo.icon"
+              size="13"
+              :color="provenanceInfo.color"
+              class="me-1"
+            />
             <span class="text-xxs font-weight-bold text-grey-lighten-1">
-              Req. Nv. {{ provenanceInfo.lvl }} por <span class="text-white">{{ provenanceInfo.name }}</span>
+              Req. Nv. {{ provenanceInfo.lvl }} por
+              <span class="text-white">{{ provenanceInfo.name }}</span>
             </span>
           </div>
         </div>
@@ -70,12 +95,17 @@
 
       <div class="hq-spell-desc-section mt-4 border-thin pa-4 rounded-xl">
         <div class="hq-section-header mb-2">
-          <span class="text-uppercase tracking-widest font-weight-bold text-xxs text-disabled">
+          <span
+            class="text-uppercase tracking-widest font-weight-bold text-xxs text-disabled"
+          >
             Efecto del Conjuro
           </span>
         </div>
         <p class="hq-desc-text font-italic mb-0 text-medium-emphasis text-justify">
-          "{{ selectedSpell.description || 'Este hechizo canaliza flujos de energía mística no documentados formalmente.' }}"
+          "{{
+            selectedSpell.description ||
+            'Este hechizo canaliza flujos de energía mística no documentados formalmente.'
+          }}"
         </p>
       </div>
     </VCardText>
@@ -115,16 +145,27 @@ onMounted(() => {
   fetchSpellDetails(props.spellId)
 })
 
-watch(() => props.spellId, (newId) => {
-  fetchSpellDetails(newId)
-})
+watch(
+  () => props.spellId,
+  (newId) => {
+    fetchSpellDetails(newId)
+  }
+)
 </script>
 
 <style scoped>
-.text-xxs { font-size: 0.65rem !important; }
-.gap-x-2 { column-gap: 8px !important; }
-.gap-x-4 { column-gap: 16px !important; }
-.tracking-widest { letter-spacing: 0.12em !important; }
+.text-xxs {
+  font-size: 0.65rem !important;
+}
+.gap-x-2 {
+  column-gap: 8px !important;
+}
+.gap-x-4 {
+  column-gap: 16px !important;
+}
+.tracking-widest {
+  letter-spacing: 0.12em !important;
+}
 
 /* ── ❌ BOTÓN CERRAR FLOTANTE ── */
 .hq-close-btn {

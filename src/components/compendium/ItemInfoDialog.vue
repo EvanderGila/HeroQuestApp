@@ -1,14 +1,19 @@
 <template>
-  <div v-if="!selectedItem" class="d-flex flex-column align-center justify-center pa-12 hq-item-loading">
+  <div
+    v-if="!selectedItem"
+    class="d-flex flex-column align-center justify-center pa-12 hq-item-loading"
+  >
     <VProgressCircular indeterminate color="primary" size="48" class="mb-3" />
-    <span class="text-caption text-disabled font-weight-bold text-uppercase tracking-widest">
+    <span
+      class="text-caption text-disabled font-weight-bold text-uppercase tracking-widest"
+    >
       Identificando Objeto...
     </span>
   </div>
 
-  <VCard 
-    v-else 
-    variant="flat" 
+  <VCard
+    v-else
+    variant="flat"
     class="hq-item-card overflow-hidden rounded-xl position-relative"
     :class="{ 'hq-item-relic': selectedItem.reliq }"
   >
@@ -25,20 +30,21 @@
 
     <VCardText class="pa-4 pa-md-6">
       <div class="d-flex flex-column flex-sm-row gap-x-4 align-start">
-        
-        <VAvatar 
-          size="80" 
-          rounded="xl" 
+        <VAvatar
+          size="80"
+          rounded="xl"
           class="border-thin flex-shrink-0 bg-grey-darken-4 hq-item-avatar mb-4 mb-sm-0 mx-auto mx-sm-0"
           :class="selectedItem.reliq ? 'border-amber-lighten-1' : ''"
         >
-          <VImg 
-            :src="selectedItem.img || 'https://placehold.co/150?text=Item'" 
-            cover 
+          <VImg
+            :src="selectedItem.img || 'https://placehold.co/150?text=Item'"
+            cover
             crossorigin="anonymous"
           >
             <template #placeholder>
-              <div class="d-flex align-center justify-center fill-height bg-grey-darken-4">
+              <div
+                class="d-flex align-center justify-center fill-height bg-grey-darken-4"
+              >
                 <VProgressCircular indeterminate color="primary" size="24" />
               </div>
             </template>
@@ -46,15 +52,17 @@
         </VAvatar>
 
         <div class="flex-grow-1 w-100 text-center text-sm-left">
-          <div class="d-flex align-center justify-center justify-sm-start gap-x-2 mb-1 flex-wrap">
-            <span 
+          <div
+            class="d-flex align-center justify-center justify-sm-start gap-x-2 mb-1 flex-wrap"
+          >
+            <span
               class="text-uppercase tracking-widest text-xxs font-weight-bold"
               :class="selectedItem.reliq ? 'text-amber-lighten-1' : 'text-grey-lighten-1'"
             >
               {{ selectedItem.reliq ? '👑 Reliquia Ancestral' : 'Inventario de Campaña' }}
             </span>
             <span class="text-disabled text-xxs">—</span>
-            
+
             <VChip
               size="x-small"
               :color="typeAndSlotInfo.color"
@@ -65,7 +73,7 @@
             </VChip>
           </div>
 
-          <h2 
+          <h2
             class="text-h5 font-weight-black text-uppercase tracking-wide mb-2"
             :class="selectedItem.reliq ? 'text-amber' : 'text-white'"
           >
@@ -76,16 +84,27 @@
 
       <div v-if="hasStats" class="hq-item-stats-section mt-4 border-thin pa-4 rounded-xl">
         <div class="hq-section-header mb-3">
-          <span class="text-uppercase tracking-widest font-weight-bold text-xxs text-disabled">
+          <span
+            class="text-uppercase tracking-widest font-weight-bold text-xxs text-disabled"
+          >
             Modificadores de Atributo
           </span>
         </div>
-        
+
         <div class="d-flex flex-wrap gap-2">
-          <div v-for="stat in statList" :key="stat.label" class="hq-stat-badge d-flex align-center px-2 py-1 rounded bg-hq-row border-thin">
+          <div
+            v-for="stat in statList"
+            :key="stat.label"
+            class="hq-stat-badge d-flex align-center px-2 py-1 rounded bg-hq-row border-thin"
+          >
             <VIcon :icon="stat.icon" size="14" :color="stat.color" class="me-1" />
-            <span class="text-xxs font-weight-medium text-grey-lighten-1 me-1">{{ stat.label }}:</span>
-            <span class="text-xxs font-weight-bold" :class="stat.value > 0 ? 'text-green' : 'text-red'">
+            <span class="text-xxs font-weight-medium text-grey-lighten-1 me-1">
+              {{ stat.label }}:
+            </span>
+            <span
+              class="text-xxs font-weight-bold"
+              :class="stat.value > 0 ? 'text-green' : 'text-red'"
+            >
               {{ stat.value > 0 ? '+' : '' }}{{ stat.value }}
             </span>
           </div>
@@ -94,12 +113,17 @@
 
       <div class="hq-item-desc-section mt-4 border-thin pa-4 rounded-xl">
         <div class="hq-section-header mb-2">
-          <span class="text-uppercase tracking-widest font-weight-bold text-xxs text-disabled">
+          <span
+            class="text-uppercase tracking-widest font-weight-bold text-xxs text-disabled"
+          >
             Propiedades del Objeto
           </span>
         </div>
         <p class="hq-desc-text font-italic mb-0 text-medium-emphasis text-justify">
-          "{{ selectedItem.effect?.description || 'Un objeto misterioso cuyos efectos completos solo se revelarán al ser utilizado en batalla.' }}"
+          "{{
+            selectedItem.effect?.description ||
+            'Un objeto misterioso cuyos efectos completos solo se revelarán al ser utilizado en batalla.'
+          }}"
         </p>
       </div>
     </VCardText>
@@ -161,34 +185,72 @@ const hasStats = computed(() => {
 // Lista procesada de estadísticas para renderizar de forma iterativa
 const statList = computed(() => {
   if (!selectedItem.value) return []
-  
+
   const stats = [
-    { label: 'VIT', value: selectedItem.value.hp_mod, icon: 'mdi-heart', color: 'red-lighten-1' },
-    { label: 'ATK', value: selectedItem.value.atk_mod, icon: 'mdi-sword', color: 'orange-lighten-1' },
-    { label: 'DEF', value: selectedItem.value.def_mod, icon: 'mdi-shield-half-full', color: 'blue-lighten-1' },
-    { label: 'PM', value: selectedItem.value.mp_mod, icon: 'mdi-water', color: 'cyan-lighten-1' },
-    { label: 'MOV', value: selectedItem.value.mov_mod, icon: 'mdi-shoe-print', color: 'green-lighten-1' },
+    {
+      label: 'VIT',
+      value: selectedItem.value.hp_mod,
+      icon: 'mdi-heart',
+      color: 'red-lighten-1'
+    },
+    {
+      label: 'ATK',
+      value: selectedItem.value.atk_mod,
+      icon: 'mdi-sword',
+      color: 'orange-lighten-1'
+    },
+    {
+      label: 'DEF',
+      value: selectedItem.value.def_mod,
+      icon: 'mdi-shield-half-full',
+      color: 'blue-lighten-1'
+    },
+    {
+      label: 'PM',
+      value: selectedItem.value.mp_mod,
+      icon: 'mdi-water',
+      color: 'cyan-lighten-1'
+    },
+    {
+      label: 'MOV',
+      value: selectedItem.value.mov_mod,
+      icon: 'mdi-shoe-print',
+      color: 'green-lighten-1'
+    }
   ]
 
   // Solo devolvemos los modificadores que no sean 0
-  return stats.filter(stat => stat.value !== 0)
+  return stats.filter((stat) => stat.value !== 0)
 })
 
 onMounted(() => {
   fetchItemDetails(props.itemId)
 })
 
-watch(() => props.itemId, (newId) => {
-  fetchItemDetails(newId)
-})
+watch(
+  () => props.itemId,
+  (newId) => {
+    fetchItemDetails(newId)
+  }
+)
 </script>
 
 <style scoped>
-.text-xxs { font-size: 0.65rem !important; }
-.gap-2 { gap: 8px !important; }
-.gap-x-2 { column-gap: 8px !important; }
-.gap-x-4 { column-gap: 16px !important; }
-.tracking-widest { letter-spacing: 0.12em !important; }
+.text-xxs {
+  font-size: 0.65rem !important;
+}
+.gap-2 {
+  gap: 8px !important;
+}
+.gap-x-2 {
+  column-gap: 8px !important;
+}
+.gap-x-4 {
+  column-gap: 16px !important;
+}
+.tracking-widest {
+  letter-spacing: 0.12em !important;
+}
 
 /* ── ❌ BOTÓN CERRAR FLOTANTE ── */
 .hq-close-btn {
@@ -219,7 +281,9 @@ watch(() => props.itemId, (newId) => {
 /* ✨ Brillo dorado sutil si es Reliquia */
 .hq-item-relic {
   border: 1px solid rgba(255, 193, 7, 0.3) !important;
-  box-shadow: 0 0 30px rgba(255, 193, 7, 0.15), 0 20px 50px rgba(0, 0, 0, 0.8) !important;
+  box-shadow:
+    0 0 30px rgba(255, 193, 7, 0.15),
+    0 20px 50px rgba(0, 0, 0, 0.8) !important;
 }
 
 .hq-item-loading {

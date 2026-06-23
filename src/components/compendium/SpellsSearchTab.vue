@@ -6,11 +6,10 @@
       variant="flat"
       class="hq-spell-card border-thin rounded-xl overflow-hidden position-relative d-flex flex-column"
       @click="handleInspectSpell(spell.id)"
-      >
+    >
       <div class="hq-navbar-noise"></div>
 
       <div class="hq-spell-image-wrapper position-relative">
-        
         <div class="hq-mana-floating-badge px-2 py-0.5 d-flex align-center">
           <VIcon icon="mdi-creation" size="12" class="me-1 text-cyan-lighten-2" />
           <span class="text-xs font-weight-black text-white me-1">
@@ -35,16 +34,23 @@
       </div>
 
       <div class="hq-spell-content pa-3 d-flex flex-column flex-grow-1 justify-center">
-        <h3 class="hq-spell-title font-weight-black text-uppercase text-center text-truncate">
+        <h3
+          class="hq-spell-title font-weight-black text-uppercase text-center text-truncate"
+        >
           {{ spell.name }}
         </h3>
       </div>
     </VCard>
   </div>
-  <VDialog v-model="isDetailsDialogOpen" max-width="900px" width="auto" transition="dialog-bottom-transition">
-    <SpellInfoDialog 
+  <VDialog
+    v-model="isDetailsDialogOpen"
+    max-width="900px"
+    width="auto"
+    transition="dialog-bottom-transition"
+  >
+    <SpellInfoDialog
       v-if="spellSelected"
-      :spellId="spellSelected" 
+      :spellId="spellSelected"
       @close="isDetailsDialogOpen = false"
     />
   </VDialog>
@@ -67,7 +73,9 @@ const compStore = useCompendiumStore()
 </script>
 
 <style scoped>
-.text-xxs { font-size: 0.62rem !important; }
+.text-xxs {
+  font-size: 0.62rem !important;
+}
 
 /* Rejilla elástica */
 .hq-compendium-grid {
@@ -78,26 +86,32 @@ const compStore = useCompendiumStore()
 
 /* ── 🎴 TARJETA DE HECHIZO ── */
 .hq-spell-card {
-  background: linear-gradient(180deg, rgba(15, 20, 32, 0.95) 0%, rgba(5, 6, 8, 1) 100%) !important;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 20, 32, 0.95) 0%,
+    rgba(5, 6, 8, 1) 100%
+  ) !important;
   border: 1px solid rgba(255, 255, 255, 0.05) !important;
   transition: all 0.3s ease;
 }
 
 .hq-spell-card:hover {
   border-color: rgba(186, 104, 200, 0.4) !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(186, 104, 200, 0.15) !important;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.5),
+    0 0 15px rgba(186, 104, 200, 0.15) !important;
 }
 
 /* ── ⚡ BADGE DE MANÁ FLOTANTE (REPOSICIONADO) ── */
 .hq-mana-floating-badge {
   position: absolute;
-  bottom: 0;   /* 🚀 Cambiado de top a bottom */
+  bottom: 0; /* 🚀 Cambiado de top a bottom */
   right: 0;
   z-index: 3;
   background: linear-gradient(90deg, #4a148c 0%, #311b92 100%) !important;
   box-shadow: -2px -2px 8px rgba(0, 0, 0, 0.5);
   /* Redondeamos la esquina superior izquierda para suavizar la transición con la foto */
-  border-top-left-radius: 8px; 
+  border-top-left-radius: 8px;
   border-left: 1px solid rgba(0, 229, 255, 0.25);
   border-top: 1px solid rgba(0, 229, 255, 0.25);
   backdrop-filter: blur(4px);

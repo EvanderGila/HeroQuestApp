@@ -2,8 +2,12 @@
   <div class="pa-2 pa-sm-3">
     <!-- Encabezado compacto -->
     <div class="text-center mb-4">
-      <h3 class="text-h6 font-weight-black text-uppercase text-high-emphasis lh-tight">Bautiza a tu Héroe</h3>
-      <p class="text-caption text-medium-emphasis mb-0">Dale un nombre legendario y elige su aspecto visual.</p>
+      <h3 class="text-h6 font-weight-black text-uppercase text-high-emphasis lh-tight">
+        Bautiza a tu Héroe
+      </h3>
+      <p class="text-caption text-medium-emphasis mb-0">
+        Dale un nombre legendario y elige su aspecto visual.
+      </p>
     </div>
 
     <VRow justify="center">
@@ -23,24 +27,43 @@
 
         <!-- 🖼️ Selector de Avatares -->
         <div class="hq-tabs-container border-thin pa-3 rounded-xl">
-          <div class="text-caption font-weight-bold text-uppercase text-warning mb-3 tracking-wide d-flex justify-space-between align-center">
-            <span>Selecciona un Retrato de Stock o Sube Una </span>
-            <VBtn size="x-small" color="secondary" prepend-icon="mdi-upload" variant="tonal" disabled>
+          <div
+            class="text-caption font-weight-bold text-uppercase text-warning mb-3 tracking-wide d-flex justify-space-between align-center"
+          >
+            <span>Selecciona un Retrato de Stock o Sube Una</span>
+            <VBtn
+              size="x-small"
+              color="secondary"
+              prepend-icon="mdi-upload"
+              variant="tonal"
+              disabled
+            >
               Subir Propia (Próximamente)
             </VBtn>
           </div>
 
           <!-- Rejilla de Avatares -->
           <VRow dense>
-            <VCol v-for="url in stockAvatars" :key="url" cols="4" sm="3" md="2" class="pa-1">
+            <VCol
+              v-for="url in stockAvatars"
+              :key="url"
+              cols="4"
+              sm="3"
+              md="2"
+              class="pa-1"
+            >
               <VCard
                 clickable
                 @click="setImage(url)"
-                :class="draft.img === url ? 'border-warning-heavy elevation-8 scale-active' : 'opacity-72'"
+                :class="
+                  draft.img === url
+                    ? 'border-warning-heavy elevation-8 scale-active'
+                    : 'opacity-72'
+                "
                 class="bg-grey-darken-3 rounded-lg overflow-hidden cursor-pointer transition-all"
                 variant="flat"
               >
-                <VImg :src="url" aspect-ratio="4/5"  cover />
+                <VImg :src="url" aspect-ratio="4/5" cover />
               </VCard>
             </VCol>
           </VRow>
@@ -54,7 +77,7 @@
 import { computed } from 'vue'
 import { useCharacterCreation } from '@/composables/useCharacterCreation'
 
-const { draft, setName, setImage, nextStep, previousStep, canContinue } = useCharacterCreation()
+const { draft, setName, setImage } = useCharacterCreation()
 
 // Proxy reactivo para sincronizar el input del nombre con tu action del composable
 const inputName = computed({
@@ -76,7 +99,7 @@ const stockAvatars = [
 <style scoped>
 .hq-tabs-container {
   /* Un gris "carbón" más profundo que el grey-darken-4 (#212121) */
-  background-color: #151515cb !important; 
+  background-color: #151515cb !important;
 }
 .transition-all {
   transition: all 0.2s ease-in-out;

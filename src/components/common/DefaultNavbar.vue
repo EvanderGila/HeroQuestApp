@@ -1,7 +1,7 @@
 <template>
-  <VAppBar 
-    elevation="0" 
-    scroll-behavior="hide" 
+  <VAppBar
+    elevation="0"
+    scroll-behavior="hide"
     scroll-threshold="5"
     class="hq-main-navbar px-2 px-sm-6"
     height="65"
@@ -15,21 +15,28 @@
           <VIcon icon="mdi-shield-crown" color="primary" size="20" class="hq-logo-icon" />
         </div>
       </div>
-      <VAppBarTitle class="hq-brand-text font-weight-black tracking-widest text-body-2 text-sm-h6">
-        HERO<span class="hq-brand-text-glow">QUEST</span>
+      <VAppBarTitle
+        class="hq-brand-text font-weight-black tracking-widest text-body-2 text-sm-h6"
+      >
+        HERO
+        <span class="hq-brand-text-glow">QUEST</span>
       </VAppBarTitle>
     </RouterLink>
 
     <VSpacer />
 
     <div class="d-flex align-center gap-x-2 gap-x-sm-4">
-      
-      <div v-if="user?.profile?.nickname" class="hq-player-display d-flex align-center me-1">
+      <div
+        v-if="user?.profile?.nickname"
+        class="hq-player-display d-flex align-center me-1"
+      >
         <div class="hq-status-indicator mr-2">
           <span class="hq-status-ping"></span>
           <span class="hq-status-dot"></span>
         </div>
-        <span class="hq-player-name text-xxs font-weight-bold text-uppercase tracking-wider">
+        <span
+          class="hq-player-name text-xxs font-weight-bold text-uppercase tracking-wider"
+        >
           {{ user.profile.nickname }}
         </span>
       </div>
@@ -45,14 +52,19 @@
           @click="item.action && item.action()"
         >
           <template #prepend>
-            <VIcon :color="item.color || 'primary'" size="16" class="hq-nav-icon me-0 me-sm-1">
+            <VIcon
+              :color="item.color || 'primary'"
+              size="16"
+              class="hq-nav-icon me-0 me-sm-1"
+            >
               {{ item.icon }}
             </VIcon>
           </template>
-          <span class="hq-nav-text text-grey-lighten-1 d-none d-md-inline">{{ item.text }}</span>
+          <span class="hq-nav-text text-grey-lighten-1 d-none d-md-inline">
+            {{ item.text }}
+          </span>
         </VBtn>
       </div>
-
     </div>
   </VAppBar>
 </template>
@@ -65,25 +77,43 @@ defineProps({
   },
   user: {
     type: Object,
-    required: true,
+    required: true
   }
 })
 </script>
 
 <style scoped>
-.text-xxs { font-size: 0.75rem !important; }
-.tracking-widest { letter-spacing: 0.14em !important; }
-.tracking-wider { letter-spacing: 0.08em !important; }
+.text-xxs {
+  font-size: 0.75rem !important;
+}
+.tracking-widest {
+  letter-spacing: 0.14em !important;
+}
+.tracking-wider {
+  letter-spacing: 0.08em !important;
+}
 
 /* Micro-gaps dinámicos optimizados */
-.gap-x-0 { column-gap: 2px !important; }
-.gap-x-1 { column-gap: 4px !important; }
-.gap-x-2 { column-gap: 8px !important; }
-.gap-x-4 { column-gap: 16px !important; }
+.gap-x-0 {
+  column-gap: 2px !important;
+}
+.gap-x-1 {
+  column-gap: 4px !important;
+}
+.gap-x-2 {
+  column-gap: 8px !important;
+}
+.gap-x-4 {
+  column-gap: 16px !important;
+}
 
 /* ── 🌌 BARRA DE NAVEGACIÓN BASE ── */
 .hq-main-navbar {
-  background: linear-gradient(180deg, rgba(10, 14, 24, 0.94) 0%, rgba(5, 6, 8, 0.98) 100%) !important;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 14, 24, 0.94) 0%,
+    rgba(5, 6, 8, 0.98) 100%
+  ) !important;
   backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(33, 150, 243, 0.15) !important;
   box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5) !important;
@@ -191,20 +221,40 @@ defineProps({
   background-color: rgba(33, 150, 243, 0.04) !important;
   border-color: rgba(33, 150, 243, 0.15) !important;
 }
-.hq-nav-btn:hover .hq-nav-text { color: #ffffff !important; }
+.hq-nav-btn:hover .hq-nav-text {
+  color: #ffffff !important;
+}
 .hq-nav-btn.v-btn--active {
   background-color: rgba(33, 150, 243, 0.08) !important;
   border-color: rgba(33, 150, 243, 0.3) !important;
 }
-.hq-nav-btn.v-btn--active .hq-nav-text { color: #ffffff !important; font-weight: 800 !important; }
+.hq-nav-btn.v-btn--active .hq-nav-text {
+  color: #ffffff !important;
+  font-weight: 800 !important;
+}
 
 /* 🎭 ANIMACIONES MÍSTICAS */
 @keyframes logoPulse {
-  0%, 100% { transform: scale(0.9); opacity: 0.4; }
-  50% { transform: scale(1.1); opacity: 0.9; filter: blur(1px); }
+  0%,
+  100% {
+    transform: scale(0.9);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.9;
+    filter: blur(1px);
+  }
 }
 @keyframes statusPing {
-  0% { transform: scale(1); opacity: 0.8; }
-  70%, 100% { transform: scale(2.5); opacity: 0; }
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  70%,
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
 }
 </style>

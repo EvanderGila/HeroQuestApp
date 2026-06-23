@@ -23,15 +23,17 @@
             </div>
           </template>
         </VImg>
-        
+
         <div class="hq-race-overlay"></div>
       </div>
 
       <div class="hq-race-content pa-3 d-flex flex-column justify-end">
-        <h3 class="hq-race-title font-weight-black text-uppercase text-center text-truncate">
+        <h3
+          class="hq-race-title font-weight-black text-uppercase text-center text-truncate"
+        >
           {{ race.name }}
         </h3>
-        
+
         <div class="hq-race-mini-stats d-flex justify-center gap-x-1 mt-1">
           <span class="text-xxs text-disabled hq-stat-item">❤️{{ race.hp_base }}</span>
           <span class="text-xxs text-disabled hq-stat-item">⚔️{{ race.atk_base }}</span>
@@ -42,11 +44,16 @@
       </div>
     </VCard>
   </div>
-  
-  <VDialog v-model="isDetailsDialogOpen" max-width="900px" width="auto" transition="dialog-bottom-transition">
-    <RaceInfoDialog 
+
+  <VDialog
+    v-model="isDetailsDialogOpen"
+    max-width="900px"
+    width="auto"
+    transition="dialog-bottom-transition"
+  >
+    <RaceInfoDialog
       v-if="raceSelected"
-      :raceId="raceSelected" 
+      :raceId="raceSelected"
       @close="isDetailsDialogOpen = false"
     />
   </VDialog>
@@ -69,9 +76,13 @@ function handleInspectRace(race_id: any) {
 </script>
 
 <style scoped>
-.text-xxs { font-size: 0.65rem !important; }
+.text-xxs {
+  font-size: 0.65rem !important;
+}
 /* Bajamos un pelo el gap por defecto para ganar margen de maniobra */
-.gap-x-1 { column-gap: 6px !important; }
+.gap-x-1 {
+  column-gap: 6px !important;
+}
 
 /* 🧙‍♂️ Rejilla Base Desktop */
 .hq-compendium-grid {
@@ -83,7 +94,11 @@ function handleInspectRace(race_id: any) {
 
 /* ── 🎴 LA TARJETA ── */
 .hq-race-card {
-  background: linear-gradient(180deg, rgba(15, 20, 32, 0.9) 0%, rgba(5, 6, 8, 0.98) 100%) !important;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 20, 32, 0.9) 0%,
+    rgba(5, 6, 8, 0.98) 100%
+  ) !important;
   border: 1px solid rgba(255, 255, 255, 0.05) !important;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
   cursor: pointer;
@@ -92,7 +107,9 @@ function handleInspectRace(race_id: any) {
 .hq-race-card:hover {
   transform: translateY(-5px);
   border-color: rgba(33, 150, 243, 0.4) !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 12px rgba(33, 150, 243, 0.1) !important;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.6),
+    0 0 12px rgba(33, 150, 243, 0.1) !important;
 }
 
 .hq-race-card:hover .hq-race-image {
@@ -171,7 +188,10 @@ function handleInspectRace(race_id: any) {
 /* Caso Vertical: Dos columnas perfectas en móviles comunes */
 @media (max-width: 480px) and (orientation: portrait) {
   .hq-compendium-grid {
-    grid-template-columns: repeat(2, 1fr) !important; /* Forzamos exactamente 2 columnas sin importar los px */
+    grid-template-columns: repeat(
+      2,
+      1fr
+    ) !important; /* Forzamos exactamente 2 columnas sin importar los px */
     gap: 10px;
   }
   .hq-race-title {
@@ -189,7 +209,7 @@ function handleInspectRace(race_id: any) {
 @media (max-height: 480px) and (orientation: landscape) {
   .hq-compendium-grid {
     /* Forzamos 4 columnas en horizontal para que las tarjetas mantengan su proporción estilizada y compacta */
-    grid-template-columns: repeat(4, 1fr) !important; 
+    grid-template-columns: repeat(4, 1fr) !important;
     gap: 12px;
   }
   .hq-race-title {

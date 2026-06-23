@@ -1,5 +1,8 @@
 <template>
-  <VContainer v-if="authStore.isLoading" class="fill-height d-flex align-center justify-center">
+  <VContainer
+    v-if="authStore.isLoading"
+    class="fill-height d-flex align-center justify-center"
+  >
     <VProgressCircular indeterminate color="primary" size="64" />
   </VContainer>
 
@@ -7,7 +10,7 @@
     <DefaultNavbar :items="navItems" :user="authStore.user" />
     <VMain>
       <VContainer fluid class="pa-0">
-        <slot /> 
+        <slot />
       </VContainer>
     </VMain>
   </template>
@@ -26,8 +29,5 @@ const authStore = useAuthStore()
 const { logout } = useAuth()
 
 // Array de elementos a introducir en el navbar
-const navItems = [
-  { text: 'Logout', icon: 'mdi-logout', color: 'error', action: logout},
-]
-
+const navItems = [{ text: 'Logout', icon: 'mdi-logout', color: 'error', action: logout }]
 </script>

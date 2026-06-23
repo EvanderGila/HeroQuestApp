@@ -1,27 +1,40 @@
 <template>
   <!-- 🎴 Contenedor Adaptable: Altura fluida en móviles, fija en escritorio -->
-  <VCard class="hq-hq-card mx-auto d-flex flex-column border-thin elevation-4" variant="flat">
-    
+  <VCard
+    class="hq-hq-card mx-auto d-flex flex-column border-thin elevation-4"
+    variant="flat"
+  >
     <!-- Componente de cabecera (Luego lo unificamos con la estética de la pequeña) -->
     <HeaderDetailedCard :character="character" class="flex-shrink-0" />
 
     <!-- Pestañas: Eliminamos bg-white para heredar el fondo correcto -->
-    <VTabs 
-      v-model="activeTab" 
-      color="primary" 
-      grow 
+    <VTabs
+      v-model="activeTab"
+      color="primary"
+      grow
       density="compact"
       class="border-bottom-thin flex-shrink-0"
     >
-      <VTab value="stats" class="hq-tab-text"><VIcon icon="mdi-sword-cross" class="d-sm-inline me-sm-1" size="small" />Stats</VTab>
-      <VTab value="skills" class="hq-tab-text"><VIcon icon="mdi-auto-fix" class="d-sm-inline me-sm-1" size="small" />Habs</VTab>
-      <VTab value="spells" class="hq-tab-text"><VIcon icon="mdi-wizard-hat" class="d-sm-inline me-sm-1" size="small" />Magia</VTab>
-      <VTab value="equipment" class="hq-tab-text"><VIcon icon="mdi-shield-account" class="d-sm-inline me-sm-1" size="small" />Equipo</VTab>
+      <VTab value="stats" class="hq-tab-text">
+        <VIcon icon="mdi-sword-cross" class="d-sm-inline me-sm-1" size="small" />
+        Stats
+      </VTab>
+      <VTab value="skills" class="hq-tab-text">
+        <VIcon icon="mdi-auto-fix" class="d-sm-inline me-sm-1" size="small" />
+        Habs
+      </VTab>
+      <VTab value="spells" class="hq-tab-text">
+        <VIcon icon="mdi-wizard-hat" class="d-sm-inline me-sm-1" size="small" />
+        Magia
+      </VTab>
+      <VTab value="equipment" class="hq-tab-text">
+        <VIcon icon="mdi-shield-account" class="d-sm-inline me-sm-1" size="small" />
+        Equipo
+      </VTab>
     </VTabs>
 
     <!-- El motor del Scroll: Limpiamos bg-grey para evitar bloques blancos -->
     <div class="hq-scroll-body flex-grow-1">
-      
       <div v-if="activeTab === 'stats'" class="pa-4 pa-sm-6 d-flex flex-column h-100">
         <StatsTab
           :character="character"
@@ -43,7 +56,6 @@
           @unequipItem="$emit('unequipItem', $event)"
         />
       </div>
-
     </div>
 
     <!-- Footer: Fondo transparente heredado -->
@@ -52,7 +64,6 @@
         Cerrar Panel
       </VBtn>
     </div>
-
   </VCard>
 </template>
 
@@ -70,26 +81,33 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'close'): void
-  (e: 'saveStats', payload: { characterId: number; updates: Record<string, number>; totalSpent: number; onSuccess?: () => void }): void
+  (
+    e: 'saveStats',
+    payload: {
+      characterId: number
+      updates: Record<string, number>
+      totalSpent: number
+      onSuccess?: () => void
+    }
+  ): void
   (e: 'unequipItem', payload: { characterId: number; slot: string }): void
 }>()
 
 const activeTab = ref('stats')
-
 </script>
 
 <style scoped>
 /* 🎯 ARQUITECTURA RESPONSIVE DINÁMICA */
 .hq-hq-card {
-  width: 95vw !important;        
-  max-width: 950px !important;    
-  
+  width: 95vw !important;
+  max-width: 950px !important;
+
   /* En móviles ocupa casi todo el alto disponible sin desbordar */
   height: 85vh !important;
   height: 85dvh !important; /* dvh maneja mejor las barras de navegación en móvil */
-  
+
   border-radius: 12px;
-  overflow: hidden !important;    
+  overflow: hidden !important;
 }
 
 /* En escritorio volvemos a congelar la altura para que no se estire infinito */
@@ -100,7 +118,6 @@ const activeTab = ref('stats')
   }
 }
 @media (orientation: landscape) and (max-height: 500px) {
-
   .hq-hq-card {
     height: auto !important;
     max-height: none !important;
@@ -120,11 +137,11 @@ const activeTab = ref('stats')
 }
 
 /* Bordes basados en el tema de Vuetify */
-.border-bottom-thin { 
-  border-bottom: 1px solid rgba(var(--v-border-color), var(--v-border-opacity)) !important; 
+.border-bottom-thin {
+  border-bottom: 1px solid rgba(var(--v-border-color), var(--v-border-opacity)) !important;
 }
-.border-top-thin { 
-  border-top: 1px solid rgba(var(--v-border-color), var(--v-border-opacity)) !important; 
+.border-top-thin {
+  border-top: 1px solid rgba(var(--v-border-color), var(--v-border-opacity)) !important;
 }
 
 /* Pestañas y textos compactos */
@@ -134,6 +151,10 @@ const activeTab = ref('stats')
   letter-spacing: 0px !important;
 }
 
-.gap-x-2 { column-gap: 8px !important; }
-.gap-x-1 { column-gap: 4px !important; }
+.gap-x-2 {
+  column-gap: 8px !important;
+}
+.gap-x-1 {
+  column-gap: 4px !important;
+}
 </style>
