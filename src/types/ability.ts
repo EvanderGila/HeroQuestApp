@@ -7,6 +7,6 @@ export interface Ability {
   name: string
   description: string | null
   type: 'passive' | 'active'
-  race_abilities:RaceAbility[]
-  class_abilities:ClassAbility[]
+  race_abilities: RaceAbility[]
+  class_abilities: ClassAbility[]
 }
