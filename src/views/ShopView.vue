@@ -79,7 +79,7 @@
                 <div
                   class="w-100 px-4 py-2"
                   style="
-                    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+                    background: linear-gradient(to top, rgb(0 0 0 / 90%), transparent);
                   "
                 >
                   <div
@@ -314,6 +314,7 @@ async function confirmPurchase() {
 .gap-4 {
   gap: 16px;
 }
+
 .italic {
   font-style: italic;
 }

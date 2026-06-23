@@ -63,25 +63,31 @@ const { draft } = useCharacterCreation()
 .lh-tight {
   line-height: 1.2;
 }
+
 .lh-base {
   line-height: 1.4;
 }
+
 .gap-x-2 {
   column-gap: 8px !important;
 }
+
 .border-warning-subtle {
-  border-color: rgba(255, 179, 0, 0.2) !important;
+  border-color: rgb(255 179 0 / 20%) !important;
 }
+
 /* Efecto de pulso místico para el icono de confirmación */
 .animate-pulse {
   animation: pulse 2s infinite ease-in-out;
 }
+
 @keyframes pulse {
   0%,
   100% {
     transform: scale(1);
     opacity: 0.9;
   }
+
   50% {
     transform: scale(1.05);
     opacity: 1;

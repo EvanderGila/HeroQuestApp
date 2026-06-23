@@ -211,8 +211,8 @@ watch(
 }
 
 .bg-hq-row {
-  background: rgba(5, 7, 12, 0.8) !important;
-  border: 1px solid rgba(255, 255, 255, 0.02) !important;
+  background: rgb(5 7 12 / 80%) !important;
+  border: 1px solid rgb(255 255 255 / 2%) !important;
 }
 
 .hq-stat-row {
@@ -220,25 +220,22 @@ watch(
 }
 
 .hq-stat-row:hover {
-  border-color: rgba(255, 193, 7, 0.2) !important;
-  background: rgba(5, 7, 12, 1) !important;
+  border-color: rgb(255 193 7 / 20%) !important;
+  background: rgb(5 7 12 / 100%) !important;
 }
 
 .gap-y-1 {
   row-gap: 4px !important;
 }
+
 .gap-x-2 {
   column-gap: 8px !important;
 }
+
 .text-xxs {
   font-size: 0.65rem !important;
 }
-.gap-x-2 {
-  column-gap: 8px !important;
-}
-.gap-y-1 {
-  row-gap: 4px !important;
-}
+
 .gap-y-4 {
   row-gap: 16px !important;
 }
@@ -249,40 +246,30 @@ watch(
   top: 12px;
   right: 12px;
   z-index: 10; /* Asegura estar por encima de los degradados e imágenes */
-  background: rgba(5, 7, 12, 0.4) !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  background: rgb(5 7 12 / 40%) !important;
+  border: 1px solid rgb(255 255 255 / 8%) !important;
   backdrop-filter: blur(4px);
   transition: all 0.2s ease;
 }
 
 .hq-close-dialog-btn:hover {
-  background: rgba(
-    244,
-    67,
-    54,
-    0.2
-  ) !important; /* Destello sutil rojo al pasar el ratón */
-  border-color: rgba(244, 67, 54, 0.4) !important;
+  background: rgb(244 67 54 / 20%) !important; /* Destello sutil rojo al pasar el ratón */
+  border-color: rgb(244 67 54 / 40%) !important;
   color: #fff !important;
 }
 
 /* ── 🎴 DIÁLOGO BASE ── */
 .hq-detail-card {
   background: #090d16 !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8) !important;
+  border: 1px solid rgb(255 255 255 / 8%) !important;
+  box-shadow: 0 20px 50px rgb(0 0 0 / 80%) !important;
   max-height: calc(100dvh - 24px);
   overflow-y: auto !important;
 }
 
 .hq-detail-section {
-  background: rgba(15, 22, 36, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.03) !important;
-}
-
-.bg-hq-row {
-  background: rgba(5, 7, 12, 0.8) !important;
-  border: 1px solid rgba(255, 255, 255, 0.02) !important;
+  background: rgb(15 22 36 / 40%);
+  border: 1px solid rgb(255 255 255 / 3%) !important;
 }
 
 /* ── 🖼️ CONTENEDOR DE IMAGEN INTELIGENTE ── */
@@ -302,9 +289,9 @@ watch(
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(9, 13, 22, 0) 60%,
-    rgba(9, 13, 22, 0.9) 95%,
-    rgba(9, 13, 22, 1) 100%
+    rgb(9 13 22 / 0%) 60%,
+    rgb(9 13 22 / 90%) 95%,
+    rgb(9 13 22 / 100%) 100%
   );
   z-index: 1;
 }
@@ -315,7 +302,7 @@ watch(
   left: 0;
   width: 100%;
   z-index: 2;
-  background: linear-gradient(to top, rgba(9, 13, 22, 0.95) 0%, rgba(9, 13, 22, 0) 100%);
+  background: linear-gradient(to top, rgb(9 13 22 / 95%) 0%, rgb(9 13 22 / 0%) 100%);
 }
 
 .hq-navbar-noise {
@@ -327,21 +314,22 @@ watch(
 }
 
 /* 📱 RESPONSIVE */
-@media (max-width: 599px) {
+@media (width <= 599px) {
   .hq-image-column {
     aspect-ratio: 16 / 9 !important;
   }
+
   .hq-detail-overlay {
     background: linear-gradient(
       to bottom,
-      rgba(9, 13, 22, 0) 20%,
-      rgba(9, 13, 22, 0.85) 80%,
-      rgba(9, 13, 22, 1) 100%
+      rgb(9 13 22 / 0%) 20%,
+      rgb(9 13 22 / 85%) 80%,
+      rgb(9 13 22 / 100%) 100%
     ) !important;
   }
 }
 
-@media (max-height: 500px) and (orientation: landscape) {
+@media (height <= 500px) and (orientation: landscape) {
   .hq-image-column {
     aspect-ratio: 21 / 9 !important;
   }
@@ -360,17 +348,17 @@ watch(
 }
 
 .hq-scrollable-tab-content::-webkit-scrollbar-track {
-  background: rgba(5, 7, 12, 0.5);
+  background: rgb(5 7 12 / 50%);
   border-radius: 4px;
 }
 
 .hq-scrollable-tab-content::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgb(255 255 255 / 10%);
   border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgb(255 255 255 / 5%);
 }
 
 .hq-scrollable-tab-content::-webkit-scrollbar-thumb:hover {
-  background: rgba(33, 150, 243, 0.3); /* Destello azul sutil al pasar el ratón */
+  background: rgb(33 150 243 / 30%); /* Destello azul sutil al pasar el ratón */
 }
 </style>

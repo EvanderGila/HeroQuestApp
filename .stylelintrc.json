@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-standard-scss",
+    "stylelint-config-html/vue"
+  ],
+  "rules": {
+    "no-duplicate-selectors": true,
+    "declaration-block-no-duplicate-properties": true,
+    "selector-class-pattern": null,
+    "scss/at-extend-no-missing-placeholder": null,
+    "property-no-vendor-prefix": null,
+    "value-keyword-case": null,
+    
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": ["deep", "global", "slotted"]
+      }
+    ],
+    "keyframes-name-pattern": null
+  }
+}

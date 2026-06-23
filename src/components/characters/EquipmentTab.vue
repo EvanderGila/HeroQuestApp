@@ -144,14 +144,16 @@ function getEquippedItemInSlot(slotKey: string): Item | null {
 .text-xxs {
   font-size: 0.6rem !important;
 }
+
 .z-index-2 {
   position: relative;
   z-index: 2;
 }
+
 .gap-x-1 {
-  column-gap: 4px !important;
-  row-gap: 4px !important;
+  gap: 4px !important;
 }
+
 .hq-section-title {
   color: #2196f3;
   letter-spacing: 0.08em;
@@ -163,10 +165,10 @@ function getEquippedItemInSlot(slotKey: string): Item | null {
   min-height: 175px;
   background: linear-gradient(
     180deg,
-    rgba(20, 24, 35, 0.4) 0%,
-    rgba(10, 11, 14, 0.6) 100%
+    rgb(20 24 35 / 40%) 0%,
+    rgb(10 11 14 / 60%) 100%
   ) !important;
-  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgb(255 255 255 / 5%) !important;
   overflow: hidden;
   position: relative;
   transition: all 0.2s ease;
@@ -185,19 +187,19 @@ function getEquippedItemInSlot(slotKey: string): Item | null {
 .hq-inventory-slot.has-item {
   background: linear-gradient(
     180deg,
-    rgba(14, 20, 32, 0.85) 0%,
-    rgba(6, 7, 10, 0.95) 100%
+    rgb(14 20 32 / 85%) 0%,
+    rgb(6 7 10 / 95%) 100%
   ) !important;
-  border-color: rgba(33, 150, 243, 0.2) !important;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  border-color: rgb(33 150 243 / 20%) !important;
+  box-shadow: 0 4px 15px rgb(0 0 0 / 30%);
 }
 
 /* 🔥 ESTILO RELIQUIA MÍSTICA (Borde de Fuego/Oro) */
 .hq-inventory-slot.is-relic {
-  border-color: rgba(255, 179, 0, 0.45) !important;
+  border-color: rgb(255 179 0 / 45%) !important;
   box-shadow:
-    0 0 15px rgba(255, 179, 0, 0.15),
-    inset 0 0 10px rgba(255, 179, 0, 0.05) !important;
+    0 0 15px rgb(255 179 0 / 15%),
+    inset 0 0 10px rgb(255 179 0 / 5%) !important;
 }
 
 /* ── 🖼️ CONTENEDOR DE IMAGEN 1:1 ── */
@@ -205,18 +207,20 @@ function getEquippedItemInSlot(slotKey: string): Item | null {
   position: relative;
   width: 100%;
   aspect-ratio: 1;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgb(255 255 255 / 4%);
 }
+
 .hq-item-image {
   width: 100%;
   height: 100%;
   opacity: 0.85;
 }
+
 /* Sombra negra inferior en la imagen para poder leer el nombre */
 .hq-item-image-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 40%, rgba(6, 7, 10, 0.95) 100%);
+  background: linear-gradient(to bottom, rgb(0 0 0 / 0%) 40%, rgb(6 7 10 / 95%) 100%);
 }
 
 /* Etiquetas flotantes sobre el cromo */
@@ -226,12 +230,12 @@ function getEquippedItemInSlot(slotKey: string): Item | null {
   left: 6px;
   font-size: 0.55rem;
   font-weight: 800;
-  background-color: rgba(0, 0, 0, 0.65);
+  background-color: rgb(0 0 0 / 65%);
   backdrop-filter: blur(4px);
-  color: rgba(255, 255, 255, 0.5);
+  color: rgb(255 255 255 / 50%);
   padding: 1px 5px;
   border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgb(255 255 255 / 5%);
 }
 
 /* ── 💎 PUNTO DE ESTADO RELIQUIA ── */
@@ -243,6 +247,7 @@ function getEquippedItemInSlot(slotKey: string): Item | null {
   width: 8px;
   height: 8px;
 }
+
 .hq-relic-dot {
   position: relative;
   width: 8px;
@@ -251,6 +256,7 @@ function getEquippedItemInSlot(slotKey: string): Item | null {
   border-radius: 50%;
   box-shadow: 0 0 6px #ffb300;
 }
+
 .hq-relic-ping {
   position: absolute;
   width: 8px;
@@ -264,14 +270,15 @@ function getEquippedItemInSlot(slotKey: string): Item | null {
 /* ── 📝 DETALLES E INFOS DEL ÍTEM ── */
 .hq-item-name {
   font-size: 0.7rem;
-  color: #ffffff;
+  color: #fff;
   line-height: 1.2;
   letter-spacing: 0.02em;
 }
+
 /* Si es una reliquia, el nombre se tiñe de color dorado de leyenda */
 .is-relic .hq-item-name {
   color: #ffe082;
-  text-shadow: 0 0 4px rgba(255, 179, 0, 0.3);
+  text-shadow: 0 0 4px rgb(255 179 0 / 30%);
 }
 
 /* 📊 MICRO STATS (Badges compactos) */
@@ -280,33 +287,38 @@ function getEquippedItemInSlot(slotKey: string): Item | null {
   font-weight: 800;
   padding: 1px 4px;
   border-radius: 4px;
-  background-color: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background-color: rgb(255 255 255 / 3%);
+  border: 1px solid rgb(255 255 255 / 5%);
 }
+
 .hq-stat-mini.atk {
   color: #ff8a80;
-  border-color: rgba(255, 138, 128, 0.15);
+  border-color: rgb(255 138 128 / 15%);
 }
+
 .hq-stat-mini.def {
   color: #81c784;
-  border-color: rgba(129, 199, 132, 0.15);
+  border-color: rgb(129 199 132 / 15%);
 }
+
 .hq-stat-mini.mag {
   color: #80deea;
-  border-color: rgba(128, 222, 234, 0.15);
+  border-color: rgb(128 222 234 / 15%);
 }
 
 /* ── 🕳️ DISEÑO ESTADO VACÍO ── */
 .hq-slot-empty {
-  color: rgba(255, 255, 255, 0.2);
+  color: rgb(255 255 255 / 20%);
 }
+
 .hq-empty-icon {
   opacity: 0.25;
 }
+
 .hq-slot-tag {
   font-size: 0.65rem;
   letter-spacing: 0.05em;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgb(255 255 255 / 30%);
 }
 
 /* 🎭 ANIMACIÓN RELIQUIA */
@@ -315,6 +327,7 @@ function getEquippedItemInSlot(slotKey: string): Item | null {
     transform: scale(1);
     opacity: 0.8;
   }
+
   70%,
   100% {
     transform: scale(2.8);

@@ -141,11 +141,13 @@ function actionNotImplemented(menuName: string) {
 .tracking-widest {
   letter-spacing: 0.16em !important;
 }
+
 .tracking-wider {
   letter-spacing: 0.1em !important;
 }
+
 .text-grey-md {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgb(255 255 255 / 50%);
 }
 
 /* ── 👑 ENCABEZADO ESTILO PREMIUM ── */
@@ -157,43 +159,48 @@ function actionNotImplemented(menuName: string) {
   width: 54px;
   height: 54px;
 }
+
 .hq-header-pulse-glow {
   position: absolute;
   width: 50px;
   height: 50px;
-  background: radial-gradient(circle, rgba(33, 150, 243, 0.35) 0%, transparent 70%);
+  background: radial-gradient(circle, rgb(33 150 243 / 35%) 0%, transparent 70%);
   border-radius: 50%;
   animation: headerPulse 3s infinite ease-in-out;
 }
+
 .hq-header-logo-box {
   position: relative;
   z-index: 2;
   width: 52px;
   height: 52px;
-  background: rgba(33, 150, 243, 0.04);
-  border: 1px solid rgba(33, 150, 243, 0.25);
+  background: rgb(33 150 243 / 4%);
+  border: 1px solid rgb(33 150 243 / 25%);
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: inset 0 0 12px rgba(33, 150, 243, 0.15);
+  box-shadow: inset 0 0 12px rgb(33 150 243 / 15%);
 }
+
 .hq-header-icon {
-  filter: drop-shadow(0 0 6px rgba(33, 150, 243, 0.5));
+  filter: drop-shadow(0 0 6px rgb(33 150 243 / 50%));
 }
 
 /* Títulos Metálicos con degradado */
 .hq-main-title {
-  background: linear-gradient(180deg, #ffffff 30%, #cfd8dc 100%);
+  background: linear-gradient(180deg, #fff 30%, #cfd8dc 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
 .hq-title-glow {
   background: linear-gradient(180deg, #90caf9 30%, #2196f3 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 10px rgba(33, 150, 243, 0.4));
+  filter: drop-shadow(0 0 10px rgb(33 150 243 / 40%));
 }
+
 .hq-subtitle {
   font-size: 1rem !important;
   font-weight: 400;
@@ -204,12 +211,12 @@ function actionNotImplemented(menuName: string) {
   position: relative;
   background: linear-gradient(
     180deg,
-    rgba(13, 18, 30, 0.75) 0%,
-    rgba(7, 8, 12, 0.9) 100%
+    rgb(13 18 30 / 75%) 0%,
+    rgb(7 8 12 / 90%) 100%
   ) !important;
   border-radius: 14px !important;
-  border: 1px solid rgba(255, 255, 255, 0.05) !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+  border: 1px solid rgb(255 255 255 / 5%) !important;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 40%) !important;
   cursor: pointer;
   overflow: hidden;
   transition:
@@ -233,11 +240,12 @@ function actionNotImplemented(menuName: string) {
 }
 
 .hq-card-title {
-  color: #ffffff;
+  color: #fff;
   transition: color 0.2s ease;
 }
+
 .hq-card-subtitle {
-  color: rgba(255, 255, 255, 0.4) !important;
+  color: rgb(255 255 255 / 40%) !important;
   transition: color 0.2s ease;
   line-height: 1.4;
 }
@@ -252,8 +260,8 @@ function actionNotImplemented(menuName: string) {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgb(255 255 255 / 2%);
+  border: 1px solid rgb(255 255 255 / 8%);
   transition: all 0.3s ease;
 }
 
@@ -263,82 +271,91 @@ function actionNotImplemented(menuName: string) {
 .color-combat {
   color: #ff5252;
 }
+
 .hq-card-combat:hover {
-  border-color: rgba(255, 82, 82, 0.35) !important;
+  border-color: rgb(255 82 82 / 35%) !important;
   box-shadow:
-    0 12px 35px rgba(255, 82, 82, 0.1),
-    inset 0 0 15px rgba(255, 82, 82, 0.02) !important;
+    0 12px 35px rgb(255 82 82 / 10%),
+    inset 0 0 15px rgb(255 82 82 / 2%) !important;
   transform: translateY(-5px);
 }
+
 .hq-card-combat:hover .hq-icon-frame {
-  background: rgba(255, 82, 82, 0.08);
-  border-color: rgba(255, 82, 82, 0.4);
-  filter: drop-shadow(0 0 6px rgba(255, 82, 82, 0.5));
+  background: rgb(255 82 82 / 8%);
+  border-color: rgb(255 82 82 / 40%);
+  filter: drop-shadow(0 0 6px rgb(255 82 82 / 50%));
 }
 
 /* Personajes (Azul Principal) */
 .color-primary {
   color: #2196f3;
 }
+
 .hq-card-primary:hover {
-  border-color: rgba(33, 89, 243, 0.479) !important;
+  border-color: rgb(33 89 243 / 47.9%) !important;
   box-shadow:
-    0 12px 35px rgba(29, 132, 216, 0.1),
-    inset 0 0 15px rgba(28, 149, 248, 0.02) !important;
+    0 12px 35px rgb(29 132 216 / 10%),
+    inset 0 0 15px rgb(28 149 248 / 2%) !important;
   transform: translateY(-5px);
 }
+
 .hq-card-primary:hover .hq-icon-frame {
-  background: rgba(33, 150, 243, 0.08);
-  border-color: rgba(33, 150, 243, 0.4);
-  filter: drop-shadow(0 0 6px rgba(33, 150, 243, 0.5));
+  background: rgb(33 150 243 / 8%);
+  border-color: rgb(33 150 243 / 40%);
+  filter: drop-shadow(0 0 6px rgb(33 150 243 / 50%));
 }
 
 /* Tienda (Oro / Warning) */
 .color-warning {
   color: #ffa726;
 }
+
 .hq-card-warning:hover {
-  border-color: rgba(255, 167, 38, 0.35) !important;
+  border-color: rgb(255 167 38 / 35%) !important;
   box-shadow:
-    0 12px 35px rgba(255, 167, 38, 0.1),
-    inset 0 0 15px rgba(255, 167, 38, 0.02) !important;
+    0 12px 35px rgb(255 167 38 / 10%),
+    inset 0 0 15px rgb(255 167 38 / 2%) !important;
   transform: translateY(-5px);
 }
+
 .hq-card-warning:hover .hq-icon-frame {
-  background: rgba(255, 167, 38, 0.08);
-  border-color: rgba(255, 167, 38, 0.4);
-  filter: drop-shadow(0 0 6px rgba(255, 167, 38, 0.5));
+  background: rgb(255 167 38 / 8%);
+  border-color: rgb(255 167 38 / 40%);
+  filter: drop-shadow(0 0 6px rgb(255 167 38 / 50%));
 }
 
 /* Compendio (Cian / Info) */
 .color-info {
   color: #00e5ff;
 }
+
 .hq-card-info:hover {
-  border-color: rgba(0, 229, 255, 0.35) !important;
+  border-color: rgb(0 229 255 / 35%) !important;
   box-shadow:
-    0 12px 35px rgba(0, 229, 255, 0.1),
-    inset 0 0 15px rgba(0, 229, 255, 0.02) !important;
+    0 12px 35px rgb(0 229 255 / 10%),
+    inset 0 0 15px rgb(0 229 255 / 2%) !important;
   transform: translateY(-5px);
 }
+
 .hq-card-info:hover .hq-icon-frame {
-  background: rgba(0, 229, 255, 0.08);
-  border-color: rgba(0, 229, 255, 0.4);
-  filter: drop-shadow(0 0 6px rgba(0, 229, 255, 0.5));
+  background: rgb(0 229 255 / 8%);
+  border-color: rgb(0 229 255 / 40%);
+  filter: drop-shadow(0 0 6px rgb(0 229 255 / 50%));
 }
 
 /* Cambio global de textos en hover */
 .hq-rpg-card:hover .hq-card-title {
-  color: #ffffff;
+  color: #fff;
 }
+
 .hq-rpg-card:hover .hq-card-subtitle {
-  color: rgba(255, 255, 255, 0.75) !important;
+  color: rgb(255 255 255 / 75%) !important;
 }
 
 /* 📜 FOOTER TEXT */
 .hq-footer-text {
   font-size: 0.65rem;
-  color: rgba(255, 255, 255, 0.2);
+  color: rgb(255 255 255 / 20%);
 }
 
 /* 🎭 ANIMACIONES */
@@ -348,6 +365,7 @@ function actionNotImplemented(menuName: string) {
     transform: scale(0.95);
     opacity: 0.5;
   }
+
   50% {
     transform: scale(1.15);
     opacity: 0.9;

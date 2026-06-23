@@ -133,12 +133,15 @@ function isLevelUnlocked(requiredLvl: number): boolean {
 .gap-x-2 {
   column-gap: 8px !important;
 }
+
 .lh-tight {
   line-height: 1.25;
 }
+
 .max-w-70 {
   max-width: 70%;
 }
+
 .transition-all {
   transition: all 0.25s ease-in-out;
 }
@@ -159,14 +162,16 @@ function isLevelUnlocked(requiredLvl: number): boolean {
   white-space: nowrap;
   overflow: hidden;
 }
+
 .hq-section-header::after {
   content: '';
   flex-grow: 1;
   margin-left: 12px;
   height: 1px;
-  background: linear-gradient(to right, rgba(var(--v-border-color), 0.15), transparent);
+  background: linear-gradient(to right, rgb(var(--v-border-color), 0.15), transparent);
   align-self: center;
 }
+
 .tracking-widest {
   letter-spacing: 0.12em !important;
 }
@@ -175,33 +180,35 @@ function isLevelUnlocked(requiredLvl: number): boolean {
 .unlocked-spell {
   background: linear-gradient(
     135deg,
-    rgba(103, 58, 183, 0.05) 0%,
-    rgba(103, 58, 183, 0.01) 100%
+    rgb(103 58 183 / 5%) 0%,
+    rgb(103 58 183 / 1%) 100%
   ) !important;
-  border-color: rgba(103, 58, 183, 0.3) !important; /* deep-purple original */
+  border-color: rgb(103 58 183 / 30%) !important; /* deep-purple original */
   box-shadow:
-    inset 0 0 12px rgba(103, 58, 183, 0.04),
-    inset 3px 0 0 0 rgb(103, 58, 183) !important;
+    inset 0 0 12px rgb(103 58 183 / 4%),
+    inset 3px 0 0 0 rgb(103 58 183) !important;
 }
+
 .unlocked-spell .hq-spell-icon {
-  color: rgb(149, 117, 205); /* deep-purple-lighten-2 */
-  filter: drop-shadow(0 0 4px rgba(103, 58, 183, 0.4));
+  color: rgb(149 117 205); /* deep-purple-lighten-2 */
+  filter: drop-shadow(0 0 4px rgb(103 58 183 / 40%));
 }
 
 /* 🔒 ESTADO: HECHIZO BLOQUEADO */
 .locked-spell {
   opacity: 0.45;
-  background-color: rgba(var(--v-theme-on-surface), 0.02) !important;
-  border-color: rgba(var(--v-border-color), 0.15) !important;
+  background-color: rgb(var(--v-theme-on-surface), 0.02) !important;
+  border-color: rgb(var(--v-border-color), 0.15) !important;
   border-style: dashed !important;
 }
+
 .locked-spell .hq-spell-icon {
-  color: rgba(var(--v-theme-on-surface), 0.3);
+  color: rgb(var(--v-theme-on-surface), 0.3);
 }
 
 /* ⚡ DIVISOR INFERIOR SUTIL */
 .border-top-dashed {
-  border-top: 1px dashed rgba(var(--v-border-color), 0.15) !important;
+  border-top: 1px dashed rgb(var(--v-border-color), 0.15) !important;
 }
 
 /* 🔷 INSIGNIA DE COSTE DE MANÁ (Estilo RPG Premium) */
@@ -211,9 +218,11 @@ function isLevelUnlocked(requiredLvl: number): boolean {
     #4a148c 0%,
     #311b92 100%
   ) !important; /* Tonos oscuros de violeta/azul para contraste */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-  border: 1px solid rgba(0, 229, 255, 0.2);
+
+  box-shadow: 0 2px 4px rgb(0 0 0 / 15%);
+  border: 1px solid rgb(0 229 255 / 20%);
 }
+
 .gap-x-3 {
   column-gap: 12px !important;
 }

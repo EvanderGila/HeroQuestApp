@@ -86,9 +86,11 @@ defineProps({
 .text-xxs {
   font-size: 0.75rem !important;
 }
+
 .tracking-widest {
   letter-spacing: 0.14em !important;
 }
+
 .tracking-wider {
   letter-spacing: 0.08em !important;
 }
@@ -97,12 +99,15 @@ defineProps({
 .gap-x-0 {
   column-gap: 2px !important;
 }
+
 .gap-x-1 {
   column-gap: 4px !important;
 }
+
 .gap-x-2 {
   column-gap: 8px !important;
 }
+
 .gap-x-4 {
   column-gap: 16px !important;
 }
@@ -111,12 +116,12 @@ defineProps({
 .hq-main-navbar {
   background: linear-gradient(
     180deg,
-    rgba(10, 14, 24, 0.94) 0%,
-    rgba(5, 6, 8, 0.98) 100%
+    rgb(10 14 24 / 94%) 0%,
+    rgb(5 6 8 / 98%) 100%
   ) !important;
   backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(33, 150, 243, 0.15) !important;
-  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5) !important;
+  border-bottom: 1px solid rgb(33 150 243 / 15%) !important;
+  box-shadow: 0 4px 25px rgb(0 0 0 / 50%) !important;
   position: relative;
 }
 
@@ -135,40 +140,45 @@ defineProps({
   align-items: center;
   justify-content: center;
 }
+
 .hq-logo-pulse-glow {
   position: absolute;
   width: 28px;
   height: 28px;
-  background: radial-gradient(circle, rgba(33, 150, 243, 0.4) 0%, transparent 70%);
+  background: radial-gradient(circle, rgb(33 150 243 / 40%) 0%, transparent 70%);
   border-radius: 50%;
   animation: logoPulse 2.5s infinite ease-in-out;
 }
+
 .hq-logo-box {
   position: relative;
   z-index: 2;
   width: 30px;
   height: 30px;
-  background: rgba(33, 150, 243, 0.05);
-  border: 1px solid rgba(33, 150, 243, 0.3);
+  background: rgb(33 150 243 / 5%);
+  border: 1px solid rgb(33 150 243 / 30%);
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: inset 0 0 8px rgba(33, 150, 243, 0.2);
+  box-shadow: inset 0 0 8px rgb(33 150 243 / 20%);
 }
+
 .hq-logo-icon {
-  filter: drop-shadow(0 0 4px rgba(33, 150, 243, 0.6));
+  filter: drop-shadow(0 0 4px rgb(33 150 243 / 60%));
 }
+
 .hq-brand-text {
-  background: linear-gradient(180deg, #ffffff 40%, #b0bec5 100%);
+  background: linear-gradient(180deg, #fff 40%, #b0bec5 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
 .hq-brand-text-glow {
   background: linear-gradient(180deg, #90caf9 40%, #2196f3 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 6px rgba(33, 150, 243, 0.5));
+  filter: drop-shadow(0 0 6px rgb(33 150 243 / 50%));
 }
 
 /* ── 🪪 DISPLAY DE USUARIO ── */
@@ -178,22 +188,27 @@ defineProps({
   border-radius: 6px;
   transition: background-color 0.2s ease;
 }
+
 .hq-player-display:hover {
-  background-color: rgba(255, 255, 255, 0.03);
+  background-color: rgb(255 255 255 / 3%);
 }
+
 .hq-player-display:hover .hq-player-name {
-  color: #ffffff;
+  color: #fff;
 }
+
 .hq-player-name {
-  color: rgba(255, 255, 255, 0.4);
+  color: rgb(255 255 255 / 40%);
   transition: color 0.2s ease;
 }
+
 .hq-status-indicator {
   position: relative;
   display: flex;
   width: 6px;
   height: 6px;
 }
+
 .hq-status-dot {
   position: relative;
   width: 6px;
@@ -201,6 +216,7 @@ defineProps({
   background-color: #00e5ff;
   border-radius: 50%;
 }
+
 .hq-status-ping {
   position: absolute;
   width: 6px;
@@ -217,19 +233,23 @@ defineProps({
   transition: all 0.2s ease-in-out !important;
   border: 1px solid transparent;
 }
+
 .hq-nav-btn:hover {
-  background-color: rgba(33, 150, 243, 0.04) !important;
-  border-color: rgba(33, 150, 243, 0.15) !important;
+  background-color: rgb(33 150 243 / 4%) !important;
+  border-color: rgb(33 150 243 / 15%) !important;
 }
+
 .hq-nav-btn:hover .hq-nav-text {
-  color: #ffffff !important;
+  color: #fff !important;
 }
+
 .hq-nav-btn.v-btn--active {
-  background-color: rgba(33, 150, 243, 0.08) !important;
-  border-color: rgba(33, 150, 243, 0.3) !important;
+  background-color: rgb(33 150 243 / 8%) !important;
+  border-color: rgb(33 150 243 / 30%) !important;
 }
+
 .hq-nav-btn.v-btn--active .hq-nav-text {
-  color: #ffffff !important;
+  color: #fff !important;
   font-weight: 800 !important;
 }
 
@@ -240,17 +260,20 @@ defineProps({
     transform: scale(0.9);
     opacity: 0.4;
   }
+
   50% {
     transform: scale(1.1);
     opacity: 0.9;
     filter: blur(1px);
   }
 }
+
 @keyframes statusPing {
   0% {
     transform: scale(1);
     opacity: 0.8;
   }
+
   70%,
   100% {
     transform: scale(2.5);

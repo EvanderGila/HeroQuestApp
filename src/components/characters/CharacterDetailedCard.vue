@@ -103,21 +103,20 @@ const activeTab = ref('stats')
   max-width: 950px !important;
 
   /* En móviles ocupa casi todo el alto disponible sin desbordar */
-  height: 85vh !important;
   height: 85dvh !important; /* dvh maneja mejor las barras de navegación en móvil */
-
   border-radius: 12px;
   overflow: hidden !important;
 }
 
 /* En escritorio volvemos a congelar la altura para que no se estire infinito */
-@media (min-width: 600px) {
+@media (width >= 600px) {
   .hq-hq-card {
     height: 720px !important;
     max-height: 900px !important;
   }
 }
-@media (orientation: landscape) and (max-height: 500px) {
+
+@media (orientation: landscape) and (height <= 500px) {
   .hq-hq-card {
     height: auto !important;
     max-height: none !important;
@@ -138,22 +137,24 @@ const activeTab = ref('stats')
 
 /* Bordes basados en el tema de Vuetify */
 .border-bottom-thin {
-  border-bottom: 1px solid rgba(var(--v-border-color), var(--v-border-opacity)) !important;
+  border-bottom: 1px solid rgb(var(--v-border-color), var(--v-border-opacity)) !important;
 }
+
 .border-top-thin {
-  border-top: 1px solid rgba(var(--v-border-color), var(--v-border-opacity)) !important;
+  border-top: 1px solid rgb(var(--v-border-color), var(--v-border-opacity)) !important;
 }
 
 /* Pestañas y textos compactos */
 .hq-tab-text {
   font-size: 0.75rem !important;
   font-weight: 800 !important;
-  letter-spacing: 0px !important;
+  letter-spacing: 0 !important;
 }
 
 .gap-x-2 {
   column-gap: 8px !important;
 }
+
 .gap-x-1 {
   column-gap: 4px !important;
 }

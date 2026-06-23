@@ -115,9 +115,11 @@ async function handleSaveStats(payload: {
 .min-card-height {
   min-height: 290px;
 }
+
 .max-w-200 {
   max-width: 200px;
 }
+
 .transition-all {
   transition: all 0.25s ease-in-out !important;
 }
@@ -127,25 +129,25 @@ async function handleSaveStats(payload: {
   cursor: pointer;
   border-style: dashed !important; /* Líneas discontinuas */
   border-width: 2px !important; /* Un pelín más gruesa para que se note el dashed */
-  border-color: rgba(var(--v-theme-primary), 0.25) !important; /* Semitransparente */
-  background-color: rgba(var(--v-theme-primary), 0.01) !important;
+  border-color: rgb(var(--v-theme-primary), 0.25) !important; /* Semitransparente */
+  background-color: rgb(var(--v-theme-primary), 0.01) !important;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
 }
 
 /* El texto e iconos por defecto se ven sutiles, como un fantasma */
 .hq-create-card .hq-create-icon,
 .hq-create-card .hq-create-text {
-  color: rgba(var(--v-theme-primary), 0.6);
+  color: rgb(var(--v-theme-primary), 0.6);
 }
 
 /* 🔥 EFECTO HOVER: Reacciona de forma mágica al pasar el ratón */
 .hq-create-card:hover {
-  background-color: rgba(var(--v-theme-primary), 0.04) !important;
-  border-color: rgba(var(--v-theme-primary), 0.6) !important; /* El borde se ilumina */
+  background-color: rgb(var(--v-theme-primary), 0.04) !important;
+  border-color: rgb(var(--v-theme-primary), 0.6) !important; /* El borde se ilumina */
   border-style: solid !important; /* Pasa de dashed a sólido al enfocar */
   box-shadow:
-    0 0 16px rgba(var(--v-theme-primary), 0.12),
-    inset 0 0 12px rgba(var(--v-theme-primary), 0.03) !important;
+    0 0 16px rgb(var(--v-theme-primary), 0.12),
+    inset 0 0 12px rgb(var(--v-theme-primary), 0.03) !important;
 }
 
 /* Al hacer hover, el icono y el texto cobran "vida" */
@@ -160,7 +162,7 @@ async function handleSaveStats(payload: {
 }
 
 :deep(.v-overlay__content) {
-  @media (orientation: landscape) and (max-height: 500px) {
+  @media (orientation: landscape) and (height <= 500px) {
     overflow-y: auto !important;
     max-height: 100dvh !important;
     display: block !important; /* Evita que flexbox aplaste la tarjeta */
@@ -183,7 +185,7 @@ async function handleSaveStats(payload: {
 }
 
 /* En móviles pequeños (cuando la pantalla no da ni para dos de 280px), quitamos el max-width para que llene la fila */
-@media (max-width: 599px) {
+@media (width <= 599px) {
   .hq-flex-card-wrapper {
     grid-template-columns: 1fr;
   }

@@ -131,9 +131,11 @@ const handleLogin = () => {
 .text-xxs {
   font-size: 0.6rem !important;
 }
+
 .tracking-widest {
   letter-spacing: 0.2em !important;
 }
+
 .block-span {
   display: block;
 }
@@ -165,17 +167,19 @@ const handleLogin = () => {
   z-index: 0;
   animation: orbPulse 8s infinite alternate ease-in-out;
 }
+
 .hq-orb-blue-deep {
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(33, 150, 243, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+  background: radial-gradient(circle, rgb(33 150 243 / 15%) 0%, rgb(0 0 0 / 0%) 70%);
   top: 10%;
   left: 15%;
 }
+
 .hq-orb-cyan-electric {
   width: 450px;
   height: 450px;
-  background: radial-gradient(circle, rgba(0, 229, 255, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
+  background: radial-gradient(circle, rgb(0 229 255 / 8%) 0%, rgb(0 0 0 / 0%) 70%);
   bottom: 10%;
   right: 15%;
   animation-delay: -4s;
@@ -188,14 +192,13 @@ const handleLogin = () => {
   border-radius: 24px;
   background: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(33, 150, 243, 0.25) 40%,
-    rgba(0, 229, 255, 0.15) 70%,
-    rgba(255, 255, 255, 0.02) 100%
+    rgb(255 255 255 / 10%) 0%,
+    rgb(33 150 243 / 25%) 40%,
+    rgb(0 229 255 / 15%) 70%,
+    rgb(255 255 255 / 2%) 100%
   );
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 80%);
   z-index: 1;
-
   max-width: 430px;
   margin: 0 16px; /* Evita que choque contra los bordes físicos del móvil */
 }
@@ -204,19 +207,19 @@ const handleLogin = () => {
 .hq-login-card {
   background: linear-gradient(
     180deg,
-    rgba(10, 14, 24, 0.9) 0%,
-    rgba(6, 7, 10, 0.96) 100%
+    rgb(10 14 24 / 90%) 0%,
+    rgb(6 7 10 / 96%) 100%
   ) !important;
   backdrop-filter: blur(20px);
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05) !important;
+  box-shadow: inset 0 1px 1px rgb(255 255 255 / 5%) !important;
 }
 
 /* 👑 TÍTULO HEROQUEST CON EFECTO FILO MÁGICO AZUL/BLANCO */
 .hq-game-title {
-  background: linear-gradient(180deg, #ffffff 40%, #90caf9 100%);
+  background: linear-gradient(180deg, #fff 40%, #90caf9 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 2px 8px rgba(33, 150, 243, 0.3));
+  filter: drop-shadow(0 2px 8px rgb(33 150 243 / 30%));
 }
 
 /* 🏛️ SEPARADOR RÚNICO AZUL CRISTAL */
@@ -226,19 +229,23 @@ const handleLogin = () => {
   justify-content: center;
   width: 100%;
 }
+
 .hq-rune-line {
   height: 1px;
   flex-grow: 1;
 }
+
 .hq-rune-line.left {
-  background: linear-gradient(to right, transparent, rgba(243, 212, 33, 0.4));
+  background: linear-gradient(to right, transparent, rgb(243 212 33 / 40%));
 }
+
 .hq-rune-line.right {
-  background: linear-gradient(to left, transparent, rgba(243, 212, 33, 0.4));
+  background: linear-gradient(to left, transparent, rgb(243 212 33 / 40%));
 }
+
 .hq-rune-icon {
   margin: 0 10px;
-  filter: drop-shadow(0 0 4px rgba(243, 212, 33, 0.6));
+  filter: drop-shadow(0 0 4px rgb(243 212 33 / 60%));
   animation: runeGlow 3s infinite ease-in-out;
 }
 
@@ -247,54 +254,61 @@ const handleLogin = () => {
   display: flex;
   flex-direction: column;
 }
+
 .hq-input-label {
   font-size: 0.65rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: rgba(144, 202, 249, 0.6); /* Azul suave text-disabled */
+  color: rgb(144 202 249 / 60%); /* Azul suave text-disabled */
   margin-bottom: 6px;
   padding-left: 2px;
 }
 
 :deep(.hq-custom-input .v-field) {
-  background-color: rgba(0, 0, 0, 0.35) !important;
+  background-color: rgb(0 0 0 / 35%) !important;
   border-radius: 10px !important;
   transition: all 0.2s ease-in-out;
 }
+
 :deep(.hq-custom-input .v-field__outline) {
-  --v-field-border-color: rgba(255, 255, 255, 0.05) !important;
+  --v-field-border-color: rgb(255 255 255 / 5%) !important;
 }
+
 :deep(.hq-custom-input .v-field--focused) {
-  box-shadow: 0 0 15px rgba(33, 150, 243, 0.15) !important;
-  background-color: rgba(0, 0, 0, 0.45) !important;
+  box-shadow: 0 0 15px rgb(33 150 243 / 15%) !important;
+  background-color: rgb(0 0 0 / 45%) !important;
 }
+
 :deep(.hq-custom-input .v-field--focused .v-field__outline) {
-  --v-field-border-color: rgba(33, 150, 243, 0.4) !important;
+  --v-field-border-color: rgb(33 150 243 / 40%) !important;
 }
 
 /* ⚠️ ALERTA CON BORDE EMBOSADO */
 .hq-alert-error {
-  border-color: rgba(244, 67, 54, 0.3) !important;
-  background-color: rgba(244, 67, 54, 0.06) !important;
+  border-color: rgb(244 67 54 / 30%) !important;
+  background-color: rgb(244 67 54 / 6%) !important;
   color: #ff8a80 !important;
 }
 
 /* ⚔️ BOTÓN ÉPICO: Forjado en la paleta de azul primario nativo */
 .hq-btn-epic {
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgb(255 255 255 / 8%) !important;
   box-shadow:
-    0 4px 15px rgba(var(--v-theme-primary), 0.35),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+    0 4px 15px rgb(var(--v-theme-primary), 0.35),
+    inset 0 1px 0 rgb(255 255 255 / 15%) !important;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
 }
+
 .hq-btn-epic:hover {
-  box-shadow: 0 0 25px rgba(var(--v-theme-primary), 0.5) !important;
+  box-shadow: 0 0 25px rgb(var(--v-theme-primary), 0.5) !important;
   transform: translateY(-2px);
 }
+
 .hq-btn-epic:hover .hq-sword-icon {
   transform: rotate(15deg) scale(1.1);
 }
+
 .hq-sword-icon {
   transition: transform 0.2s ease;
 }
@@ -302,37 +316,44 @@ const handleLogin = () => {
 /* 🎭 ANIMACIONES MÍSTICAS */
 @keyframes orbPulse {
   0% {
-    transform: scale(1) translate(0px, 0px);
+    transform: scale(1) translate(0, 0);
     opacity: 0.1;
   }
+
   100% {
     transform: scale(1.1) translate(15px, -10px);
     opacity: 0.16;
   }
 }
+
 @keyframes runeGlow {
   0%,
   100% {
     opacity: 0.6;
-    filter: drop-shadow(0 0 2px rgba(243, 194, 33, 0.4));
+    filter: drop-shadow(0 0 2px rgb(243 194 33 / 40%));
   }
+
   50% {
     opacity: 1;
-    filter: drop-shadow(0 0 8px rgba(255, 230, 0, 0.7));
+    filter: drop-shadow(0 0 8px rgb(255 230 0 / 70%));
   }
 }
+
 .animate-shake {
   animation: shake 0.4s ease-in-out;
 }
+
 @keyframes shake {
   0%,
   100% {
     transform: translateX(0);
   }
+
   20%,
   60% {
     transform: translateX(-4px);
   }
+
   40%,
   80% {
     transform: translateX(4px);

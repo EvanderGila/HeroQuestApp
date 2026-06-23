@@ -209,6 +209,7 @@ const getBadgeStyle = (item: any) => {
 .text-xxs {
   font-size: 0.65rem !important;
 }
+
 .gap-x-1 {
   column-gap: 6px !important;
 }
@@ -224,17 +225,17 @@ const getBadgeStyle = (item: any) => {
 .hq-item-card {
   background: linear-gradient(
     180deg,
-    rgba(15, 20, 32, 0.95) 0%,
-    rgba(5, 6, 8, 1) 100%
+    rgb(15 20 32 / 95%) 0%,
+    rgb(5 6 8 / 100%) 100%
   ) !important;
-  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgb(255 255 255 / 5%) !important;
   transition: all 0.3s ease;
 }
 
 .hq-item-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(33, 150, 243, 0.3) !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border-color: rgb(33 150 243 / 30%) !important;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 50%);
 }
 
 /* ── ⚡ BADGE DE OBJETO FLOTANTE (MÁS GRANDE Y ADAPTADO) ── */
@@ -243,7 +244,7 @@ const getBadgeStyle = (item: any) => {
   bottom: 0;
   right: 0;
   z-index: 3;
-  box-shadow: -2px -2px 10px rgba(0, 0, 0, 0.6);
+  box-shadow: -2px -2px 10px rgb(0 0 0 / 60%);
   border-top-left-radius: 10px;
   backdrop-filter: blur(4px);
 }
@@ -265,13 +266,13 @@ const getBadgeStyle = (item: any) => {
 .hq-item-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 70%, rgba(5, 6, 8, 1) 100%);
+  background: linear-gradient(to bottom, transparent 70%, rgb(5 6 8 / 100%) 100%);
   z-index: 2;
 }
 
 /* ── 📝 CONTENIDO SIMPLIFICADO Y AJUSTADO ── */
 .hq-item-content {
-  background: rgba(5, 6, 8, 0.95);
+  background: rgb(5 6 8 / 95%);
   min-height: 70px; /* Reducido sustancialmente al no llevar la fila de chips abajo */
 }
 
@@ -290,7 +291,7 @@ const getBadgeStyle = (item: any) => {
 }
 
 :deep(.v-overlay__content) {
-  @media (max-width: 959px), (max-height: 1000px) {
+  @media (width <= 959px), (height <= 1000px) {
     max-height: calc(100dvh - 24px) !important;
     width: calc(100vw - 24px) !important;
     margin: 12px !important;
@@ -300,33 +301,39 @@ const getBadgeStyle = (item: any) => {
 }
 
 /* Adaptación responsive */
+
 /* Caso Vertical (Móviles pequeños/comunes) */
-@media (max-width: 460px) and (orientation: portrait) {
+@media (width <= 460px) and (orientation: portrait) {
   .hq-compendium-grid {
     grid-template-columns: repeat(2, 1fr) !important; /* Forzamos 2 columnas exactas */
     gap: 12px;
   }
+
   .hq-item-title {
     font-size: 0.8rem;
   }
+
   .hq-item-mini-stats {
     column-gap: 4px !important; /* Estrechamos un poco las estadísticas */
   }
+
   .text-xxs {
     font-size: 0.58rem !important; /* Reducimos un pelín los números para que no desborden */
   }
 }
 
 /* Caso Horizontal (Landscape): Evita que los cromos se vean gigantes e infinitos */
-@media (max-height: 480px) and (orientation: landscape) {
+@media (height <= 480px) and (orientation: landscape) {
   .hq-compendium-grid {
     /* Forzamos 4 columnas en horizontal para que mantengan la proporción compacta */
     grid-template-columns: repeat(4, 1fr) !important;
     gap: 12px;
   }
+
   .hq-item-title {
     font-size: 0.8rem;
   }
+
   .hq-item-content {
     min-height: 65px; /* Compactamos un pelín más el texto en horizontal */
   }

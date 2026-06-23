@@ -79,6 +79,7 @@ function handleInspectRace(race_id: any) {
 .text-xxs {
   font-size: 0.65rem !important;
 }
+
 /* Bajamos un pelo el gap por defecto para ganar margen de maniobra */
 .gap-x-1 {
   column-gap: 6px !important;
@@ -96,20 +97,20 @@ function handleInspectRace(race_id: any) {
 .hq-race-card {
   background: linear-gradient(
     180deg,
-    rgba(15, 20, 32, 0.9) 0%,
-    rgba(5, 6, 8, 0.98) 100%
+    rgb(15 20 32 / 90%) 0%,
+    rgb(5 6 8 / 98%) 100%
   ) !important;
-  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgb(255 255 255 / 5%) !important;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
   cursor: pointer;
 }
 
 .hq-race-card:hover {
   transform: translateY(-5px);
-  border-color: rgba(33, 150, 243, 0.4) !important;
+  border-color: rgb(33 150 243 / 40%) !important;
   box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.6),
-    0 0 12px rgba(33, 150, 243, 0.1) !important;
+    0 8px 24px rgb(0 0 0 / 60%),
+    0 0 12px rgb(33 150 243 / 10%) !important;
 }
 
 .hq-race-card:hover .hq-race-image {
@@ -131,9 +132,9 @@ function handleInspectRace(race_id: any) {
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0) 50%,
-    rgba(5, 6, 8, 0.85) 82%,
-    rgba(5, 6, 8, 1) 100%
+    rgb(0 0 0 / 0%) 50%,
+    rgb(5 6 8 / 85%) 82%,
+    rgb(5 6 8 / 100%) 100%
   );
   z-index: 1;
 }
@@ -142,15 +143,15 @@ function handleInspectRace(race_id: any) {
   position: relative;
   z-index: 2;
   margin-top: -30px;
-  background: rgba(5, 6, 8, 0.95);
-  border-top: 1px solid rgba(255, 255, 255, 0.02);
+  background: rgb(5 6 8 / 95%);
+  border-top: 1px solid rgb(255 255 255 / 2%);
 }
 
 .hq-race-title {
   font-size: 0.9rem;
-  color: #ffffff;
+  color: #fff;
   letter-spacing: 0.05em;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 2px 4px rgb(0 0 0 / 50%);
 }
 
 .hq-race-card:hover .hq-race-title {
@@ -174,7 +175,7 @@ function handleInspectRace(race_id: any) {
 }
 
 :deep(.v-overlay__content) {
-  @media (max-width: 959px), (max-height: 500px) {
+  @media (width <= 959px), (height <= 500px) {
     max-height: calc(100dvh - 24px) !important;
     width: calc(100vw - 24px) !important;
     margin: 12px !important;
@@ -186,32 +187,37 @@ function handleInspectRace(race_id: any) {
 /* 📱 OPTIMIZACIÓN RESPONSIVE */
 
 /* Caso Vertical: Dos columnas perfectas en móviles comunes */
-@media (max-width: 480px) and (orientation: portrait) {
+@media (width <= 480px) and (orientation: portrait) {
   .hq-compendium-grid {
     grid-template-columns: repeat(
       2,
       1fr
     ) !important; /* Forzamos exactamente 2 columnas sin importar los px */
+
     gap: 10px;
   }
+
   .hq-race-title {
     font-size: 0.8rem;
   }
+
   .hq-race-mini-stats {
     column-gap: 4px !important; /* Estrechamos los iconos para que quepan en pantallas mini */
   }
+
   .text-xxs {
     font-size: 0.58rem !important; /* Reducimos un pelín la fuente en móvil vertical */
   }
 }
 
 /* Caso Horizontal (Landscape): Evita que los cromos se vuelvan gigantes a lo ancho */
-@media (max-height: 480px) and (orientation: landscape) {
+@media (height <= 480px) and (orientation: landscape) {
   .hq-compendium-grid {
     /* Forzamos 4 columnas en horizontal para que las tarjetas mantengan su proporción estilizada y compacta */
     grid-template-columns: repeat(4, 1fr) !important;
     gap: 12px;
   }
+
   .hq-race-title {
     font-size: 0.8rem;
   }

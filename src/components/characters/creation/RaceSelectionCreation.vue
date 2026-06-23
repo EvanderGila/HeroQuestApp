@@ -168,18 +168,23 @@ onMounted(() => {
   /* Un gris "carbón" más profundo que el grey-darken-4 (#212121) */
   background-color: #151515cb !important;
 }
+
 .gap-y-2 {
   row-gap: 8px !important;
 }
+
 .gap-x-2 {
   column-gap: 8px !important;
 }
+
 .border-top-thin {
-  border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+  border-top: 1px solid rgb(255 255 255 / 5%) !important;
 }
+
 :deep(.v-window__controls) {
   padding: 0 12px;
 }
+
 .text-xxs {
   font-size: 0.75rem !important;
 }
@@ -194,19 +199,21 @@ onMounted(() => {
   white-space: nowrap;
   overflow: hidden;
 }
+
 .hq-section-header::after {
   content: '';
   flex-grow: 1;
   margin-left: 8px;
   height: 1px;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0.08), transparent);
+  background: linear-gradient(to right, rgb(255 255 255 / 8%), transparent);
   align-self: center;
 }
 
 .bg-hq-row {
-  background-color: rgba(255, 255, 255, 0.02) !important;
-  border-color: rgba(255, 255, 255, 0.05) !important;
+  background-color: rgb(255 255 255 / 2%) !important;
+  border-color: rgb(255 255 255 / 5%) !important;
 }
+
 .gap-y-1 {
   row-gap: 6px !important;
 }

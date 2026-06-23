@@ -88,18 +88,18 @@ const compStore = useCompendiumStore()
 .hq-spell-card {
   background: linear-gradient(
     180deg,
-    rgba(15, 20, 32, 0.95) 0%,
-    rgba(5, 6, 8, 1) 100%
+    rgb(15 20 32 / 95%) 0%,
+    rgb(5 6 8 / 100%) 100%
   ) !important;
-  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgb(255 255 255 / 5%) !important;
   transition: all 0.3s ease;
 }
 
 .hq-spell-card:hover {
-  border-color: rgba(186, 104, 200, 0.4) !important;
+  border-color: rgb(186 104 200 / 40%) !important;
   box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.5),
-    0 0 15px rgba(186, 104, 200, 0.15) !important;
+    0 10px 30px rgb(0 0 0 / 50%),
+    0 0 15px rgb(186 104 200 / 15%) !important;
 }
 
 /* ── ⚡ BADGE DE MANÁ FLOTANTE (REPOSICIONADO) ── */
@@ -109,11 +109,12 @@ const compStore = useCompendiumStore()
   right: 0;
   z-index: 3;
   background: linear-gradient(90deg, #4a148c 0%, #311b92 100%) !important;
-  box-shadow: -2px -2px 8px rgba(0, 0, 0, 0.5);
+  box-shadow: -2px -2px 8px rgb(0 0 0 / 50%);
+
   /* Redondeamos la esquina superior izquierda para suavizar la transición con la foto */
   border-top-left-radius: 8px;
-  border-left: 1px solid rgba(0, 229, 255, 0.25);
-  border-top: 1px solid rgba(0, 229, 255, 0.25);
+  border-left: 1px solid rgb(0 229 255 / 25%);
+  border-top: 1px solid rgb(0 229 255 / 25%);
   backdrop-filter: blur(4px);
 }
 
@@ -126,13 +127,13 @@ const compStore = useCompendiumStore()
 .hq-spell-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 70%, rgba(5, 6, 8, 1) 100%);
+  background: linear-gradient(to bottom, transparent 70%, rgb(5 6 8 / 100%) 100%);
   z-index: 2; /* Bajamos el z-index de la sombra un pelín por debajo del badge */
 }
 
 /* ── 📝 TEXTOS Y CONTENIDO ── */
 .hq-spell-content {
-  background: rgba(5, 6, 8, 0.95);
+  background: rgb(5 6 8 / 95%);
   min-height: 55px;
 }
 
@@ -155,7 +156,7 @@ const compStore = useCompendiumStore()
 }
 
 :deep(.v-overlay__content) {
-  @media (max-width: 959px), (max-height: 1000px) {
+  @media (width <= 959px), (height <= 1000px) {
     max-height: calc(100dvh - 24px) !important;
     width: calc(100vw - 24px) !important;
     margin: 12px !important;
@@ -165,7 +166,7 @@ const compStore = useCompendiumStore()
 }
 
 /* Responsive móvil */
-@media (max-width: 460px) {
+@media (width <= 460px) {
   .hq-compendium-grid {
     grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
     gap: 12px;

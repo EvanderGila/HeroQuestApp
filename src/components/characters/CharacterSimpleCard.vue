@@ -247,9 +247,10 @@ defineEmits<{
     transform 0.2s ease,
     box-shadow 0.2s ease;
 }
+
 .character-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 8px 16px rgb(0 0 0 / 10%) !important;
 }
 
 .avatar-rpg-container {
@@ -262,32 +263,41 @@ defineEmits<{
 .lh-tight {
   line-height: 1.2;
 }
+
 .lh-1 {
   line-height: 1;
 }
+
 .gap-x-2 {
   column-gap: 4px !important;
 }
+
 .gap-x-4 {
   column-gap: 16px !important;
 }
+
 .border-bottom-thin {
-  border-bottom: 1px solid rgba(var(--v-border-color), var(--v-border-opacity)) !important;
+  border-bottom: 1px solid rgb(var(--v-border-color), var(--v-border-opacity)) !important;
 }
+
 .animate-pulse {
   animation: pulse 2s infinite;
 }
+
 @keyframes pulse {
   0% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.7;
   }
+
   100% {
     opacity: 1;
   }
 }
+
 :deep(.custom-mini-badge .v-badge__badge) {
   font-size: 0.5rem !important;
   height: 12px !important;

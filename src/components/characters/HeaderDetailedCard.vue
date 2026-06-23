@@ -115,27 +115,33 @@ function calculateExpPercentage(exp: number = 0) {
 .lh-tight {
   line-height: 1.2;
 }
+
 .gap-x-2 {
   column-gap: 8px !important;
 }
+
 .gap-x-4 {
   column-gap: 16px !important;
 }
+
 .border-bottom-thin {
-  border-bottom: 1px solid rgba(var(--v-border-color), var(--v-border-opacity)) !important;
+  border-bottom: 1px solid rgb(var(--v-border-color), var(--v-border-opacity)) !important;
 }
 
 /* Animación del Badge */
 .animate-pulse {
   animation: pulse 2s infinite;
 }
+
 @keyframes pulse {
   0% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.7;
   }
+
   100% {
     opacity: 1;
   }

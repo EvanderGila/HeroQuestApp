@@ -213,15 +213,19 @@ function isLevelUnlocked(requiredLvl: number): boolean {
 .gap-y-4 {
   row-gap: 16px !important;
 }
+
 .gap-x-3 {
   column-gap: 12px !important;
 }
+
 .lh-tight {
   line-height: 1.25;
 }
+
 .max-w-70 {
   max-width: 70%;
 }
+
 .transition-all {
   transition: all 0.25s ease-in-out;
 }
@@ -238,14 +242,16 @@ function isLevelUnlocked(requiredLvl: number): boolean {
   white-space: nowrap;
   overflow: hidden;
 }
+
 .hq-section-header::after {
   content: '';
   flex-grow: 1;
   margin-left: 12px;
   height: 1px;
-  background: linear-gradient(to right, rgba(var(--v-border-color), 0.15), transparent);
+  background: linear-gradient(to right, rgb(var(--v-border-color), 0.15), transparent);
   align-self: center;
 }
+
 .tracking-widest {
   letter-spacing: 0.12em !important;
 }
@@ -257,25 +263,26 @@ function isLevelUnlocked(requiredLvl: number): boolean {
 
 /* 🟢 PASIVAS (Verde / Success) — Desbloqueadas */
 .unlocked-card.is-passive {
-  background-color: rgba(var(--v-theme-success), 0.03) !important;
-  border-color: rgba(var(--v-theme-success), 0.18) !important;
-  box-shadow: inset 3px 0 0 0 rgba(var(--v-theme-success), 0.6) !important;
+  background-color: rgb(var(--v-theme-success), 0.03) !important;
+  border-color: rgb(var(--v-theme-success), 0.18) !important;
+  box-shadow: inset 3px 0 0 0 rgb(var(--v-theme-success), 0.6) !important;
 }
 
 /* 🔵 ACTIVAS (Azul / Info) — Desbloqueadas */
 .unlocked-card.is-active {
-  background-color: rgba(var(--v-theme-info), 0.03) !important;
-  border-color: rgba(var(--v-theme-info), 0.18) !important;
-  box-shadow: inset 3px 0 0 0 rgba(var(--v-theme-info), 0.6) !important;
+  background-color: rgb(var(--v-theme-info), 0.03) !important;
+  border-color: rgb(var(--v-theme-info), 0.18) !important;
+  box-shadow: inset 3px 0 0 0 rgb(var(--v-theme-info), 0.6) !important;
 }
 
 /* 🔒 ESTADO BLOQUEADO: Opaco y genérico */
 .locked-card {
   opacity: 0.45;
-  background-color: rgba(var(--v-theme-on-surface), 0.02) !important;
-  border-color: rgba(var(--v-border-color), 0.15) !important;
+  background-color: rgb(var(--v-theme-on-surface), 0.02) !important;
+  border-color: rgb(var(--v-border-color), 0.15) !important;
   border-style: dashed !important;
 }
+
 .locked-card .hq-ability-avatar {
   filter: grayscale(100%);
   opacity: 0.6;

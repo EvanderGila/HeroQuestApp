@@ -280,18 +280,23 @@ const hasAnyTrait = computed(() => {
 .lh-tight {
   line-height: 1.2;
 }
+
 .gap-x-2 {
   column-gap: 8px !important;
 }
+
 .gap-x-4 {
   column-gap: 16px !important;
 }
+
 .gap-1 {
   gap: 4px !important;
 }
+
 .text-xxs {
   font-size: 0.62rem !important;
 }
+
 .text-xs {
   font-size: 0.7rem !important;
 }
@@ -299,7 +304,7 @@ const hasAnyTrait = computed(() => {
 /* ── 🌌 FONDO OSCURO DEL COMPONENTE CONTENEDOR ── */
 .sticky-card {
   background-color: #151515 !important;
-  border-color: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgb(255 255 255 / 6%) !important;
 }
 
 /* 🏷️ LÍNEAS SEPARADORAS DE SUBSECCIÓN RPG */
@@ -309,22 +314,24 @@ const hasAnyTrait = computed(() => {
   white-space: nowrap;
   overflow: hidden;
 }
+
 .hq-section-header::after {
   content: '';
   flex-grow: 1;
   margin-left: 8px;
   height: 1px;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0.08), transparent);
+  background: linear-gradient(to right, rgb(255 255 255 / 8%), transparent);
   align-self: center;
 }
+
 .tracking-widest {
   letter-spacing: 0.1em !important;
 }
 
 /* Fila de Atributo */
 .hq-stat-row {
-  background-color: rgba(255, 255, 255, 0.02) !important;
-  border-color: rgba(255, 255, 255, 0.05) !important;
+  background-color: rgb(255 255 255 / 2%) !important;
+  border-color: rgb(255 255 255 / 5%) !important;
 }
 
 /* 🏷️ MICRO CHIPS */
@@ -333,12 +340,13 @@ const hasAnyTrait = computed(() => {
   font-size: 0.65rem !important;
   letter-spacing: 0.02em;
 }
+
 .skill-type-chip {
   font-weight: 400 !important;
   opacity: 0.85;
 }
 
-@media (min-width: 960px) {
+@media (width >= 960px) {
   .sticky-card {
     position: sticky;
     top: 12px;
@@ -350,7 +358,7 @@ const hasAnyTrait = computed(() => {
 /* 🏹 Contenedor de la cabecera unificada */
 .hq-header-container {
   min-height: 160px; /* Incrementado para el retrato grande */
-  background-color: rgba(255, 255, 255, 0.01);
+  background-color: rgb(255 255 255 / 1%);
 }
 
 /* Retrato vertical con relación 3:4 exacta e incrementada de tamaño */
@@ -359,11 +367,11 @@ const hasAnyTrait = computed(() => {
   height: 140px;
   border-radius: 10px;
   overflow: hidden;
-  border-color: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgb(255 255 255 / 10%) !important;
 }
 
 .border-bottom-thin {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+  border-bottom: 1px solid rgb(255 255 255 / 6%) !important;
 }
 
 /* Posicionamiento flotante del nivel */
@@ -382,6 +390,6 @@ const hasAnyTrait = computed(() => {
 
 /* Borde primario sutil para la clase */
 .border-thin-primary {
-  border: 1px solid rgba(var(--v-theme-primary), 0.25) !important;
+  border: 1px solid rgb(var(--v-theme-primary), 0.25) !important;
 }
 </style>

@@ -156,11 +156,13 @@ async function handleSave() {
 .min-card-height {
   min-height: 290px;
 }
+
 .custom-create-btn {
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
+
 .custom-create-btn:hover {
-  background-color: rgba(var(--v-theme-primary), 0.05);
+  background-color: rgb(var(--v-theme-primary), 0.05);
 }
 </style>

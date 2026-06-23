@@ -101,18 +101,23 @@ const stockAvatars = [
   /* Un gris "carbón" más profundo que el grey-darken-4 (#212121) */
   background-color: #151515cb !important;
 }
+
 .transition-all {
   transition: all 0.2s ease-in-out;
 }
+
 .opacity-70 {
   opacity: 0.6;
 }
+
 .opacity-70:hover {
   opacity: 1;
 }
+
 .border-warning-heavy {
   border: 3px solid #ffb300 !important;
 }
+
 .scale-active {
   transform: scale(1.03);
 }

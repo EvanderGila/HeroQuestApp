@@ -97,18 +97,18 @@ function handleInspectAbility(ability_id: any) {
 .hq-ability-card {
   background: linear-gradient(
     180deg,
-    rgba(15, 20, 32, 0.95) 0%,
-    rgba(5, 6, 8, 1) 100%
+    rgb(15 20 32 / 95%) 0%,
+    rgb(5 6 8 / 100%) 100%
   ) !important;
-  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgb(255 255 255 / 5%) !important;
   transition: all 0.3s ease;
 }
 
 .hq-ability-card:hover {
-  border-color: rgba(33, 150, 243, 0.4) !important; /* Brillo azulado al pasar el ratón */
+  border-color: rgb(33 150 243 / 40%) !important; /* Brillo azulado al pasar el ratón */
   box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.5),
-    0 0 15px rgba(33, 150, 243, 0.15) !important;
+    0 10px 30px rgb(0 0 0 / 50%),
+    0 0 15px rgb(33 150 243 / 15%) !important;
 }
 
 /* ── ⚡ BADGES FLOTANTES DE HABILIDAD ── */
@@ -117,7 +117,7 @@ function handleInspectAbility(ability_id: any) {
   bottom: 0;
   right: 0;
   z-index: 3;
-  box-shadow: -2px -2px 10px rgba(0, 0, 0, 0.6);
+  box-shadow: -2px -2px 10px rgb(0 0 0 / 60%);
 
   /* Aumentamos el padding: 4px arriba/abajo y 12px a los lados */
   padding: 4px 12px !important;
@@ -126,11 +126,13 @@ function handleInspectAbility(ability_id: any) {
   border-top-left-radius: 10px;
   backdrop-filter: blur(4px);
 }
+
 .hq-ability-floating-badge span {
   font-size: 0.75rem !important; /* Subimos de 0.62rem a 0.75rem */
   letter-spacing: 0.08em !important;
   font-weight: 900 !important; /* Extra negrita para estilo RPG */
 }
+
 .hq-ability-floating-badge .v-icon {
   font-size: 14px !important; /* Subimos de 12px a 14px */
   margin-right: 4px !important;
@@ -143,8 +145,9 @@ function handleInspectAbility(ability_id: any) {
     #0d47a1 0%,
     #1565c0 100%
   ) !important; /* Azul eléctrico */
-  border-left: 1px solid rgba(33, 150, 243, 0.3);
-  border-top: 1px solid rgba(33, 150, 243, 0.3);
+
+  border-left: 1px solid rgb(33 150 243 / 30%);
+  border-top: 1px solid rgb(33 150 243 / 30%);
 }
 
 /* Estilo específico para habilidades Pasivas (Metal/Pergamino) */
@@ -158,14 +161,14 @@ function handleInspectAbility(ability_id: any) {
 
   /* Sombra interna sutil */
   box-shadow:
-    inset 0 0 10px rgba(141, 110, 99, 0.2),
-    -2px -2px 10px rgba(0, 0, 0, 0.5);
+    inset 0 0 10px rgb(141 110 99 / 20%),
+    -2px -2px 10px rgb(0 0 0 / 50%);
 }
 
 /* Texto y icono para el badge pasivo dorado apagado */
 .hq-badge-passive span {
   color: #3e2723 !important; /* Texto marrón oscuro oscuro para tinta */
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3); /* Sutil relieve pálido */
+  text-shadow: 0 1px 1px rgb(255 255 255 / 30%); /* Sutil relieve pálido */
 }
 
 .hq-badge-passive .v-icon {
@@ -181,13 +184,13 @@ function handleInspectAbility(ability_id: any) {
 .hq-ability-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 70%, rgba(5, 6, 8, 1) 100%);
+  background: linear-gradient(to bottom, transparent 70%, rgb(5 6 8 / 100%) 100%);
   z-index: 2;
 }
 
 /* ── 📝 TEXTOS Y CONTENIDO ── */
 .hq-ability-content {
-  background: rgba(5, 6, 8, 0.95);
+  background: rgb(5 6 8 / 95%);
   min-height: 55px;
 }
 
@@ -210,7 +213,7 @@ function handleInspectAbility(ability_id: any) {
 }
 
 :deep(.v-overlay__content) {
-  @media (max-width: 959px), (max-height: 1000px) {
+  @media (width <= 959px), (height <= 1000px) {
     max-height: calc(100dvh - 24px) !important;
     width: calc(100vw - 24px) !important;
     margin: 12px !important;
@@ -220,11 +223,12 @@ function handleInspectAbility(ability_id: any) {
 }
 
 /* Responsive móvil */
-@media (max-width: 460px) {
+@media (width <= 460px) {
   .hq-compendium-grid {
     grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
     gap: 12px;
   }
+
   .hq-ability-title {
     font-size: 0.8rem;
   }

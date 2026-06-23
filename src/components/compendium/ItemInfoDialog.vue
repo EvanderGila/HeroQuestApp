@@ -239,15 +239,19 @@ watch(
 .text-xxs {
   font-size: 0.65rem !important;
 }
+
 .gap-2 {
   gap: 8px !important;
 }
+
 .gap-x-2 {
   column-gap: 8px !important;
 }
+
 .gap-x-4 {
   column-gap: 16px !important;
 }
+
 .tracking-widest {
   letter-spacing: 0.12em !important;
 }
@@ -258,32 +262,33 @@ watch(
   top: 12px;
   right: 12px;
   z-index: 10;
-  background: rgba(5, 7, 12, 0.4) !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  background: rgb(5 7 12 / 40%) !important;
+  border: 1px solid rgb(255 255 255 / 8%) !important;
   backdrop-filter: blur(4px);
   transition: all 0.2s ease;
 }
+
 .hq-close-btn:hover {
-  background: rgba(244, 67, 54, 0.2) !important;
-  border-color: rgba(244, 67, 54, 0.4) !important;
+  background: rgb(244 67 54 / 20%) !important;
+  border-color: rgb(244 67 54 / 40%) !important;
   color: #fff !important;
 }
 
 /* ── 🎴 DIÁLOGO BASE ── */
 .hq-item-card {
   background: #090d16 !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8) !important;
+  border: 1px solid rgb(255 255 255 / 8%) !important;
+  box-shadow: 0 20px 50px rgb(0 0 0 / 80%) !important;
   max-height: calc(100dvh - 24px);
   overflow-y: auto !important;
 }
 
 /* ✨ Brillo dorado sutil si es Reliquia */
 .hq-item-relic {
-  border: 1px solid rgba(255, 193, 7, 0.3) !important;
+  border: 1px solid rgb(255 193 7 / 30%) !important;
   box-shadow:
-    0 0 30px rgba(255, 193, 7, 0.15),
-    0 20px 50px rgba(0, 0, 0, 0.8) !important;
+    0 0 30px rgb(255 193 7 / 15%),
+    0 20px 50px rgb(0 0 0 / 80%) !important;
 }
 
 .hq-item-loading {
@@ -293,27 +298,28 @@ watch(
 
 /* 🖼️ AVATAR */
 .hq-item-avatar {
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgb(255 255 255 / 10%) !important;
+  box-shadow: 0 4px 15px rgb(0 0 0 / 40%);
 }
+
 .border-amber-lighten-1 {
-  border-color: rgba(255, 193, 7, 0.6) !important;
+  border-color: rgb(255 193 7 / 60%) !important;
 }
 
 /* 📊 SECCIÓN STATS Y DESCRIPCIÓN */
 .hq-item-stats-section {
-  background: rgba(15, 22, 36, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.03) !important;
+  background: rgb(15 22 36 / 20%);
+  border: 1px solid rgb(255 255 255 / 3%) !important;
 }
 
 .hq-item-desc-section {
-  background: rgba(15, 22, 36, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.03) !important;
+  background: rgb(15 22 36 / 40%);
+  border: 1px solid rgb(255 255 255 / 3%) !important;
 }
 
 .bg-hq-row {
-  background: rgba(5, 7, 12, 0.8) !important;
-  border: 1px solid rgba(255, 255, 255, 0.02) !important;
+  background: rgb(5 7 12 / 80%) !important;
+  border: 1px solid rgb(255 255 255 / 2%) !important;
 }
 
 .hq-desc-text {
@@ -328,12 +334,13 @@ watch(
   white-space: nowrap;
   overflow: hidden;
 }
+
 .hq-section-header::after {
   content: '';
   flex-grow: 1;
   margin-left: 12px;
   height: 1px;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0.05), transparent);
+  background: linear-gradient(to right, rgb(255 255 255 / 5%), transparent);
 }
 
 .hq-navbar-noise {
