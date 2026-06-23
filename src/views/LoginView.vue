@@ -1,34 +1,49 @@
 <template>
   <!-- 🌌 Contenedor Principal con patrón de micro-ruido RPG de fondo -->
-  <VContainer fluid class="pa-0 d-flex align-center justify-center hq-login-page" style="min-height: 100vh;">
+  <VContainer
+    fluid
+    class="pa-0 d-flex align-center justify-center hq-login-page"
+    style="min-height: 100vh"
+  >
     <div class="hq-noise-overlay"></div>
-    
+
     <!-- ✨ Orbes de luminiscencia ambiental profunda (Fusión Azul Arcana) -->
     <div class="hq-glow-orb hq-orb-blue-deep"></div>
     <div class="hq-glow-orb hq-orb-cyan-electric"></div>
 
     <!-- 🪪 Tarjeta de Login Premium con Borde de Energía Activa Celesta -->
     <div class="hq-login-card-wrapper w-100">
-      <VCard max-width="430" class="pa-9 rounded-xl hq-login-card text-white" variant="flat">
-        
+      <VCard
+        max-width="430"
+        class="pa-9 rounded-xl hq-login-card text-white"
+        variant="flat"
+      >
         <!-- 👑 Cabecera Monumental con Destellos Arcanos -->
         <div class="text-center mb-8 relative-container">
-          <h1 class="text-h3 font-weight-black text-uppercase tracking-widest text-white hq-game-title">
+          <h1
+            class="text-h3 font-weight-black text-uppercase tracking-widest text-white hq-game-title"
+          >
             HeroQuest
           </h1>
-          
+
           <!-- Separador de Líneas con Runa/Gema Central Azul -->
           <div class="hq-rune-separator my-3">
             <div class="hq-rune-line left"></div>
-            <VIcon icon="mdi-rhombus-medium" size="14" class="text-warning hq-rune-icon" />
+            <VIcon
+              icon="mdi-rhombus-medium"
+              size="14"
+              class="text-warning hq-rune-icon"
+            />
             <div class="hq-rune-line right"></div>
           </div>
-          
-          <span class="text-xxs font-weight-bold text-uppercase tracking-widest text-blue-lighten-3 opacity-60 block-span">
+
+          <span
+            class="text-xxs font-weight-bold text-uppercase tracking-widest text-blue-lighten-3 opacity-60 block-span"
+          >
             — Edición de Forja v1.0 —
           </span>
         </div>
-        
+
         <!-- 📝 Formulario con Micro-Interacciones -->
         <VForm @submit.prevent="handleLogin">
           <!-- Input Email -->
@@ -96,7 +111,6 @@
     </div>
   </VContainer>
 </template>
-
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useAuthStore } from '@/store/authStore'
@@ -114,9 +128,15 @@ const handleLogin = () => {
 </script>
 
 <style scoped>
-.text-xxs { font-size: 0.6rem !important; }
-.tracking-widest { letter-spacing: 0.2em !important; }
-.block-span { display: block; }
+.text-xxs {
+  font-size: 0.6rem !important;
+}
+.tracking-widest {
+  letter-spacing: 0.2em !important;
+}
+.block-span {
+  display: block;
+}
 
 /* ── 🌌 FONDO RADIAL CON MEZCLA AZUL PROFUNDO ── */
 .hq-login-page {
@@ -148,14 +168,14 @@ const handleLogin = () => {
 .hq-orb-blue-deep {
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(33, 150, 243, 0.15) 0%, rgba(0,0,0,0) 70%);
+  background: radial-gradient(circle, rgba(33, 150, 243, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
   top: 10%;
   left: 15%;
 }
 .hq-orb-cyan-electric {
   width: 450px;
   height: 450px;
-  background: radial-gradient(circle, rgba(0, 229, 255, 0.08) 0%, rgba(0,0,0,0) 70%);
+  background: radial-gradient(circle, rgba(0, 229, 255, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
   bottom: 10%;
   right: 15%;
   animation-delay: -4s;
@@ -166,17 +186,27 @@ const handleLogin = () => {
   position: relative;
   padding: 1px;
   border-radius: 24px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(33, 150, 243, 0.25) 40%, rgba(0, 229, 255, 0.15) 70%, rgba(255,255,255,0.02) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(33, 150, 243, 0.25) 40%,
+    rgba(0, 229, 255, 0.15) 70%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
   z-index: 1;
 
-  max-width: 430px; 
+  max-width: 430px;
   margin: 0 16px; /* Evita que choque contra los bordes físicos del móvil */
 }
 
 /* 🪪 TARJETA INTERNA: Cristal de Obsidiana con reflejos azulados */
 .hq-login-card {
-  background: linear-gradient(180deg, rgba(10, 14, 24, 0.9) 0%, rgba(6, 7, 10, 0.96) 100%) !important;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 14, 24, 0.9) 0%,
+    rgba(6, 7, 10, 0.96) 100%
+  ) !important;
   backdrop-filter: blur(20px);
   box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05) !important;
 }
@@ -200,8 +230,12 @@ const handleLogin = () => {
   height: 1px;
   flex-grow: 1;
 }
-.hq-rune-line.left { background: linear-gradient(to right, transparent, rgba(243, 212, 33, 0.4)); }
-.hq-rune-line.right { background: linear-gradient(to left, transparent, rgba(243, 212, 33, 0.4)); }
+.hq-rune-line.left {
+  background: linear-gradient(to right, transparent, rgba(243, 212, 33, 0.4));
+}
+.hq-rune-line.right {
+  background: linear-gradient(to left, transparent, rgba(243, 212, 33, 0.4));
+}
 .hq-rune-icon {
   margin: 0 10px;
   filter: drop-shadow(0 0 4px rgba(243, 212, 33, 0.6));
@@ -249,7 +283,7 @@ const handleLogin = () => {
 /* ⚔️ BOTÓN ÉPICO: Forjado en la paleta de azul primario nativo */
 .hq-btn-epic {
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  box-shadow: 
+  box-shadow:
     0 4px 15px rgba(var(--v-theme-primary), 0.35),
     inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
@@ -267,19 +301,41 @@ const handleLogin = () => {
 
 /* 🎭 ANIMACIONES MÍSTICAS */
 @keyframes orbPulse {
-  0% { transform: scale(1) translate(0px, 0px); opacity: 0.1; }
-  100% { transform: scale(1.1) translate(15px, -10px); opacity: 0.16; }
+  0% {
+    transform: scale(1) translate(0px, 0px);
+    opacity: 0.1;
+  }
+  100% {
+    transform: scale(1.1) translate(15px, -10px);
+    opacity: 0.16;
+  }
 }
 @keyframes runeGlow {
-  0%, 100% { opacity: 0.6; filter: drop-shadow(0 0 2px rgba(243, 194, 33, 0.4)); }
-  50% { opacity: 1; filter: drop-shadow(0 0 8px rgba(255, 230, 0, 0.7)); }
+  0%,
+  100% {
+    opacity: 0.6;
+    filter: drop-shadow(0 0 2px rgba(243, 194, 33, 0.4));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px rgba(255, 230, 0, 0.7));
+  }
 }
 .animate-shake {
   animation: shake 0.4s ease-in-out;
 }
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  20%, 60% { transform: translateX(-4px); }
-  40%, 80% { transform: translateX(4px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20%,
+  60% {
+    transform: translateX(-4px);
+  }
+  40%,
+  80% {
+    transform: translateX(4px);
+  }
 }
 </style>
